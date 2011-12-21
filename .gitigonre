@@ -1,0 +1,6 @@
+.idea
+.idea/*
+.app/cache
+.app/cache/*
+.app/log
+.app/log/*

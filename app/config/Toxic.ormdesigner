@@ -1,32 +1,181 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <orm-designer version="1.4.6.488">
 
-  <project code-name="Toxic" framework="Without Framework" name="toxic" orm="Doctrine2" visSizeX="0" visSizeX2="630" visSizeY="0" visSizeY2="505">
-    <module-position name="Sattelite" visPositionX="50" visPositionY="50"/>
+  <project code-name="Toxic" framework="Without Framework" name="toxic" orm="Doctrine2" visSizeX="76" visSizeX2="1094" visSizeY="148" visSizeY2="877">
+    <module-position name="Sattelite" visPositionX="0" visPositionY="-66"/>
+    <module-position name="Parser" visPositionX="497" visPositionY="362"/>
+    <module-position name="Place" visPositionX="-26" visPositionY="371"/>
   </project>
 
-  <module import-format="Doctrine2Yml" import-path="..\" name="Sattelite" visBkColor="15987704" visSizeX="-7" visSizeX2="452" visSizeY="0" visSizeY2="348">
-    <table name="Domen" visPositionX="30" visPositionY="29" visSizeX="0" visSizeX2="20" visSizeY="0" visSizeY2="20">
+  <module import-format="Doctrine2Xml" import-path="..\..\src\Tox\SatelliteBundle\Resources\config\doctrine\metadata\orm\" name="Sattelite" visBkColor="15987704" visSizeX="25" visSizeX2="700" visSizeY="29" visSizeY2="427">
+    <table name="Satellite" visPositionX="205" visPositionY="279" visSizeX="0" visSizeX2="127" visSizeY="0" visSizeY2="73">
+      <column auto-increment="true" name="id" primary="true" type="integer"/>
+      <column name="ftp_account_id" type="integer"/>
+      <column name="domen_id" type="integer"/>
+      <column name="theme_id" type="integer"/>
+    </table>
+    <table name="Post" visPositionX="16" visPositionY="34" visSizeX="0" visSizeX2="109" visSizeY="0" visSizeY2="101">
+      <column auto-increment="true" name="id" primary="true" type="integer"/>
+      <column name="title" required="true" type="string"/>
+      <column name="text" required="true" type="text"/>
+      <column name="file_name" required="true" type="string" unique="true"/>
+      <column name="satellite_id" required="true" type="integer"/>
+      <column name="type" size="255" type="text"/>
+      <inheritance-parent discriminator-column="type" type="SINGLE_TABLE"/>
+    </table>
+    <table name="DomenHistory" visPositionX="-7" visPositionY="232" visSizeX="0" visSizeX2="109" visSizeY="0" visSizeY2="73">
+      <column auto-increment="true" name="id" primary="true" type="integer"/>
+      <column name="changet_at" required="true" type="date"/>
+      <column name="satellite_id" required="true" type="integer"/>
+      <column name="domen_id" required="true" type="integer"/>
+    </table>
+    <table name="Page" visPositionX="181" visPositionY="66" visSizeX="0" visSizeX2="72" visSizeY="0" visSizeY2="31">
+      <column name="id" primary="true" required="true" type="integer"/>
+      <inheritance-child derived-from="Post" discriminator-value="Page"/>
+    </table>
+    <table name="Theme" visPositionX="607" visPositionY="-19" visSizeX="0" visSizeX2="83" visSizeY="0" visSizeY2="45">
+      <column auto-increment="true" name="id" primary="true" type="integer"/>
+      <column name="name" required="true" type="string"/>
+    </table>
+    <foreign-key caption="FtpAccount Satellite" from="Satellite" name="FK_Satellite_FtpAccount_id" to="FtpAccount" visCaption1X="0" visCaption1Y="0" visCenterX="3" visCenterY="2">
+      <foreign-key-column from="ftp_account_id" to="id"/>
+    </foreign-key>
+    <foreign-key caption="Domen Satellite" from="Satellite" name="FK_Satellite_Domen_id" to="Domen">
+      <foreign-key-column from="domen_id" to="id"/>
+    </foreign-key>
+    <foreign-key caption="Theme Satellite" from="Satellite" name="FK_Satellite_Theme_id" to="Theme">
+      <foreign-key-column from="theme_id" to="id"/>
+    </foreign-key>
+    <foreign-key caption="Satellite Post" from="Post" name="FK_Post_Satellite_id" to="Satellite">
+      <foreign-key-column from="satellite_id" to="id"/>
+    </foreign-key>
+    <foreign-key caption="Satellite DomenHistory" from="DomenHistory" name="FK_DomenHistory_Satellite_id" to="Satellite">
+      <foreign-key-column from="satellite_id" to="id"/>
+    </foreign-key>
+    <foreign-key caption="Domen DomenHistory" from="DomenHistory" name="FK_DomenHistory_Domen_id" to="Domen" visCaption1X="0" visCaption1Y="0" visCenterX="0" visCenterY="4">
+      <foreign-key-column from="domen_id" to="id"/>
+    </foreign-key>
+    <foreign-key caption="Satellite Page" from="Page" name="FK_Page_Satellite_id" to="Satellite"/>
+  </module>
+
+  <module import-format="Doctrine2Xml" import-path="..\..\src\Tox\ParserBundle\Resources\config\doctrine\metadata\orm\" name="Parser" visBkColor="16380923" visSizeX="0" visSizeX2="623" visSizeY="-8" visSizeY2="466">
+    <table name="Bot" visPositionX="17" visPositionY="36" visSizeX="0" visSizeX2="105" visSizeY="0" visSizeY2="101">
+      <column auto-increment="true" name="id" primary="true" type="integer"/>
+      <column name="vkid" required="true" type="integer" unique="true"/>
+      <column name="first_name" required="true" type="string"/>
+      <column name="last_name" required="true" type="string"/>
+      <column name="email" type="string"/>
+      <column name="phone" type="string"/>
+    </table>
+    <table name="RawPage" visPositionX="351" visPositionY="35" visSizeX="0" visSizeX2="106" visSizeY="0" visSizeY2="73">
+      <column auto-increment="true" name="id" primary="true" type="integer"/>
+      <column name="text" required="true" type="text"/>
+      <column name="theme_id" type="integer"/>
+      <column name="Source_id" type="integer"/>
+    </table>
+    <table name="Source" visPositionX="155" visPositionY="38" visSizeX="0" visSizeX2="103" visSizeY="0" visSizeY2="73">
+      <column auto-increment="true" name="id" primary="true" type="integer"/>
+      <column name="name" type="string"/>
+      <column name="url" required="true" type="string"/>
+      <column name="theme_id" type="integer"/>
+    </table>
+    <table name="PatternType" visPositionX="17" visPositionY="175" visSizeX="0" visSizeX2="83" visSizeY="0" visSizeY2="45">
+      <column auto-increment="true" name="id" primary="true" type="integer"/>
+      <column name="name" required="true" type="string"/>
+    </table>
+    <table name="Rule" visPositionX="160" visPositionY="159" visSizeX="0" visSizeX2="130" visSizeY="0" visSizeY2="88">
+      <column auto-increment="true" name="id" primary="true" type="integer"/>
+      <column name="source_id" required="true" type="integer"/>
+      <column name="pattern_type_id" required="true" type="integer"/>
+      <column name="pattern" required="true" type="string"/>
+    </table>
+    <foreign-key caption="Theme RawPage" from="RawPage" name="FK_RawPage_Theme_id" to="Theme">
+      <foreign-key-column from="theme_id" to="id"/>
+    </foreign-key>
+    <foreign-key caption="Source RawPage" from="RawPage" name="FK_RawPage_Source_id" to="Source">
+      <foreign-key-column from="Source_id" to="id"/>
+    </foreign-key>
+    <foreign-key caption="Theme Source" from="Source" name="FK_Source_Theme_id" to="Theme">
+      <foreign-key-column from="theme_id" to="id"/>
+    </foreign-key>
+    <foreign-key caption="Source Rule" from="Rule" name="FK_Rule_Source_id" to="Source">
+      <foreign-key-column from="source_id" to="id"/>
+    </foreign-key>
+    <foreign-key caption="PatternType Rule" from="Rule" name="FK_Rule_PatternType_id" to="PatternType">
+      <foreign-key-column from="pattern_type_id" to="id"/>
+    </foreign-key>
+    <many-to-many-relation mn-table="Rule">
+      <many-to-many-foreign-key foreign-key="FK_Rule_Source_id" relation-alias=""/>
+      <many-to-many-foreign-key foreign-key="FK_Rule_PatternType_id" relation-alias=""/>
+    </many-to-many-relation>
+  </module>
+
+  <module import-format="Doctrine2Xml" import-path="..\..\src\Tox\PlaceBundle\Resources\config\doctrine\metadata\orm\" name="Place" visBkColor="16317694" visSizeX="0" visSizeX2="507" visSizeY="0" visSizeY2="456">
+    <table name="Domen" visPositionX="37" visPositionY="29" visSizeX="0" visSizeX2="146" visSizeY="0" visSizeY2="101">
       <column auto-increment="true" name="id" primary="true" type="integer"/>
       <column name="name" required="true" type="string"/>
       <column name="bought_at" type="date"/>
       <column name="whois" type="string"/>
       <column name="paid_unitl" type="date"/>
+      <column name="register_account_id" type="integer"/>
+      <column name="bot_id" type="integer"/>
     </table>
-    <table name="Host" visPositionX="205" visPositionY="30" visSizeX="0" visSizeX2="101" visSizeY="0" visSizeY2="73">
+    <table name="Host" visPositionX="215" visPositionY="107" visSizeX="0" visSizeX2="101" visSizeY="0" visSizeY2="87">
       <column auto-increment="true" name="id" primary="true" type="integer"/>
       <column name="name" type="string"/>
       <column name="username" type="string"/>
       <column name="password" type="string"/>
+      <column name="ns_servers" type="text"/>
     </table>
-    <table name="FtpAccount" visPositionX="347" visPositionY="7" visSizeX="0" visSizeX2="101" visSizeY="0" visSizeY2="73">
+    <table name="FtpAccount" visPositionX="374" visPositionY="103" visSizeX="0" visSizeX2="133" visSizeY="0" visSizeY2="45">
       <column auto-increment="true" name="id" primary="true" type="integer"/>
-      <column name="username" type="string"/>
-      <column name="password" type="string"/>
-      <column name="host_id" type="integer"/>
+      <column name="host_account_id" type="integer"/>
+      <inheritance-child derived-from="Account" discriminator-value="FtpAccount" visCenterX="3" visCenterY="0"/>
     </table>
-    <foreign-key caption="Host FtpAccount" from="FtpAccount" name="FK_FtpAccount_Host_id" to="Host">
+    <table name="Register" visPositionX="2" visPositionY="384" visSizeX="0" visSizeX2="83" visSizeY="0" visSizeY2="59">
+      <column auto-increment="true" name="id" primary="true" type="integer"/>
+      <column name="name" type="string"/>
+      <column name="url" type="string"/>
+    </table>
+    <table name="Account" visPositionX="368" visPositionY="381" visSizeX="0" visSizeX2="101" visSizeY="0" visSizeY2="59">
+      <column auto-increment="true" name="id" primary="true" size="255" type="text"/>
+      <column name="username" required="true" type="string"/>
+      <column name="password" required="true" type="string"/>
+      <inheritance-parent discriminator-column="id" type="JOINED"/>
+    </table>
+    <table name="RegisterAccount" visPositionX="215" visPositionY="364" visSizeX="0" visSizeX2="108" visSizeY="0" visSizeY2="45">
+      <column auto-increment="true" name="id" primary="true" type="integer"/>
+      <column name="register_id" type="integer"/>
+      <inheritance-child derived-from="Account" discriminator-value="RegisterAccount" visCenterX="0" visCenterY="-3"/>
+    </table>
+    <table name="HostAccount" visPositionX="315" visPositionY="285" visSizeX="0" visSizeX2="95" visSizeY="0" visSizeY2="45">
+      <column auto-increment="true" name="id" primary="true" type="integer"/>
+      <column name="host_id" type="integer"/>
+      <inheritance-child derived-from="Account" discriminator-value="HostAccount" visCenterX="0" visCenterY="0"/>
+    </table>
+    <table name="Indexed" visPositionX="34" visPositionY="289" visSizeX="0" visSizeX2="105" visSizeY="0" visSizeY2="73">
+      <column auto-increment="true" name="id" primary="true" type="integer"/>
+      <column name="ss" type="string"/>
+      <column name="in" type="boolean"/>
+      <column name="domen_id" type="integer"/>
+    </table>
+    <foreign-key caption="RegisterAccount Domen" from="Domen" name="FK_Domen_RegisterAccount_id" to="RegisterAccount">
+      <foreign-key-column from="register_account_id" to="id"/>
+    </foreign-key>
+    <foreign-key caption="Bot Domen" from="Domen" name="FK_Domen_Bot_id" to="Bot">
+      <foreign-key-column from="bot_id" to="id"/>
+    </foreign-key>
+    <foreign-key caption="HostAccount FtpAccount" from="FtpAccount" name="FK_FtpAccount_HostAccount_id" to="HostAccount" visCaption1X="0" visCaption1Y="0" visCenterX="0" visCenterY="0">
+      <foreign-key-column from="host_account_id" to="id"/>
+    </foreign-key>
+    <foreign-key caption="Register RegisterAccount" from="RegisterAccount" name="FK_RegisterAccount_Register_id" to="Register" visCaption1X="0" visCaption1Y="0" visCenterX="0" visCenterY="0">
+      <foreign-key-column from="register_id" to="id"/>
+    </foreign-key>
+    <foreign-key caption="Host HostAccount" from="HostAccount" name="FK_HostAccount_Host_id" to="Host" visCaption1X="0" visCaption1Y="0" visCenterX="0" visCenterY="0">
       <foreign-key-column from="host_id" to="id"/>
+    </foreign-key>
+    <foreign-key caption="Domen Indexed" from="Indexed" name="FK_Indexed_Domen_id" to="Domen">
+      <foreign-key-column from="domen_id" to="id"/>
     </foreign-key>
   </module>
 
