@@ -1,6 +1,8 @@
 .idea
+.idea/
 .idea/*
-.app/cache
-.app/cache/*
-.app/log
-.app/log/*
+app/cache
+app/cache/
+app/cache/*
+app/log
+app/log/*

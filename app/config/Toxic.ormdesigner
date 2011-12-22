@@ -7,14 +7,14 @@
     <module-position name="Place" visPositionX="-26" visPositionY="371"/>
   </project>
 
-  <module import-format="Doctrine2Xml" import-path="..\..\src\Tox\SatelliteBundle\Resources\config\doctrine\metadata\orm\" name="Sattelite" visBkColor="15987704" visSizeX="25" visSizeX2="700" visSizeY="29" visSizeY2="427">
+  <module import-format="Doctrine2Yml" import-path="..\..\src\Tox\SatelliteBundle\Resources\config\doctrine\" name="Sattelite" visBkColor="15987704" visSizeX="25" visSizeX2="700" visSizeY="29" visSizeY2="427">
     <table name="Satellite" visPositionX="205" visPositionY="279" visSizeX="0" visSizeX2="127" visSizeY="0" visSizeY2="73">
       <column auto-increment="true" name="id" primary="true" type="integer"/>
       <column name="ftp_account_id" type="integer"/>
       <column name="domen_id" type="integer"/>
       <column name="theme_id" type="integer"/>
     </table>
-    <table name="Post" visPositionX="16" visPositionY="34" visSizeX="0" visSizeX2="109" visSizeY="0" visSizeY2="101">
+    <table name="Post" visPositionX="23" visPositionY="29" visSizeX="0" visSizeX2="109" visSizeY="0" visSizeY2="101">
       <column auto-increment="true" name="id" primary="true" type="integer"/>
       <column name="title" required="true" type="string"/>
       <column name="text" required="true" type="text"/>
@@ -29,7 +29,7 @@
       <column name="satellite_id" required="true" type="integer"/>
       <column name="domen_id" required="true" type="integer"/>
     </table>
-    <table name="Page" visPositionX="181" visPositionY="66" visSizeX="0" visSizeX2="72" visSizeY="0" visSizeY2="31">
+    <table name="Page" visPositionX="179" visPositionY="68" visSizeX="0" visSizeX2="72" visSizeY="0" visSizeY2="31">
       <column name="id" primary="true" required="true" type="integer"/>
       <inheritance-child derived-from="Post" discriminator-value="Page"/>
     </table>
@@ -37,7 +37,7 @@
       <column auto-increment="true" name="id" primary="true" type="integer"/>
       <column name="name" required="true" type="string"/>
     </table>
-    <foreign-key caption="FtpAccount Satellite" from="Satellite" name="FK_Satellite_FtpAccount_id" to="FtpAccount" visCaption1X="0" visCaption1Y="0" visCenterX="3" visCenterY="2">
+    <foreign-key caption="FtpAccount Satellite" from="Satellite" name="FK_Satellite_FtpAccount_id" to="FtpAccount" visCaption1X="0" visCaption1Y="0" visCenterX="3" visCenterY="34">
       <foreign-key-column from="ftp_account_id" to="id"/>
     </foreign-key>
     <foreign-key caption="Domen Satellite" from="Satellite" name="FK_Satellite_Domen_id" to="Domen">
@@ -58,7 +58,7 @@
     <foreign-key caption="Satellite Page" from="Page" name="FK_Page_Satellite_id" to="Satellite"/>
   </module>
 
-  <module import-format="Doctrine2Xml" import-path="..\..\src\Tox\ParserBundle\Resources\config\doctrine\metadata\orm\" name="Parser" visBkColor="16380923" visSizeX="0" visSizeX2="623" visSizeY="-8" visSizeY2="466">
+  <module import-format="Doctrine2Yml" import-path="..\..\src\Tox\ParserBundle\Resources\config\doctrine\" name="Parser" visBkColor="16380923" visSizeX="0" visSizeX2="623" visSizeY="-8" visSizeY2="466">
     <table name="Bot" visPositionX="17" visPositionY="36" visSizeX="0" visSizeX2="105" visSizeY="0" visSizeY2="101">
       <column auto-increment="true" name="id" primary="true" type="integer"/>
       <column name="vkid" required="true" type="integer" unique="true"/>
@@ -110,7 +110,7 @@
     </many-to-many-relation>
   </module>
 
-  <module import-format="Doctrine2Xml" import-path="..\..\src\Tox\PlaceBundle\Resources\config\doctrine\metadata\orm\" name="Place" visBkColor="16317694" visSizeX="0" visSizeX2="507" visSizeY="0" visSizeY2="456">
+  <module import-format="Doctrine2Yml" import-path="..\..\src\Tox\PlaceBundle\Resources\config\doctrine\" name="Place" visBkColor="16317694" visSizeX="0" visSizeX2="507" visSizeY="0" visSizeY2="456">
     <table name="Domen" visPositionX="37" visPositionY="29" visSizeX="0" visSizeX2="146" visSizeY="0" visSizeY2="101">
       <column auto-increment="true" name="id" primary="true" type="integer"/>
       <column name="name" required="true" type="string"/>
