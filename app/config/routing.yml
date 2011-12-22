@@ -1,5 +1,6 @@
 ToxSatelliteBundle:
-    resource: "@ToxSatelliteBundle/Resources/config/routing.yml"
+    resource: "@ToxSatelliteBundle/Controller/"
+    type:     annotation
     prefix:   /
 
 ToxPlaceBundle:

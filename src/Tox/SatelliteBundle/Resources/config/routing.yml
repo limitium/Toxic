@@ -1,3 +1,0 @@
-ToxSatelliteBundle_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: ToxSatelliteBundle:Default:index }

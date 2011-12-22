@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new Tox\ParserBundle\ToxParserBundle(),
             new Tox\PlaceBundle\ToxPlaceBundle(),
             new Tox\SatelliteBundle\ToxSatelliteBundle(),
+            new Limitium\ORMBundle\ORMBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

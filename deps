@@ -64,3 +64,6 @@
 [SensioGeneratorBundle]
     git=https://github.com/sensio/SensioGeneratorBundle.git
     target=/bundles/Symfony/Bundle/SensioGeneratorBundle
+
+[ORMBundle]
+    git=https://github.com/limitium/ORMBundle.git
