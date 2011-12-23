@@ -1,0 +1,23 @@
+Tox\PlaceBundle\Entity\Host:
+  type: entity
+  fields:
+    id:
+      id: true
+      type: integer
+      generator: { strategy: AUTO }
+    name:
+      type: string
+      nullable: true
+    username:
+      type: string
+      nullable: true
+    password:
+      type: string
+      nullable: true
+    ns_servers:
+      type: text
+      nullable: true
+  oneToMany:
+    Accounts:
+      targetEntity: Tox\PlaceBundle\Entity\HostAccount
+      mappedBy: Host

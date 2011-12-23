@@ -82,9 +82,8 @@ class MetadataFactory
         }
 
         $metadata->setPath($path);
-        if(!empty($r)){
-            $metadata->setNamespace($r->getNamespacename());
-        }
+        if(!empty($r))
+        $metadata->setNamespace($r->getNamespacename());
 
         return $metadata;
     }

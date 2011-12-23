@@ -1,0 +1,31 @@
+Tox\SatelliteBundle\Entity\Satellite:
+  type: entity
+  fields:
+    id:
+      id: true
+      type: integer
+      generator: { strategy: AUTO }
+    ftp_account_id:
+      type: integer
+      nullable: false
+  oneToOne:
+    Domen:
+      targetEntity: Tox\PlaceBundle\Entity\Domen
+      inversedBy: Satellite
+      joinColumns: { domen_id: { referencedColumnName: id, onDelete: CASCADE } }
+  oneToMany:
+    Posts:
+      targetEntity: Tox\SatelliteBundle\Entity\Post
+      mappedBy: Satellite
+    History:
+      targetEntity: Tox\SatelliteBundle\Entity\DomenHistory
+      mappedBy: Satellite
+  manyToOne:
+    FtpAccount:
+      targetEntity: Tox\PlaceBundle\Entity\FtpAccount
+      inversedBy: Satellites
+      joinColumns: null
+    Theme:
+      targetEntity: Tox\SatelliteBundle\Entity\Theme
+      inversedBy: Satellites
+      joinColumns: { theme_id: { referencedColumnName: id } }

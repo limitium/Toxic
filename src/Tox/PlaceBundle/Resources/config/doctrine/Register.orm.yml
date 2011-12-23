@@ -1,0 +1,17 @@
+Tox\PlaceBundle\Entity\Register:
+  type: entity
+  fields:
+    id:
+      id: true
+      type: integer
+      generator: { strategy: AUTO }
+    name:
+      type: string
+      nullable: true
+    url:
+      type: string
+      nullable: true
+  oneToMany:
+    Accounts:
+      targetEntity: Tox\PlaceBundle\Entity\RegisterAccount
+      mappedBy: Register

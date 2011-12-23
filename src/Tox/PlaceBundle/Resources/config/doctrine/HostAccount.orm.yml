@@ -1,0 +1,12 @@
+Tox\PlaceBundle\Entity\HostAccount:
+  type: entity
+  fields: null
+  oneToMany:
+    FtpAccounts:
+      targetEntity: Tox\PlaceBundle\Entity\FtpAccount
+      mappedBy: HostAccount
+  manyToOne:
+    Host:
+      targetEntity: Tox\PlaceBundle\Entity\Host
+      inversedBy: Accounts
+      joinColumns: { host_id: { referencedColumnName: id } }

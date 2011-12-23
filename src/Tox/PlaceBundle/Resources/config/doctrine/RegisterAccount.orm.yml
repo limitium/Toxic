@@ -1,0 +1,12 @@
+Tox\PlaceBundle\Entity\RegisterAccount:
+  type: entity
+  fields: null
+  oneToMany:
+    Domens:
+      targetEntity: Tox\PlaceBundle\Entity\Domen
+      mappedBy: RegisterAccount
+  manyToOne:
+    Register:
+      targetEntity: Tox\PlaceBundle\Entity\Register
+      inversedBy: Accounts
+      joinColumns: { register_id: { referencedColumnName: id } }

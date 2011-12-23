@@ -1,0 +1,30 @@
+Tox\SatelliteBundle\Entity\Post:
+  type: entity
+  fields:
+    id:
+      id: true
+      type: integer
+      generator: { strategy: AUTO }
+    title:
+      type: string
+      nullable: false
+    content:
+      type: text
+      length: 10000
+      nullable: false
+    file_name:
+      type: string
+      unique: true
+      nullable: false
+    type:
+      type: text
+      length: 255
+      nullable: true
+    is_page:
+      type: boolean
+      nullable: true
+  manyToOne:
+    Satellite:
+      targetEntity: Tox\SatelliteBundle\Entity\Satellite
+      inversedBy: Posts
+      joinColumns: { satellite_id: { referencedColumnName: id } }

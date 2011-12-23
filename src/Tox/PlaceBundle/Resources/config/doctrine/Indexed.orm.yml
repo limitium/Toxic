@@ -1,0 +1,19 @@
+Tox\PlaceBundle\Entity\Indexed:
+  type: entity
+  fields:
+    id:
+      id: true
+      type: integer
+      generator: { strategy: AUTO }
+    in:
+      type: boolean
+      nullable: true
+  manyToOne:
+    Domen:
+      targetEntity: Tox\PlaceBundle\Entity\Domen
+      inversedBy: Indexes
+      joinColumns: { domen_id: { referencedColumnName: id, onDelete: CASCADE } }
+    SearchEngine:
+      targetEntity: Tox\PlaceBundle\Entity\SearchEngine
+      inversedBy: Indexes
+      joinColumns: { search_engine_id: { referencedColumnName: id } }

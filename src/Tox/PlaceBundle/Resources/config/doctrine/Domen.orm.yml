@@ -1,0 +1,42 @@
+Tox\PlaceBundle\Entity\Domen:
+  type: entity
+  fields:
+    id:
+      id: true
+      type: integer
+      generator: { strategy: AUTO }
+    name:
+      type: string
+      nullable: false
+    bought_at:
+      type: date
+      nullable: true
+    whois:
+      type: string
+      nullable: true
+    paid_unitl:
+      type: date
+      nullable: true
+    register_account_id:
+      type: integer
+      nullable: false
+  oneToOne:
+    Satellite:
+      targetEntity: Tox\SatelliteBundle\Entity\Satellite
+      mappedBy: Domen
+  oneToMany:
+    History:
+      targetEntity: Tox\SatelliteBundle\Entity\DomenHistory
+      mappedBy: Domen
+    Indexes:
+      targetEntity: Tox\PlaceBundle\Entity\Indexed
+      mappedBy: Domen
+  manyToOne:
+    RegisterAccount:
+      targetEntity: Tox\PlaceBundle\Entity\RegisterAccount
+      inversedBy: Domens
+      joinColumns: null
+    Bot:
+      targetEntity: Tox\ParserBundle\Entity\Bot
+      inversedBy: Domens
+      joinColumns: { bot_id: { referencedColumnName: id } }
