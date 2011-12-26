@@ -5,9 +5,12 @@ Tox\PlaceBundle\Entity\Indexed:
       id: true
       type: integer
       generator: { strategy: AUTO }
-    in:
+    in_index:
       type: boolean
       nullable: true
+    check_at:
+      type: datetime
+      nullable: false
   manyToOne:
     Domen:
       targetEntity: Tox\PlaceBundle\Entity\Domen

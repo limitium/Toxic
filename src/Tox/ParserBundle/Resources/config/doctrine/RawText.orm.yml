@@ -9,6 +9,9 @@ Tox\ParserBundle\Entity\RawText:
       type: text
       length: 10000
       nullable: false
+    created_at:
+      type: datetime
+      nullable: true
   manyToOne:
     Theme:
       targetEntity: Tox\SatelliteBundle\Entity\Theme

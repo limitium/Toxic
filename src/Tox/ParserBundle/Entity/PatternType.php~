@@ -19,6 +19,11 @@ class PatternType
      */
     private $name;
 
+    /**
+     * @var boolean $is_meta
+     */
+    private $is_meta;
+
 
     /**
      * Get id
@@ -48,5 +53,25 @@ class PatternType
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set is_meta
+     *
+     * @param boolean $isMeta
+     */
+    public function setIsMeta($isMeta)
+    {
+        $this->is_meta = $isMeta;
+    }
+
+    /**
+     * Get is_meta
+     *
+     * @return boolean 
+     */
+    public function getIsMeta()
+    {
+        return $this->is_meta;
     }
 }

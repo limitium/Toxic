@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class RegisterAccount extends Account
 {
-   
+  
     /**
      * @var Tox\PlaceBundle\Entity\Domen
      */

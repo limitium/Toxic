@@ -12,9 +12,10 @@ Tox\PlaceBundle\Entity\Account:
       nullable: false
     password:
       type: string
+      length: 255
       nullable: false
   discriminatorColumn:
-    name: type
+    name: descriminator
     length: 255
     type: string
   discriminatorMap:

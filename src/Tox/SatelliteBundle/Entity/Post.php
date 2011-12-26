@@ -30,11 +30,6 @@ class Post
     private $file_name;
 
     /**
-     * @var text $type
-     */
-    private $type;
-
-    /**
      * @var boolean $is_page
      */
     private $is_page;
@@ -113,26 +108,6 @@ class Post
     public function getFileName()
     {
         return $this->file_name;
-    }
-
-    /**
-     * Set type
-     *
-     * @param text $type
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-    }
-
-    /**
-     * Get type
-     *
-     * @return text 
-     */
-    public function getType()
-    {
-        return $this->type;
     }
 
     /**

@@ -15,9 +15,14 @@ class Indexed
     private $id;
 
     /**
-     * @var boolean $in
+     * @var boolean $in_index
      */
-    private $in;
+    private $in_index;
+
+    /**
+     * @var datetime $check_at
+     */
+    private $check_at;
 
     /**
      * @var Tox\PlaceBundle\Entity\Domen
@@ -41,23 +46,43 @@ class Indexed
     }
 
     /**
-     * Set in
+     * Set in_index
      *
-     * @param boolean $in
+     * @param boolean $inIndex
      */
-    public function setIn($in)
+    public function setInIndex($inIndex)
     {
-        $this->in = $in;
+        $this->in_index = $inIndex;
     }
 
     /**
-     * Get in
+     * Get in_index
      *
      * @return boolean 
      */
-    public function getIn()
+    public function getInIndex()
     {
-        return $this->in;
+        return $this->in_index;
+    }
+
+    /**
+     * Set check_at
+     *
+     * @param datetime $checkAt
+     */
+    public function setCheckAt($checkAt)
+    {
+        $this->check_at = $checkAt;
+    }
+
+    /**
+     * Get check_at
+     *
+     * @return datetime 
+     */
+    public function getCheckAt()
+    {
+        return $this->check_at;
     }
 
     /**

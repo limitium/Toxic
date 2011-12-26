@@ -16,10 +16,6 @@ Tox\SatelliteBundle\Entity\Post:
       type: string
       unique: true
       nullable: false
-    type:
-      type: text
-      length: 255
-      nullable: true
     is_page:
       type: boolean
       nullable: true

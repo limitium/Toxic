@@ -15,7 +15,7 @@ class Account
     private $id;
 
     /**
-     * @var text $username
+     * @var string $username
      */
     private $username;
 
@@ -23,11 +23,6 @@ class Account
      * @var string $password
      */
     private $password;
-
-    /**
-     * @var text $descriminator
-     */
-    private $descriminator;
 
 
     /**
@@ -43,7 +38,7 @@ class Account
     /**
      * Set username
      *
-     * @param text $username
+     * @param string $username
      */
     public function setUsername($username)
     {
@@ -53,7 +48,7 @@ class Account
     /**
      * Get username
      *
-     * @return text 
+     * @return string 
      */
     public function getUsername()
     {
@@ -78,25 +73,5 @@ class Account
     public function getPassword()
     {
         return $this->password;
-    }
-
-    /**
-     * Set descriminator
-     *
-     * @param text $descriminator
-     */
-    public function setDescriminator($descriminator)
-    {
-        $this->descriminator = $descriminator;
-    }
-
-    /**
-     * Get descriminator
-     *
-     * @return text 
-     */
-    public function getDescriminator()
-    {
-        return $this->descriminator;
     }
 }

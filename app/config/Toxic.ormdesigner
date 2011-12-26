@@ -12,7 +12,7 @@
       <column auto-increment="true" name="id" primary="true" type="integer"/>
       <column name="ftp_account_id" required="true" type="integer"/>
       <column name="domen_id" required="true" type="integer" unique="true"/>
-      <column name="theme_id" type="integer"/>
+      <column name="theme_id" required="true" type="integer"/>
     </table>
     <table name="Post" visPositionX="23" visPositionY="29" visSizeX="0" visSizeX2="109" visSizeY="0" visSizeY2="101">
       <column auto-increment="true" name="id" primary="true" type="integer"/>
@@ -20,7 +20,6 @@
       <column name="content" required="true" size="10000" type="text"/>
       <column name="file_name" required="true" type="string" unique="true"/>
       <column name="satellite_id" required="true" type="integer"/>
-      <column name="type" size="255" type="text"/>
       <column name="is_page" type="boolean"/>
     </table>
     <table name="DomenHistory" visPositionX="-7" visPositionY="232" visSizeX="0" visSizeX2="109" visSizeY="0" visSizeY2="73">
@@ -55,7 +54,7 @@
   </module>
 
   <module import-format="Doctrine2Yml" import-path="..\..\src\Tox\ParserBundle\Resources\config\doctrine\" name="Parser" visBkColor="16380923" visSizeX="0" visSizeX2="623" visSizeY="-8" visSizeY2="466">
-    <table name="Bot" visPositionX="17" visPositionY="36" visSizeX="0" visSizeX2="105" visSizeY="0" visSizeY2="101">
+    <table name="Bot" visPositionX="31" visPositionY="28" visSizeX="0" visSizeX2="105" visSizeY="0" visSizeY2="101">
       <column auto-increment="true" name="id" primary="true" type="integer"/>
       <column name="vkid" required="true" type="integer" unique="true"/>
       <column name="first_name" required="true" type="string"/>
@@ -63,27 +62,35 @@
       <column name="email" type="string"/>
       <column name="phone" type="string"/>
     </table>
-    <table name="RawText" visPositionX="351" visPositionY="35" visSizeX="0" visSizeX2="106" visSizeY="0" visSizeY2="73">
+    <table name="RawText" visPositionX="389" visPositionY="32" visSizeX="0" visSizeX2="117" visSizeY="0" visSizeY2="87">
       <column auto-increment="true" name="id" primary="true" type="integer"/>
       <column name="content" required="true" size="10000" type="text"/>
-      <column name="theme_id" type="integer"/>
-      <column name="Source_id" type="integer"/>
+      <column name="theme_id" required="true" type="integer"/>
+      <column name="Source_id" required="true" type="integer"/>
+      <column name="created_at" type="datetime"/>
     </table>
-    <table name="Source" visPositionX="155" visPositionY="38" visSizeX="0" visSizeX2="103" visSizeY="0" visSizeY2="73">
+    <table name="Source" visPositionX="167" visPositionY="32" visSizeX="0" visSizeX2="103" visSizeY="0" visSizeY2="73">
       <column auto-increment="true" name="id" primary="true" type="integer"/>
       <column name="name" type="string"/>
       <column name="url" required="true" type="string"/>
-      <column name="theme_id" type="integer"/>
+      <column name="theme_id" required="true" type="integer"/>
     </table>
-    <table name="PatternType" visPositionX="17" visPositionY="175" visSizeX="0" visSizeX2="83" visSizeY="0" visSizeY2="45">
+    <table name="PatternType" visPositionX="259" visPositionY="188" visSizeX="0" visSizeX2="83" visSizeY="0" visSizeY2="45">
       <column auto-increment="true" name="id" primary="true" type="integer"/>
       <column name="name" required="true" type="string"/>
+      <column name="is_meta" type="boolean"/>
     </table>
-    <table name="Rule" visPositionX="160" visPositionY="159" visSizeX="0" visSizeX2="130" visSizeY="0" visSizeY2="88">
+    <table name="Rule" visPositionX="38" visPositionY="174" visSizeX="0" visSizeX2="130" visSizeY="0" visSizeY2="88">
       <column auto-increment="true" name="id" primary="true" type="integer"/>
       <column name="source_id" required="true" type="integer"/>
       <column name="pattern_type_id" required="true" type="integer"/>
       <column name="pattern" required="true" type="string"/>
+    </table>
+    <table name="MetaData" visPositionX="407" visPositionY="188" visSizeX="0" visSizeX2="115" visSizeY="0" visSizeY2="59">
+      <column auto-increment="true" name="id" primary="true" type="integer"/>
+      <column name="context" size="10000" type="text"/>
+      <column name="raw_text_id" required="true" type="integer"/>
+      <column name="pattern_type_id" required="true" type="integer"/>
     </table>
     <foreign-key caption="Theme RawPage" from="RawText" inverse-alias="Theme" name="FK_RawPage_Theme_id" owning-alias="RawPages" to="Theme">
       <foreign-key-column from="theme_id" to="id"/>
@@ -98,6 +105,12 @@
       <foreign-key-column from="source_id" to="id"/>
     </foreign-key>
     <foreign-key caption="PatternType Rule" from="Rule" inverse-alias="PatternType" name="FK_Rule_PatternType_id" owning-alias="Rules" to="PatternType" visCaption1X="1" visCaption1Y="0" visCenterX="0" visCenterY="0">
+      <foreign-key-column from="pattern_type_id" to="id"/>
+    </foreign-key>
+    <foreign-key caption="RawText MetaData" from="MetaData" name="FK_MetaData_RawText_id" to="RawText">
+      <foreign-key-column from="raw_text_id" to="id"/>
+    </foreign-key>
+    <foreign-key caption="PatternType MetaData" from="MetaData" name="FK_MetaData_PatternType_id" to="PatternType">
       <foreign-key-column from="pattern_type_id" to="id"/>
     </foreign-key>
     <many-to-many-relation mn-table="Rule">
@@ -124,7 +137,7 @@
       <column name="ns_servers" type="text"/>
     </table>
     <table name="FtpAccount" visPositionX="374" visPositionY="103" visSizeX="0" visSizeX2="133" visSizeY="0" visSizeY2="45">
-      <column name="host_account_id" type="integer"/>
+      <column name="host_account_id" required="true" type="integer"/>
       <inheritance-child derived-from="Account" discriminator-value="FtpAccount" visCenterX="3" visCenterY="0"/>
     </table>
     <table name="Register" visPositionX="2" visPositionY="384" visSizeX="0" visSizeX2="83" visSizeY="0" visSizeY2="59">
@@ -135,23 +148,24 @@
     <table name="Account" visPositionX="368" visPositionY="381" visSizeX="0" visSizeX2="101" visSizeY="0" visSizeY2="59">
       <column auto-increment="true" name="id" primary="true" type="integer"/>
       <column name="username" required="true" size="255" type="string"/>
-      <column name="password" required="true" type="string"/>
-      <column name="type" size="255" type="string"/>
-      <inheritance-parent discriminator-column="type" type="JOINED"/>
+      <column name="password" required="true" size="255" type="string"/>
+      <column name="descriminator" size="255" type="string"/>
+      <inheritance-parent discriminator-column="descriminator" type="JOINED"/>
     </table>
     <table name="RegisterAccount" visPositionX="215" visPositionY="364" visSizeX="0" visSizeX2="108" visSizeY="0" visSizeY2="45">
-      <column name="register_id" type="integer"/>
+      <column name="register_id" required="true" type="integer"/>
       <inheritance-child derived-from="Account" discriminator-value="RegisterAccount" visCenterX="0" visCenterY="-3"/>
     </table>
     <table name="HostAccount" visPositionX="315" visPositionY="285" visSizeX="0" visSizeX2="95" visSizeY="0" visSizeY2="45">
-      <column name="host_id" type="integer"/>
+      <column name="host_id" required="true" type="integer"/>
       <inheritance-child derived-from="Account" discriminator-value="HostAccount" visCenterX="0" visCenterY="0"/>
     </table>
     <table name="Indexed" visPositionX="7" visPositionY="185" visSizeX="0" visSizeX2="137" visSizeY="0" visSizeY2="73">
       <column auto-increment="true" name="id" primary="true" type="integer"/>
-      <column name="in" type="boolean"/>
+      <column name="in_index" type="boolean"/>
       <column name="domen_id" required="true" type="integer"/>
       <column name="search_engine_id" required="true" type="integer"/>
+      <column name="check_at" required="true" type="datetime"/>
     </table>
     <table name="SearchEngine" visPositionX="36" visPositionY="323" visSizeX="0" visSizeX2="83" visSizeY="0" visSizeY2="45">
       <column auto-increment="true" name="id" primary="true" type="integer"/>

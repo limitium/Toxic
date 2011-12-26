@@ -20,6 +20,11 @@ class RawText
     private $content;
 
     /**
+     * @var datetime $created_at
+     */
+    private $created_at;
+
+    /**
      * @var Tox\SatelliteBundle\Entity\Theme
      */
     private $Theme;
@@ -58,6 +63,26 @@ class RawText
     public function getContent()
     {
         return $this->content;
+    }
+
+    /**
+     * Set created_at
+     *
+     * @param datetime $createdAt
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->created_at = $createdAt;
+    }
+
+    /**
+     * Get created_at
+     *
+     * @return datetime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->created_at;
     }
 
     /**

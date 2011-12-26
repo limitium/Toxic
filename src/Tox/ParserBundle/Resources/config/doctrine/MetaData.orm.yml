@@ -1,13 +1,11 @@
-Tox\ParserBundle\Entity\PatternType:
+Tox\ParserBundle\Entity\MetaData:
   type: entity
   fields:
     id:
       id: true
       type: integer
       generator: { strategy: AUTO }
-    name:
-      type: string
-      nullable: false
-    is_meta:
-      type: boolean
+    context:
+      type: text
+      length: 10000
       nullable: true

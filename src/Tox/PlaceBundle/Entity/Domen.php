@@ -40,12 +40,12 @@ class Domen
     private $register_account_id;
 
     /**
-     * @var Tox\SatelliteBundle\Entity\Satellite
+     * @var Tox\PlaceBundle\Entity\Satellite
      */
     private $Satellite;
 
     /**
-     * @var Tox\SatelliteBundle\Entity\DomenHistory
+     * @var Tox\PlaceBundle\Entity\DomenHistory
      */
     private $History;
 
@@ -60,7 +60,7 @@ class Domen
     private $RegisterAccount;
 
     /**
-     * @var Tox\ParserBundle\Entity\Bot
+     * @var Tox\PlaceBundle\Entity\Bot
      */
     private $Bot;
 
@@ -183,9 +183,9 @@ class Domen
     /**
      * Set Satellite
      *
-     * @param Tox\SatelliteBundle\Entity\Satellite $satellite
+     * @param Tox\PlaceBundle\Entity\Satellite $satellite
      */
-    public function setSatellite(\Tox\SatelliteBundle\Entity\Satellite $satellite)
+    public function setSatellite(\Tox\PlaceBundle\Entity\Satellite $satellite)
     {
         $this->Satellite = $satellite;
     }
@@ -193,7 +193,7 @@ class Domen
     /**
      * Get Satellite
      *
-     * @return Tox\SatelliteBundle\Entity\Satellite 
+     * @return Tox\PlaceBundle\Entity\Satellite 
      */
     public function getSatellite()
     {
@@ -203,9 +203,9 @@ class Domen
     /**
      * Add History
      *
-     * @param Tox\SatelliteBundle\Entity\DomenHistory $history
+     * @param Tox\PlaceBundle\Entity\DomenHistory $history
      */
-    public function addDomenHistory(\Tox\SatelliteBundle\Entity\DomenHistory $history)
+    public function addDomenHistory(\Tox\PlaceBundle\Entity\DomenHistory $history)
     {
         $this->History[] = $history;
     }
@@ -263,9 +263,9 @@ class Domen
     /**
      * Set Bot
      *
-     * @param Tox\ParserBundle\Entity\Bot $bot
+     * @param Tox\PlaceBundle\Entity\Bot $bot
      */
-    public function setBot(\Tox\ParserBundle\Entity\Bot $bot)
+    public function setBot(\Tox\PlaceBundle\Entity\Bot $bot)
     {
         $this->Bot = $bot;
     }
@@ -273,7 +273,7 @@ class Domen
     /**
      * Get Bot
      *
-     * @return Tox\ParserBundle\Entity\Bot 
+     * @return Tox\PlaceBundle\Entity\Bot 
      */
     public function getBot()
     {

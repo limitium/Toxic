@@ -3,7 +3,7 @@ Tox\PlaceBundle\Entity\FtpAccount:
   fields:
     host_account_id:
       type: integer
-      nullable: true
+      nullable: false
   oneToMany:
     Satellites:
       targetEntity: Tox\SatelliteBundle\Entity\Satellite
