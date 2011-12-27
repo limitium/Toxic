@@ -1,0 +1,7 @@
+Tox\ParserBundle\Entity\Content:
+  type: entity
+  fields:
+    data:
+      type: text
+      length: 10000
+      nullable: false

@@ -7,12 +7,9 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Tox\ParserBundle\Entity\Bot
  */
-class Bot
+class Bot extends RawResult
 {
-    /**
-     * @var integer $id
-     */
-    private $id;
+
 
     /**
      * @var integer $vkid
@@ -49,16 +46,6 @@ class Bot
         $this->Domens = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
     /**
      * Set vkid
      *

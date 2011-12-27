@@ -4,7 +4,8 @@ Tox\PlaceBundle\Entity\Domen:
     id:
       id: true
       type: integer
-      generator: { strategy: AUTO }
+      generator:
+        strategy: AUTO
     name:
       type: string
       nullable: false
@@ -19,7 +20,10 @@ Tox\PlaceBundle\Entity\Domen:
       nullable: true
     register_account_id:
       type: integer
-      nullable: false
+      nullable: true
+    bot_id:
+      type: integer
+      nullable: true
   oneToOne:
     Satellite:
       targetEntity: Tox\SatelliteBundle\Entity\Satellite
@@ -35,8 +39,12 @@ Tox\PlaceBundle\Entity\Domen:
     RegisterAccount:
       targetEntity: Tox\PlaceBundle\Entity\RegisterAccount
       inversedBy: Domens
-      joinColumns: null
+      joinColumns:
+        register_account_id:
+          referencedColumnName: id
     Bot:
       targetEntity: Tox\ParserBundle\Entity\Bot
       inversedBy: Domens
-      joinColumns: { bot_id: { referencedColumnName: id } }
+      joinColumns:
+        bot_id:
+          referencedColumnName: id

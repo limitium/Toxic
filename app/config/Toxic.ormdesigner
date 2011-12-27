@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <orm-designer version="1.4.7.491">
 
-  <project code-name="Toxic" framework="Without Framework" name="toxic" orm="Doctrine2" visSizeX="76" visSizeX2="1094" visSizeY="148" visSizeY2="877">
+  <project code-name="Toxic" framework="Without Framework" name="toxic" orm="Doctrine2" visSizeX="76" visSizeX2="1277" visSizeY="148" visSizeY2="1016">
     <module-position name="Sattelite" visPositionX="0" visPositionY="-66"/>
-    <module-position name="Parser" visPositionX="497" visPositionY="362"/>
+    <module-position name="Parser" visPositionX="539" visPositionY="361"/>
     <module-position name="Place" visPositionX="-26" visPositionY="371"/>
   </project>
 
   <module import-format="Doctrine2Yml" import-path="..\..\src\Tox\SatelliteBundle\Resources\config\doctrine\" name="Sattelite" visBkColor="15987704" visSizeX="25" visSizeX2="700" visSizeY="29" visSizeY2="427">
     <table name="Satellite" visPositionX="205" visPositionY="279" visSizeX="0" visSizeX2="127" visSizeY="0" visSizeY2="73">
       <column auto-increment="true" name="id" primary="true" type="integer"/>
-      <column name="ftp_account_id" required="true" type="integer"/>
       <column name="domen_id" required="true" type="integer" unique="true"/>
       <column name="theme_id" required="true" type="integer"/>
+      <column name="ftp_account_id" type="integer"/>
     </table>
     <table name="Post" visPositionX="23" visPositionY="29" visSizeX="0" visSizeX2="109" visSizeY="0" visSizeY2="101">
       <column auto-increment="true" name="id" primary="true" type="integer"/>
@@ -32,7 +32,6 @@
       <column auto-increment="true" name="id" primary="true" type="integer"/>
       <column name="name" required="true" type="string"/>
     </table>
-    <foreign-key caption="FtpAccount Satellite" from="Satellite" inverse-alias="FtpAccount" name="FK_Satellite_FtpAccount_id" owning-alias="Satellites" to="FtpAccount"/>
     <foreign-key caption="Domen Satellite" from="Satellite" inverse-alias="Domen" name="FK_Satellite_Domen_id" owning-alias="Satellite" to="Domen">
       <foreign-key-column from="domen_id" to="id"/>
       <orm-properties>
@@ -42,6 +41,7 @@
     <foreign-key caption="Theme Satellite" from="Satellite" inverse-alias="Theme" name="FK_Satellite_Theme_id" owning-alias="Satellites" to="Theme">
       <foreign-key-column from="theme_id" to="id"/>
     </foreign-key>
+    <foreign-key caption="FtpAccount Satellite" from="Satellite" inverse-alias="FtpAccount" name="FK_Satellite_FtpAccount_id" owning-alias="Satellites" to="FtpAccount"/>
     <foreign-key caption="Satellite Post" from="Post" inverse-alias="Satellite" name="FK_Post_Satellite_id" owning-alias="Posts" to="Satellite" visCaption1X="-1" visCaption1Y="1" visCenterX="0" visCenterY="0">
       <foreign-key-column from="satellite_id" to="id"/>
     </foreign-key>
@@ -53,80 +53,125 @@
     </foreign-key>
   </module>
 
-  <module import-format="Doctrine2Yml" import-path="..\..\src\Tox\ParserBundle\Resources\config\doctrine\" name="Parser" visBkColor="16380923" visSizeX="0" visSizeX2="623" visSizeY="-8" visSizeY2="466">
-    <table name="Bot" visPositionX="31" visPositionY="28" visSizeX="0" visSizeX2="105" visSizeY="0" visSizeY2="101">
-      <column auto-increment="true" name="id" primary="true" type="integer"/>
+  <module import-format="Doctrine2Yml" import-path="..\..\src\Tox\ParserBundle\Resources\config\doctrine\" name="Parser" visBkColor="16380923" visSizeX="22" visSizeX2="688" visSizeY="-8" visSizeY2="605">
+    <table name="Bot" visPositionX="56" visPositionY="16" visSizeX="0" visSizeX2="105" visSizeY="0" visSizeY2="101">
       <column name="vkid" required="true" type="integer" unique="true"/>
       <column name="first_name" required="true" type="string"/>
       <column name="last_name" required="true" type="string"/>
       <column name="email" type="string"/>
       <column name="phone" type="string"/>
+      <inheritance-child derived-from="RawResult" discriminator-value="Bot"/>
     </table>
-    <table name="RawText" visPositionX="389" visPositionY="32" visSizeX="0" visSizeX2="117" visSizeY="0" visSizeY2="87">
-      <column auto-increment="true" name="id" primary="true" type="integer"/>
-      <column name="content" required="true" size="10000" type="text"/>
-      <column name="theme_id" required="true" type="integer"/>
-      <column name="Source_id" required="true" type="integer"/>
-      <column name="created_at" type="datetime"/>
+    <table name="Content" visPositionX="373" visPositionY="352" visSizeX="0" visSizeX2="115" visSizeY="0" visSizeY2="45">
+      <column name="data" required="true" size="10000" type="text"/>
+      <inheritance-child derived-from="RawResult" discriminator-value="Content"/>
     </table>
-    <table name="Source" visPositionX="167" visPositionY="32" visSizeX="0" visSizeX2="103" visSizeY="0" visSizeY2="73">
+    <table name="Source" visPositionX="193" visPositionY="109" visSizeX="0" visSizeX2="129" visSizeY="0" visSizeY2="101">
       <column auto-increment="true" name="id" primary="true" type="integer"/>
       <column name="name" type="string"/>
       <column name="url" required="true" type="string"/>
-      <column name="theme_id" required="true" type="integer"/>
+      <column name="theme_id" type="integer"/>
+      <column name="schedule_id" required="true" type="integer"/>
+      <column name="source_type_id" required="true" type="integer"/>
     </table>
-    <table name="PatternType" visPositionX="259" visPositionY="188" visSizeX="0" visSizeX2="83" visSizeY="0" visSizeY2="45">
+    <table name="PatternType" visPositionX="551" visPositionY="192" visSizeX="0" visSizeX2="129" visSizeY="0" visSizeY2="59">
       <column auto-increment="true" name="id" primary="true" type="integer"/>
       <column name="name" required="true" type="string"/>
-      <column name="is_meta" type="boolean"/>
+      <column name="source_type_id" required="true" type="integer"/>
     </table>
-    <table name="Rule" visPositionX="38" visPositionY="174" visSizeX="0" visSizeX2="130" visSizeY="0" visSizeY2="88">
+    <table name="MetaData" visPositionX="513" visPositionY="441" visSizeX="0" visSizeX2="130" visSizeY="0" visSizeY2="73">
+      <column auto-increment="true" name="id" primary="true" type="integer"/>
+      <column name="data" required="true" size="1000" type="string"/>
+      <column name="content_id" required="true" type="integer"/>
+      <column name="pattern_type_id" required="true" type="integer"/>
+    </table>
+    <table name="Schedule" visPositionX="427" visPositionY="101" visSizeX="0" visSizeX2="96" visSizeY="0" visSizeY2="45">
+      <column auto-increment="true" name="id" primary="true" type="integer"/>
+      <column name="timeout" required="true" type="integer"/>
+    </table>
+    <table name="Proxy" visPositionX="50" visPositionY="441" visSizeX="0" visSizeX2="121" visSizeY="0" visSizeY2="73">
+      <column name="ip" required="true" type="integer"/>
+      <column name="port" required="true" type="integer"/>
+      <column name="proxy_type" type="string"/>
+      <column name="valid" type="boolean"/>
+      <column name="checked_at" type="datetime"/>
+      <index name="Unique_IP" unique="true">
+        <index-column name="port"/>
+        <index-column name="ip"/>
+      </index>
+      <inheritance-child derived-from="RawResult" discriminator-value="Proxy"/>
+    </table>
+    <table name="SourceType" visPositionX="397" visPositionY="257" visSizeX="0" visSizeX2="83" visSizeY="0" visSizeY2="45">
+      <column auto-increment="true" name="id" primary="true" type="integer"/>
+      <column name="name" required="true" type="string"/>
+    </table>
+    <table name="RawResult" visPositionX="53" visPositionY="306" visSizeX="0" visSizeX2="130" visSizeY="0" visSizeY2="87">
+      <column auto-increment="true" name="id" primary="true" type="integer"/>
+      <column name="created_at" required="true" type="datetime"/>
+      <column name="url" required="true" size="255" type="string"/>
+      <column name="source_id" required="true" type="integer"/>
+      <column name="descriminator" size="255" type="text"/>
+      <inheritance-parent discriminator-column="descriminator" type="JOINED"/>
+    </table>
+    <table name="SourceAccount" visPositionX="-15" visPositionY="132" visSizeX="0" visSizeX2="105" visSizeY="0" visSizeY2="31">
+      <column name="source_id" type="integer" unique="true"/>
+      <inheritance-child derived-from="HttpAccount" discriminator-value="SourceAccount"/>
+    </table>
+    <table name="Rule" visPositionX="483" visPositionY="13" visSizeX="0" visSizeX2="130" visSizeY="0" visSizeY2="73">
       <column auto-increment="true" name="id" primary="true" type="integer"/>
       <column name="source_id" required="true" type="integer"/>
       <column name="pattern_type_id" required="true" type="integer"/>
-      <column name="pattern" required="true" type="string"/>
+      <column name="pattern" size="255" type="string"/>
     </table>
-    <table name="MetaData" visPositionX="407" visPositionY="188" visSizeX="0" visSizeX2="115" visSizeY="0" visSizeY2="59">
+    <table name="UsedProxy" visPositionX="286" visPositionY="449" visSizeX="0" visSizeX2="106" visSizeY="0" visSizeY2="87">
       <column auto-increment="true" name="id" primary="true" type="integer"/>
-      <column name="context" size="10000" type="text"/>
-      <column name="raw_text_id" required="true" type="integer"/>
-      <column name="pattern_type_id" required="true" type="integer"/>
+      <column name="used_at" required="true" type="datetime"/>
+      <column name="success" required="true" type="boolean"/>
+      <column name="source_id" type="integer"/>
+      <column name="proxy_id" type="integer"/>
     </table>
-    <foreign-key caption="Theme RawPage" from="RawText" inverse-alias="Theme" name="FK_RawPage_Theme_id" owning-alias="RawPages" to="Theme">
-      <foreign-key-column from="theme_id" to="id"/>
-    </foreign-key>
-    <foreign-key caption="Source RawPage" from="RawText" inverse-alias="Source" name="FK_RawPage_Source_id" owning-alias="RawPages" to="Source">
-      <foreign-key-column from="Source_id" to="id"/>
-    </foreign-key>
     <foreign-key caption="Theme Source" from="Source" inverse-alias="Theme" name="FK_Source_Theme_id" owning-alias="Sources" to="Theme">
       <foreign-key-column from="theme_id" to="id"/>
     </foreign-key>
-    <foreign-key caption="Source Rule" from="Rule" inverse-alias="Source" name="FK_Rule_Source_id" owning-alias="Rules" to="Source">
+    <foreign-key caption="Schedule Source" from="Source" inverse-alias="Schedule" name="FK_Source_Schedule_id" owning-alias="Source" to="Schedule" visCaption1X="0" visCaption1Y="0" visCenterX="0" visCenterY="0">
+      <foreign-key-column from="schedule_id" to="id"/>
+    </foreign-key>
+    <foreign-key caption="SourceType Source" from="Source" inverse-alias="Type" name="FK_Source_SourceType_id" owning-alias="Sources" to="SourceType">
+      <foreign-key-column from="source_type_id" to="id"/>
+    </foreign-key>
+    <foreign-key caption="SourceType PatternType" from="PatternType" inverse-alias="Type" name="FK_PatternType_SourceType_id" owning-alias="Patterns" to="SourceType">
+      <foreign-key-column from="source_type_id" to="id"/>
+    </foreign-key>
+    <foreign-key caption="RawText MetaData" from="MetaData" name="FK_MetaData_RawText_id" to="Content" visCaption1X="-1" visCaption1Y="2" visCenterX="0" visCenterY="0"/>
+    <foreign-key caption="PatternType MetaData" from="MetaData" inverse-alias="PatternType" name="FK_MetaData_PatternType_id" owning-alias="MetaData" to="PatternType" visCaption1X="0" visCaption1Y="-1" visCenterX="0" visCenterY="0">
+      <foreign-key-column from="pattern_type_id" to="id"/>
+    </foreign-key>
+    <foreign-key caption="Source RawResult" from="RawResult" inverse-alias="Source" name="FK_RawResult_Source_id" owning-alias="Results" to="Source">
       <foreign-key-column from="source_id" to="id"/>
     </foreign-key>
-    <foreign-key caption="PatternType Rule" from="Rule" inverse-alias="PatternType" name="FK_Rule_PatternType_id" owning-alias="Rules" to="PatternType" visCaption1X="1" visCaption1Y="0" visCenterX="0" visCenterY="0">
+    <foreign-key caption="Source SourceAccount" from="SourceAccount" inverse-alias="Source" name="FK_SourceAccount_Source_id" owning-alias="Account" to="Source">
+      <foreign-key-column from="source_id" to="id"/>
+    </foreign-key>
+    <foreign-key caption="Source Rule" from="Rule" inverse-alias="Soruce" name="FK_Rule_Source_id2" owning-alias="Rules" to="Source">
+      <foreign-key-column from="source_id" to="id"/>
+    </foreign-key>
+    <foreign-key caption="PatternType Rule" from="Rule" inverse-alias="Type" name="FK_Rule_PatternType_id2" owning-alias="Rules" to="PatternType" visCaption1X="1" visCaption1Y="1" visCenterX="0" visCenterY="0">
       <foreign-key-column from="pattern_type_id" to="id"/>
     </foreign-key>
-    <foreign-key caption="RawText MetaData" from="MetaData" name="FK_MetaData_RawText_id" to="RawText">
-      <foreign-key-column from="raw_text_id" to="id"/>
+    <foreign-key caption="Source UsedProxy" from="UsedProxy" inverse-alias="Source" name="FK_UsedProxy_Source_id" owning-alias="UsedProxy" to="Source">
+      <foreign-key-column from="source_id" to="id"/>
     </foreign-key>
-    <foreign-key caption="PatternType MetaData" from="MetaData" name="FK_MetaData_PatternType_id" to="PatternType">
-      <foreign-key-column from="pattern_type_id" to="id"/>
-    </foreign-key>
-    <many-to-many-relation mn-table="Rule">
-      <many-to-many-foreign-key foreign-key="FK_Rule_Source_id" relation-alias=""/>
-      <many-to-many-foreign-key foreign-key="FK_Rule_PatternType_id" relation-alias=""/>
-    </many-to-many-relation>
+    <foreign-key caption="Proxy UsedProxy" from="UsedProxy" inverse-alias="Proxy" name="FK_UsedProxy_Proxy_id" owning-alias="Used" to="Proxy"/>
   </module>
 
-  <module import-format="Doctrine2Yml" import-path="..\..\src\Tox\PlaceBundle\Resources\config\doctrine\" name="Place" visBkColor="16317694" visSizeX="0" visSizeX2="518" visSizeY="0" visSizeY2="488">
+  <module import-format="Doctrine2Yml" import-path="..\..\src\Tox\PlaceBundle\Resources\config\doctrine\" name="Place" visBkColor="16317694" visSizeX="0" visSizeX2="518" visSizeY="0" visSizeY2="512">
     <table name="Domen" visPositionX="37" visPositionY="29" visSizeX="0" visSizeX2="146" visSizeY="0" visSizeY2="101">
       <column auto-increment="true" name="id" primary="true" type="integer"/>
       <column name="name" required="true" type="string"/>
       <column name="bought_at" type="date"/>
       <column name="whois" type="string"/>
       <column name="paid_unitl" type="date"/>
-      <column name="register_account_id" required="true" type="integer"/>
+      <column name="register_account_id" type="integer"/>
       <column name="bot_id" type="integer"/>
     </table>
     <table name="Host" visPositionX="215" visPositionY="107" visSizeX="0" visSizeX2="101" visSizeY="0" visSizeY2="87">
@@ -140,41 +185,47 @@
       <column name="host_account_id" required="true" type="integer"/>
       <inheritance-child derived-from="Account" discriminator-value="FtpAccount" visCenterX="3" visCenterY="0"/>
     </table>
-    <table name="Register" visPositionX="2" visPositionY="384" visSizeX="0" visSizeX2="83" visSizeY="0" visSizeY2="59">
+    <table name="Register" visPositionX="109" visPositionY="430" visSizeX="0" visSizeX2="83" visSizeY="0" visSizeY2="59">
       <column auto-increment="true" name="id" primary="true" type="integer"/>
       <column name="name" type="string"/>
       <column name="url" type="string"/>
     </table>
-    <table name="Account" visPositionX="368" visPositionY="381" visSizeX="0" visSizeX2="101" visSizeY="0" visSizeY2="59">
+    <table name="Account" visPositionX="377" visPositionY="413" visSizeX="0" visSizeX2="137" visSizeY="0" visSizeY2="73">
       <column auto-increment="true" name="id" primary="true" type="integer"/>
       <column name="username" required="true" size="255" type="string"/>
       <column name="password" required="true" size="255" type="string"/>
       <column name="descriminator" size="255" type="string"/>
       <inheritance-parent discriminator-column="descriminator" type="JOINED"/>
     </table>
-    <table name="RegisterAccount" visPositionX="215" visPositionY="364" visSizeX="0" visSizeX2="108" visSizeY="0" visSizeY2="45">
+    <table name="RegisterAccount" visPositionX="159" visPositionY="297" visSizeX="0" visSizeX2="108" visSizeY="0" visSizeY2="31">
       <column name="register_id" required="true" type="integer"/>
-      <inheritance-child derived-from="Account" discriminator-value="RegisterAccount" visCenterX="0" visCenterY="-3"/>
+      <inheritance-child derived-from="HttpAccount" discriminator-value="RegisterAccount"/>
     </table>
-    <table name="HostAccount" visPositionX="315" visPositionY="285" visSizeX="0" visSizeX2="95" visSizeY="0" visSizeY2="45">
+    <table name="HostAccount" visPositionX="301" visPositionY="297" visSizeX="0" visSizeX2="95" visSizeY="0" visSizeY2="31">
       <column name="host_id" required="true" type="integer"/>
-      <inheritance-child derived-from="Account" discriminator-value="HostAccount" visCenterX="0" visCenterY="0"/>
+      <inheritance-child derived-from="HttpAccount" discriminator-value="HostAccount"/>
     </table>
-    <table name="Indexed" visPositionX="7" visPositionY="185" visSizeX="0" visSizeX2="137" visSizeY="0" visSizeY2="73">
+    <table name="Indexed" visPositionX="17" visPositionY="180" visSizeX="0" visSizeX2="137" visSizeY="0" visSizeY2="87">
       <column auto-increment="true" name="id" primary="true" type="integer"/>
       <column name="in_index" type="boolean"/>
       <column name="domen_id" required="true" type="integer"/>
       <column name="search_engine_id" required="true" type="integer"/>
       <column name="check_at" required="true" type="datetime"/>
     </table>
-    <table name="SearchEngine" visPositionX="36" visPositionY="323" visSizeX="0" visSizeX2="83" visSizeY="0" visSizeY2="45">
+    <table name="SearchEngine" visPositionX="10" visPositionY="397" visSizeX="0" visSizeX2="83" visSizeY="0" visSizeY2="45">
       <column auto-increment="true" name="id" primary="true" type="integer"/>
       <column name="name" required="true" type="string"/>
     </table>
+    <table name="HttpAccount" visPositionX="203" visPositionY="416" visSizeX="0" visSizeX2="141" visSizeY="0" visSizeY2="73">
+      <column name="login_field" size="255" type="string"/>
+      <column name="password_fied" size="255" type="string"/>
+      <column name="url" size="255" type="string"/>
+      <column name="descriminator" size="255" type="string"/>
+      <inheritance-parent discriminator-column="descriminator" type="JOINED"/>
+      <inheritance-child derived-from="Account" discriminator-value="HttpAccount" visCenterX="3" visCenterY="0"/>
+    </table>
     <foreign-key caption="RegisterAccount Domen" from="Domen" inverse-alias="RegisterAccount" name="FK_Domen_RegisterAccount_id" owning-alias="Domens" to="RegisterAccount"/>
-    <foreign-key caption="Bot Domen" from="Domen" inverse-alias="Bot" name="FK_Domen_Bot_id" owning-alias="Domens" to="Bot">
-      <foreign-key-column from="bot_id" to="id"/>
-    </foreign-key>
+    <foreign-key caption="Bot Domen" from="Domen" inverse-alias="Bot" name="FK_Domen_Bot_id" owning-alias="Domens" to="Bot"/>
     <foreign-key caption="HostAccount FtpAccount" from="FtpAccount" inverse-alias="HostAccount" name="FK_FtpAccount_HostAccount_id" owning-alias="FtpAccounts" to="HostAccount" visCaption1X="0" visCaption1Y="0" visCenterX="0" visCenterY="0"/>
     <foreign-key caption="Register RegisterAccount" from="RegisterAccount" inverse-alias="Register" name="FK_RegisterAccount_Register_id" owning-alias="Accounts" to="Register" visCaption1X="0" visCaption1Y="0" visCenterX="0" visCenterY="0">
       <foreign-key-column from="register_id" to="id"/>

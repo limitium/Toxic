@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Tox\PlaceBundle\Entity\HostAccount
  */
-class HostAccount extends Account
+class HostAccount extends HttpAccount
 {
 
     /**

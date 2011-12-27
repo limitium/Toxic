@@ -25,11 +25,6 @@ class Theme
     private $Satellites;
 
     /**
-     * @var Tox\ParserBundle\Entity\RawText
-     */
-    private $RawPages;
-
-    /**
      * @var Tox\ParserBundle\Entity\Source
      */
     private $Sources;
@@ -37,7 +32,6 @@ class Theme
     public function __construct()
     {
         $this->Satellites = new \Doctrine\Common\Collections\ArrayCollection();
-    $this->RawPages = new \Doctrine\Common\Collections\ArrayCollection();
     $this->Sources = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
@@ -89,26 +83,6 @@ class Theme
     public function getSatellites()
     {
         return $this->Satellites;
-    }
-
-    /**
-     * Add RawPages
-     *
-     * @param Tox\ParserBundle\Entity\RawText $rawPages
-     */
-    public function addRawText(\Tox\ParserBundle\Entity\RawText $rawPages)
-    {
-        $this->RawPages[] = $rawPages;
-    }
-
-    /**
-     * Get RawPages
-     *
-     * @return Doctrine\Common\Collections\Collection 
-     */
-    public function getRawPages()
-    {
-        return $this->RawPages;
     }
 
     /**

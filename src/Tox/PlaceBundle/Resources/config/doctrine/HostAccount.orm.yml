@@ -9,4 +9,6 @@ Tox\PlaceBundle\Entity\HostAccount:
     Host:
       targetEntity: Tox\PlaceBundle\Entity\Host
       inversedBy: Accounts
-      joinColumns: { host_id: { referencedColumnName: id } }
+      joinColumns:
+        host_id:
+          referencedColumnName: id

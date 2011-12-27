@@ -20,11 +20,20 @@ class PatternType
     private $name;
 
     /**
-     * @var boolean $is_meta
+     * @var Tox\ParserBundle\Entity\MetaData
      */
-    private $is_meta;
+    private $MetaData;
 
+    /**
+     * @var Tox\ParserBundle\Entity\SourceType
+     */
+    private $Type;
 
+    public function __construct()
+    {
+        $this->MetaData = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
     /**
      * Get id
      *
@@ -56,22 +65,67 @@ class PatternType
     }
 
     /**
-     * Set is_meta
+     * Add MetaData
      *
-     * @param boolean $isMeta
+     * @param Tox\ParserBundle\Entity\MetaData $metaData
      */
-    public function setIsMeta($isMeta)
+    public function addMetaData(\Tox\ParserBundle\Entity\MetaData $metaData)
     {
-        $this->is_meta = $isMeta;
+        $this->MetaData[] = $metaData;
     }
 
     /**
-     * Get is_meta
+     * Get MetaData
      *
-     * @return boolean 
+     * @return Doctrine\Common\Collections\Collection 
      */
-    public function getIsMeta()
+    public function getMetaData()
     {
-        return $this->is_meta;
+        return $this->MetaData;
+    }
+
+    /**
+     * Set Type
+     *
+     * @param Tox\ParserBundle\Entity\SourceType $type
+     */
+    public function setType(\Tox\ParserBundle\Entity\SourceType $type)
+    {
+        $this->Type = $type;
+    }
+
+    /**
+     * Get Type
+     *
+     * @return Tox\ParserBundle\Entity\SourceType 
+     */
+    public function getType()
+    {
+        return $this->Type;
+    }
+    /**
+     * @var Tox\ParserBundle\Entity\Rule
+     */
+    private $Rules;
+
+
+    /**
+     * Add Rules
+     *
+     * @param Tox\ParserBundle\Entity\Rule $rules
+     */
+    public function addRule(\Tox\ParserBundle\Entity\Rule $rules)
+    {
+        $this->Rules[] = $rules;
+    }
+
+    /**
+     * Get Rules
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getRules()
+    {
+        return $this->Rules;
     }
 }

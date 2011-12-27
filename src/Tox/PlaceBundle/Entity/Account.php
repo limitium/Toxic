@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Account
 {
     /**
-     * @var text $id
+     * @var integer $id
      */
     private $id;
 
@@ -28,7 +28,7 @@ class Account
     /**
      * Get id
      *
-     * @return text 
+     * @return integer 
      */
     public function getId()
     {

@@ -4,7 +4,8 @@ Tox\SatelliteBundle\Entity\Post:
     id:
       id: true
       type: integer
-      generator: { strategy: AUTO }
+      generator:
+        strategy: AUTO
     title:
       type: string
       nullable: false
@@ -23,4 +24,6 @@ Tox\SatelliteBundle\Entity\Post:
     Satellite:
       targetEntity: Tox\SatelliteBundle\Entity\Satellite
       inversedBy: Posts
-      joinColumns: { satellite_id: { referencedColumnName: id } }
+      joinColumns:
+        satellite_id:
+          referencedColumnName: id

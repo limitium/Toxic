@@ -30,7 +30,7 @@ class RawText
     private $Theme;
 
     /**
-     * @var Tox\ParserBundle\Entity\Source
+     * @var Tox\ParserBundle\Entity\SourceData
      */
     private $Source;
 
@@ -108,9 +108,9 @@ class RawText
     /**
      * Set Source
      *
-     * @param Tox\ParserBundle\Entity\Source $source
+     * @param Tox\ParserBundle\Entity\SourceData $source
      */
-    public function setSource(\Tox\ParserBundle\Entity\Source $source)
+    public function setSource(\Tox\ParserBundle\Entity\SourceData $source)
     {
         $this->Source = $source;
     }
@@ -118,7 +118,7 @@ class RawText
     /**
      * Get Source
      *
-     * @return Tox\ParserBundle\Entity\Source 
+     * @return Tox\ParserBundle\Entity\SourceData 
      */
     public function getSource()
     {

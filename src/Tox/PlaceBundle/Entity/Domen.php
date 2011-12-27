@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Domen
 {
+    
     /**
      * @var integer $id
      */
@@ -40,12 +41,17 @@ class Domen
     private $register_account_id;
 
     /**
-     * @var Tox\PlaceBundle\Entity\Satellite
+     * @var integer $bot_id
+     */
+    private $bot_id;
+
+    /**
+     * @var Tox\SatelliteBundle\Entity\Satellite
      */
     private $Satellite;
 
     /**
-     * @var Tox\PlaceBundle\Entity\DomenHistory
+     * @var Tox\SatelliteBundle\Entity\DomenHistory
      */
     private $History;
 
@@ -60,7 +66,7 @@ class Domen
     private $RegisterAccount;
 
     /**
-     * @var Tox\PlaceBundle\Entity\Bot
+     * @var Tox\ParserBundle\Entity\Bot
      */
     private $Bot;
 
@@ -181,11 +187,31 @@ class Domen
     }
 
     /**
+     * Set bot_id
+     *
+     * @param integer $botId
+     */
+    public function setBotId($botId)
+    {
+        $this->bot_id = $botId;
+    }
+
+    /**
+     * Get bot_id
+     *
+     * @return integer 
+     */
+    public function getBotId()
+    {
+        return $this->bot_id;
+    }
+
+    /**
      * Set Satellite
      *
-     * @param Tox\PlaceBundle\Entity\Satellite $satellite
+     * @param Tox\SatelliteBundle\Entity\Satellite $satellite
      */
-    public function setSatellite(\Tox\PlaceBundle\Entity\Satellite $satellite)
+    public function setSatellite(\Tox\SatelliteBundle\Entity\Satellite $satellite)
     {
         $this->Satellite = $satellite;
     }
@@ -193,7 +219,7 @@ class Domen
     /**
      * Get Satellite
      *
-     * @return Tox\PlaceBundle\Entity\Satellite 
+     * @return Tox\SatelliteBundle\Entity\Satellite 
      */
     public function getSatellite()
     {
@@ -203,9 +229,9 @@ class Domen
     /**
      * Add History
      *
-     * @param Tox\PlaceBundle\Entity\DomenHistory $history
+     * @param Tox\SatelliteBundle\Entity\DomenHistory $history
      */
-    public function addDomenHistory(\Tox\PlaceBundle\Entity\DomenHistory $history)
+    public function addDomenHistory(\Tox\SatelliteBundle\Entity\DomenHistory $history)
     {
         $this->History[] = $history;
     }
@@ -263,9 +289,9 @@ class Domen
     /**
      * Set Bot
      *
-     * @param Tox\PlaceBundle\Entity\Bot $bot
+     * @param Tox\ParserBundle\Entity\Bot $bot
      */
-    public function setBot(\Tox\PlaceBundle\Entity\Bot $bot)
+    public function setBot(\Tox\ParserBundle\Entity\Bot $bot)
     {
         $this->Bot = $bot;
     }
@@ -273,7 +299,7 @@ class Domen
     /**
      * Get Bot
      *
-     * @return Tox\PlaceBundle\Entity\Bot 
+     * @return Tox\ParserBundle\Entity\Bot 
      */
     public function getBot()
     {

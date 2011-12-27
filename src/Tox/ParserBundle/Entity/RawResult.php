@@ -5,9 +5,9 @@ namespace Tox\ParserBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Tox\ParserBundle\Entity\RawText
+ * Tox\ParserBundle\Entity\RawResult
  */
-class RawText
+class RawResult
 {
     /**
      * @var integer $id
@@ -15,19 +15,14 @@ class RawText
     private $id;
 
     /**
-     * @var text $content
-     */
-    private $content;
-
-    /**
      * @var datetime $created_at
      */
     private $created_at;
 
     /**
-     * @var Tox\SatelliteBundle\Entity\Theme
+     * @var string $url
      */
-    private $Theme;
+    private $url;
 
     /**
      * @var Tox\ParserBundle\Entity\Source
@@ -43,26 +38,6 @@ class RawText
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set content
-     *
-     * @param text $content
-     */
-    public function setContent($content)
-    {
-        $this->content = $content;
-    }
-
-    /**
-     * Get content
-     *
-     * @return text 
-     */
-    public function getContent()
-    {
-        return $this->content;
     }
 
     /**
@@ -86,23 +61,23 @@ class RawText
     }
 
     /**
-     * Set Theme
+     * Set url
      *
-     * @param Tox\SatelliteBundle\Entity\Theme $theme
+     * @param string $url
      */
-    public function setTheme(\Tox\SatelliteBundle\Entity\Theme $theme)
+    public function setUrl($url)
     {
-        $this->Theme = $theme;
+        $this->url = $url;
     }
 
     /**
-     * Get Theme
+     * Get url
      *
-     * @return Tox\SatelliteBundle\Entity\Theme 
+     * @return string 
      */
-    public function getTheme()
+    public function getUrl()
     {
-        return $this->Theme;
+        return $this->url;
     }
 
     /**

@@ -4,19 +4,44 @@ Tox\ParserBundle\Entity\Source:
     id:
       id: true
       type: integer
-      generator: { strategy: AUTO }
+      generator:
+        strategy: AUTO
     name:
       type: string
       nullable: true
     url:
       type: string
       nullable: false
+  oneToOne:
+    Account:
+      targetEntity: Tox\ParserBundle\Entity\SourceAccount
+      mappedBy: Source
   oneToMany:
-    RawPages:
-      targetEntity: Tox\ParserBundle\Entity\RawText
+    Results:
+      targetEntity: Tox\ParserBundle\Entity\RawResult
+      mappedBy: Source
+    Rules:
+      targetEntity: Tox\ParserBundle\Entity\Rule
+      mappedBy: Soruce
+    UsedProxy:
+      targetEntity: Tox\ParserBundle\Entity\UsedProxy
       mappedBy: Source
   manyToOne:
     Theme:
       targetEntity: Tox\SatelliteBundle\Entity\Theme
       inversedBy: Sources
-      joinColumns: { theme_id: { referencedColumnName: id } }
+      joinColumns:
+        theme_id:
+          referencedColumnName: id
+    Schedule:
+      targetEntity: Tox\ParserBundle\Entity\Schedule
+      inversedBy: Source
+      joinColumns:
+        schedule_id:
+          referencedColumnName: id
+    Type:
+      targetEntity: Tox\ParserBundle\Entity\SourceType
+      inversedBy: Sources
+      joinColumns:
+        source_type_id:
+          referencedColumnName: id

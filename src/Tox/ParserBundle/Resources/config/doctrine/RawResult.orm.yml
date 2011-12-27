@@ -1,0 +1,31 @@
+Tox\ParserBundle\Entity\RawResult:
+  type: entity
+  inheritanceType: JOINED
+  fields:
+    id:
+      id: true
+      type: integer
+      generator:
+        strategy: AUTO
+    created_at:
+      type: datetime
+      nullable: false
+    url:
+      type: string
+      length: 255
+      nullable: false
+  manyToOne:
+    Source:
+      targetEntity: Tox\ParserBundle\Entity\Source
+      inversedBy: Results
+      joinColumns:
+        source_id:
+          referencedColumnName: id
+  discriminatorColumn:
+    name: descriminator
+    length: 255
+    type: text
+  discriminatorMap:
+    Bot: Tox\ParserBundle\Entity\Bot
+    Content: Tox\ParserBundle\Entity\Content
+    Proxy: Tox\ParserBundle\Entity\Proxy

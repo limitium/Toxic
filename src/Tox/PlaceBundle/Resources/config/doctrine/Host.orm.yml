@@ -4,7 +4,8 @@ Tox\PlaceBundle\Entity\Host:
     id:
       id: true
       type: integer
-      generator: { strategy: AUTO }
+      generator:
+        strategy: AUTO
     name:
       type: string
       nullable: true

@@ -1,0 +1,24 @@
+Tox\PlaceBundle\Entity\HttpAccount:
+  type: entity
+  inheritanceType: JOINED
+  fields:
+    login_field:
+      type: string
+      length: 255
+      nullable: true
+    password_fied:
+      type: string
+      length: 255
+      nullable: true
+    url:
+      type: string
+      length: 255
+      nullable: true
+  discriminatorColumn:
+    name: descriminator
+    length: 255
+    type: string
+  discriminatorMap:
+    SourceAccount: Tox\ParserBundle\Entity\SourceAccount
+    RegisterAccount: Tox\PlaceBundle\Entity\RegisterAccount
+    HostAccount: Tox\PlaceBundle\Entity\HostAccount

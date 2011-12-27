@@ -9,15 +9,27 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class MetaData
 {
+  
+
     /**
      * @var integer $id
      */
     private $id;
 
     /**
-     * @var text $context
+     * @var string $data
      */
-    private $context;
+    private $data;
+
+    /**
+     * @var integer $content_id
+     */
+    private $content_id;
+
+    /**
+     * @var Tox\ParserBundle\Entity\PatternType
+     */
+    private $PatternType;
 
 
     /**
@@ -31,22 +43,62 @@ class MetaData
     }
 
     /**
-     * Set context
+     * Set data
      *
-     * @param text $context
+     * @param string $data
      */
-    public function setContext($context)
+    public function setData($data)
     {
-        $this->context = $context;
+        $this->data = $data;
     }
 
     /**
-     * Get context
+     * Get data
      *
-     * @return text 
+     * @return string 
      */
-    public function getContext()
+    public function getData()
     {
-        return $this->context;
+        return $this->data;
+    }
+
+    /**
+     * Set content_id
+     *
+     * @param integer $contentId
+     */
+    public function setContentId($contentId)
+    {
+        $this->content_id = $contentId;
+    }
+
+    /**
+     * Get content_id
+     *
+     * @return integer 
+     */
+    public function getContentId()
+    {
+        return $this->content_id;
+    }
+
+    /**
+     * Set PatternType
+     *
+     * @param Tox\ParserBundle\Entity\PatternType $patternType
+     */
+    public function setPatternType(\Tox\ParserBundle\Entity\PatternType $patternType)
+    {
+        $this->PatternType = $patternType;
+    }
+
+    /**
+     * Get PatternType
+     *
+     * @return Tox\ParserBundle\Entity\PatternType 
+     */
+    public function getPatternType()
+    {
+        return $this->PatternType;
     }
 }

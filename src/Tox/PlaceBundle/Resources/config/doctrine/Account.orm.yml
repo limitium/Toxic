@@ -5,7 +5,8 @@ Tox\PlaceBundle\Entity\Account:
     id:
       id: true
       type: integer
-      generator: { strategy: AUTO }
+      generator:
+        strategy: AUTO
     username:
       type: string
       length: 255
@@ -19,6 +20,5 @@ Tox\PlaceBundle\Entity\Account:
     length: 255
     type: string
   discriminatorMap:
-    FtpAccount: FtpAccount
-    RegisterAccount: RegisterAccount
-    HostAccount: HostAccount
+    FtpAccount: Tox\PlaceBundle\Entity\FtpAccount
+    HttpAccount: Tox\PlaceBundle\Entity\HttpAccount

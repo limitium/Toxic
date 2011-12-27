@@ -1,0 +1,10 @@
+Tox\ParserBundle\Entity\SourceAccount:
+  type: entity
+  fields: null
+  oneToOne:
+    Source:
+      targetEntity: Tox\ParserBundle\Entity\Source
+      inversedBy: Account
+      joinColumns:
+        source_id:
+          referencedColumnName: id

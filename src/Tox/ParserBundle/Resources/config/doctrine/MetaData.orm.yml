@@ -4,8 +4,19 @@ Tox\ParserBundle\Entity\MetaData:
     id:
       id: true
       type: integer
-      generator: { strategy: AUTO }
-    context:
-      type: text
-      length: 10000
-      nullable: true
+      generator:
+        strategy: AUTO
+    data:
+      type: string
+      length: 1000
+      nullable: false
+    content_id:
+      type: integer
+      nullable: false
+  manyToOne:
+    PatternType:
+      targetEntity: Tox\ParserBundle\Entity\PatternType
+      inversedBy: MetaData
+      joinColumns:
+        pattern_type_id:
+          referencedColumnName: id

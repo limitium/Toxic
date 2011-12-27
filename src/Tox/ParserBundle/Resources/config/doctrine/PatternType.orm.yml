@@ -4,10 +4,22 @@ Tox\ParserBundle\Entity\PatternType:
     id:
       id: true
       type: integer
-      generator: { strategy: AUTO }
+      generator:
+        strategy: AUTO
     name:
       type: string
       nullable: false
-    is_meta:
-      type: boolean
-      nullable: true
+  oneToMany:
+    MetaData:
+      targetEntity: Tox\ParserBundle\Entity\MetaData
+      mappedBy: PatternType
+    Rules:
+      targetEntity: Tox\ParserBundle\Entity\Rule
+      mappedBy: Type
+  manyToOne:
+    Type:
+      targetEntity: Tox\ParserBundle\Entity\SourceType
+      inversedBy: Patterns
+      joinColumns:
+        source_type_id:
+          referencedColumnName: id

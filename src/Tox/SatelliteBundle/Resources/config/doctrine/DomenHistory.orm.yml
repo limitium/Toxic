@@ -4,7 +4,8 @@ Tox\SatelliteBundle\Entity\DomenHistory:
     id:
       id: true
       type: integer
-      generator: { strategy: AUTO }
+      generator:
+        strategy: AUTO
     changet_at:
       type: date
       nullable: false
@@ -12,8 +13,12 @@ Tox\SatelliteBundle\Entity\DomenHistory:
     Satellite:
       targetEntity: Tox\SatelliteBundle\Entity\Satellite
       inversedBy: History
-      joinColumns: { satellite_id: { referencedColumnName: id } }
+      joinColumns:
+        satellite_id:
+          referencedColumnName: id
     Domen:
       targetEntity: Tox\PlaceBundle\Entity\Domen
       inversedBy: History
-      joinColumns: { domen_id: { referencedColumnName: id } }
+      joinColumns:
+        domen_id:
+          referencedColumnName: id

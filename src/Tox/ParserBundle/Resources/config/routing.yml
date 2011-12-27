@@ -1,3 +1,0 @@
-ToxParserBundle_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: ToxParserBundle:Default:index }

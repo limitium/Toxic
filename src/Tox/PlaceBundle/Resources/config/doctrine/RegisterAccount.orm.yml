@@ -9,4 +9,6 @@ Tox\PlaceBundle\Entity\RegisterAccount:
     Register:
       targetEntity: Tox\PlaceBundle\Entity\Register
       inversedBy: Accounts
-      joinColumns: { register_id: { referencedColumnName: id } }
+      joinColumns:
+        register_id:
+          referencedColumnName: id

@@ -1,0 +1,30 @@
+Tox\ParserBundle\Entity\UsedProxy:
+  type: entity
+  fields:
+    id:
+      id: true
+      type: integer
+      generator:
+        strategy: AUTO
+    used_at:
+      type: datetime
+      nullable: false
+    success:
+      type: boolean
+      nullable: false
+    proxy_id:
+      type: integer
+      nullable: true
+  manyToOne:
+    Source:
+      targetEntity: Tox\ParserBundle\Entity\Source
+      inversedBy: UsedProxy
+      joinColumns:
+        source_id:
+          referencedColumnName: id
+    Proxy:
+      targetEntity: Tox\ParserBundle\Entity\Proxy
+      inversedBy: Used
+      joinColumns:
+        proxy_id:
+          referencedColumnName: id

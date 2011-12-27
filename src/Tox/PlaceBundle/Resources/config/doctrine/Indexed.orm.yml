@@ -4,7 +4,8 @@ Tox\PlaceBundle\Entity\Indexed:
     id:
       id: true
       type: integer
-      generator: { strategy: AUTO }
+      generator:
+        strategy: AUTO
     in_index:
       type: boolean
       nullable: true
@@ -15,8 +16,13 @@ Tox\PlaceBundle\Entity\Indexed:
     Domen:
       targetEntity: Tox\PlaceBundle\Entity\Domen
       inversedBy: Indexes
-      joinColumns: { domen_id: { referencedColumnName: id, onDelete: CASCADE } }
+      joinColumns:
+        domen_id:
+          referencedColumnName: id
+          onDelete: CASCADE
     SearchEngine:
       targetEntity: Tox\PlaceBundle\Entity\SearchEngine
       inversedBy: Indexes
-      joinColumns: { search_engine_id: { referencedColumnName: id } }
+      joinColumns:
+        search_engine_id:
+          referencedColumnName: id

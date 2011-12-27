@@ -1,0 +1,27 @@
+Tox\ParserBundle\Entity\Proxy:
+  type: entity
+  fields:
+    ip:
+      type: integer
+      nullable: false
+    port:
+      type: integer
+      nullable: false
+    proxy_type:
+      type: string
+      nullable: true
+    valid:
+      type: boolean
+      nullable: true
+    checked_at:
+      type: datetime
+      nullable: true
+  uniqueConstraints:
+    Unique_IP:
+      columns:
+        - port
+        - ip
+  oneToMany:
+    Used:
+      targetEntity: Tox\ParserBundle\Entity\UsedProxy
+      mappedBy: Proxy

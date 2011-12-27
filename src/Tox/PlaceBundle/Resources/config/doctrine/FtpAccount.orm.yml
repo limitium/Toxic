@@ -12,4 +12,6 @@ Tox\PlaceBundle\Entity\FtpAccount:
     HostAccount:
       targetEntity: Tox\PlaceBundle\Entity\HostAccount
       inversedBy: FtpAccounts
-      joinColumns: null
+      joinColumns:
+        host_account_id:
+          referencedColumnName: id
