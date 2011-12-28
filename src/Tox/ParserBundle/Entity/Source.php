@@ -3,6 +3,7 @@
 namespace Tox\ParserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Tox\ParserBundle\Entity\Source
@@ -16,11 +17,13 @@ class Source
 
     /**
      * @var string $name
+     * @Assert\NotBlank()
      */
     private $name;
 
     /**
      * @var string $url
+     * @Assert\NotBlank()
      */
     private $url;
 
@@ -41,6 +44,7 @@ class Source
 
     /**
      * @var Tox\ParserBundle\Entity\Schedule
+     * @Assert\NotBlank()
      */
     private $Schedule;
 
@@ -57,7 +61,7 @@ class Source
     public function __construct()
     {
         $this->Results = new \Doctrine\Common\Collections\ArrayCollection();
-    $this->UsedProxy = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->UsedProxy = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
     /**
@@ -231,6 +235,8 @@ class Source
     }
     /**
      * @var Tox\ParserBundle\Entity\Rule
+     * @Assert\Type(type="Tox\ParserBundle\Entity\Rule")
+     * @Assert\NotBlank()
      */
     private $Rules;
 

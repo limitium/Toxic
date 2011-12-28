@@ -128,4 +128,8 @@ class PatternType
     {
         return $this->Rules;
     }
+
+    public function __toString(){
+        return $this->name;
+    }
 }

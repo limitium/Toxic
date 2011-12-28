@@ -4,9 +4,7 @@
 
 <form action="{{ path('source_create') }}" method="post" {{ form_enctype(form) }}>
     {{ form_widget(form) }}
-    <p>
-        <button type="submit">Create</button>
-    </p>
+    <input type="submit" class="symfony-button-grey" value="Create">
 </form>
 
 <ul class="record_actions">

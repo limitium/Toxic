@@ -104,4 +104,8 @@ class SourceType
     {
         return $this->Patterns;
     }
+
+    public function __toString(){
+        return $this->name;
+    }
 }

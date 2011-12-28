@@ -78,4 +78,11 @@ class Schedule
     {
         return $this->Source;
     }
+
+    public function __toString(){
+        $start = new \DateTime('@0');
+        $end = new \DateTime('@'.$this->timeout);
+        $interval = $end->diff($start);
+        return  $interval->format('%d %H:%I:%S');
+    }
 }

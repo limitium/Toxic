@@ -4,5 +4,5 @@
 app/cache
 app/cache/
 app/cache/*
-app/log
-app/log/*
+app/logs
+app/logs/*

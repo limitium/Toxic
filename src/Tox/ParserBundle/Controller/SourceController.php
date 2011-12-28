@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Tox\ParserBundle\Entity\Source;
+use Tox\ParserBundle\Entity\Rule;
 use Tox\ParserBundle\Form\SourceType;
 
 /**
@@ -62,11 +63,29 @@ class SourceController extends Controller
      */
     public function newAction()
     {
-        $entity = new Source();
-        $form   = $this->createForm(new SourceType(), $entity);
+        $patterns = $this->getDoctrine()
+            ->getEntityManager()
+            ->getRepository('ToxParserBundle:PatternType')
+            ->findAll();
+//            ->createQueryBuilder('p')
+////            ->select('p')
+////            ->leftJoin('p.Type','t')
+////            ->where('t.name = ?1')
+////            ->setParameter(1,'Content')
+//            ->getQuery()
+//            ->getResult();
+
+        $source = new Source();
+        foreach($patterns as $pattern){
+            $rule = new Rule();
+            $rule->setType($pattern);
+            $source->addRule($rule);
+        }
+
+        $form   = $this->createForm(new SourceType(), $source);
 
         return array(
-            'entity' => $entity,
+            'entity' => $source,
             'form'   => $form->createView()
         );
     }
