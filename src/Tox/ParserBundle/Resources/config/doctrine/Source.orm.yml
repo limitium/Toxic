@@ -22,7 +22,7 @@ Tox\ParserBundle\Entity\Source:
       mappedBy: Source
     Rules:
       targetEntity: Tox\ParserBundle\Entity\Rule
-      mappedBy: Soruce
+      mappedBy: Source
     UsedProxy:
       targetEntity: Tox\ParserBundle\Entity\UsedProxy
       mappedBy: Source

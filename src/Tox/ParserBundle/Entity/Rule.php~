@@ -99,4 +99,8 @@ class Rule
     {
         return $this->Type;
     }
+
+    public function __toString(){
+        return $this->pattern;
+    }
 }

@@ -20,11 +20,6 @@ class Rule
     private $pattern;
 
     /**
-     * @var Tox\ParserBundle\Entity\Source
-     */
-    private $Soruce;
-
-    /**
      * @var Tox\ParserBundle\Entity\PatternType
      */
     private $Type;
@@ -61,26 +56,6 @@ class Rule
     }
 
     /**
-     * Set Soruce
-     *
-     * @param Tox\ParserBundle\Entity\Source $soruce
-     */
-    public function setSoruce(\Tox\ParserBundle\Entity\Source $soruce)
-    {
-        $this->Soruce = $soruce;
-    }
-
-    /**
-     * Get Soruce
-     *
-     * @return Tox\ParserBundle\Entity\Source 
-     */
-    public function getSoruce()
-    {
-        return $this->Soruce;
-    }
-
-    /**
      * Set Type
      *
      * @param Tox\ParserBundle\Entity\PatternType $type
@@ -102,5 +77,30 @@ class Rule
 
     public function __toString(){
         return $this->pattern;
+    }
+    /**
+     * @var Tox\ParserBundle\Entity\Source
+     */
+    private $Source;
+
+
+    /**
+     * Set Source
+     *
+     * @param Tox\ParserBundle\Entity\Source $source
+     */
+    public function setSource(\Tox\ParserBundle\Entity\Source $source)
+    {
+        $this->Source = $source;
+    }
+
+    /**
+     * Get Source
+     *
+     * @return Tox\ParserBundle\Entity\Source 
+     */
+    public function getSource()
+    {
+        return $this->Source;
     }
 }

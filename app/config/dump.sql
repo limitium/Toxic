@@ -2,7 +2,8 @@
 SQLyog Ultimate - MySQL GUI v8.2 
 MySQL - 5.1.40-community : Database - toxqwe12223
 *********************************************************************
-*/
+*/
+
 
 /*!40101 SET NAMES utf8 */;
 
@@ -152,7 +153,7 @@ DROP TABLE IF EXISTS `HttpAccount`;
 CREATE TABLE `HttpAccount` (
   `id` int(11) NOT NULL,
   `login_field` varchar(255) DEFAULT NULL,
-  `password_fied` varchar(255) DEFAULT NULL,
+  `password_field` varchar(255) DEFAULT NULL,
   `url` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `FK_D656DFABBF396750` FOREIGN KEY (`id`) REFERENCES `account` (`id`) ON DELETE CASCADE

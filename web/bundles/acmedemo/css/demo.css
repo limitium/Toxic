@@ -291,7 +291,7 @@ ul#menu
     display: inline;
 }
 
-#source_rules,#source_Account{
+.embedded>div{
     display: block;
     padding-left: 30px;
 }

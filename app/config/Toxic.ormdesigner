@@ -152,7 +152,7 @@
     <foreign-key caption="Source SourceAccount" from="SourceAccount" inverse-alias="Source" name="FK_SourceAccount_Source_id" owning-alias="Account" to="Source">
       <foreign-key-column from="source_id" to="id"/>
     </foreign-key>
-    <foreign-key caption="Source Rule" from="Rule" inverse-alias="Soruce" name="FK_Rule_Source_id2" owning-alias="Rules" to="Source">
+    <foreign-key caption="Source Rule" from="Rule" inverse-alias="Source" name="FK_Rule_Source_id2" owning-alias="Rules" to="Source">
       <foreign-key-column from="source_id" to="id"/>
     </foreign-key>
     <foreign-key caption="PatternType Rule" from="Rule" inverse-alias="Type" name="FK_Rule_PatternType_id2" owning-alias="Rules" to="PatternType" visCaption1X="1" visCaption1Y="1" visCenterX="0" visCenterY="0">
@@ -218,11 +218,11 @@
     </table>
     <table name="HttpAccount" visPositionX="203" visPositionY="416" visSizeX="0" visSizeX2="141" visSizeY="0" visSizeY2="73">
       <column name="login_field" size="255" type="string"/>
-      <column name="password_fied" size="255" type="string"/>
+      <column name="password_field" size="255" type="string"/>
       <column name="url" size="255" type="string"/>
       <column name="descriminator" size="255" type="string"/>
       <inheritance-parent discriminator-column="descriminator" type="JOINED"/>
-      <inheritance-child derived-from="Account" discriminator-value="HttpAccount" visCenterX="3" visCenterY="0"/>
+      <inheritance-child derived-from="Account" discriminator-value="HttpAccount" visCenterX="-1" visCenterY="0"/>
     </table>
     <foreign-key caption="RegisterAccount Domen" from="Domen" inverse-alias="RegisterAccount" name="FK_Domen_RegisterAccount_id" owning-alias="Domens" to="RegisterAccount"/>
     <foreign-key caption="Bot Domen" from="Domen" inverse-alias="Bot" name="FK_Domen_Bot_id" owning-alias="Domens" to="Bot"/>

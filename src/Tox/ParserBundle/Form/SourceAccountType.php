@@ -13,7 +13,7 @@ class SourceAccountType extends AbstractType
             ->add('username')
             ->add('password')
             ->add('login_field')
-            ->add('password_fied')
+            ->add('password_field')
             ->add('url')
             ->add('Source')
         ;

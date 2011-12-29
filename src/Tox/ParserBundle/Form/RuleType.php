@@ -12,7 +12,7 @@ class RuleType extends AbstractType
         $builder
             ->add('pattern')
 //            ->add('Soruce')
-            ->add('Type')
+            ->add('Type','hidden')
         ;
     }
 

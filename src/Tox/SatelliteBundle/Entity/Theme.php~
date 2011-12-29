@@ -104,4 +104,8 @@ class Theme
     {
         return $this->Sources;
     }
+
+    public function __toString() {
+        return $this->name;
+    }
 }

@@ -11,7 +11,7 @@ Tox\ParserBundle\Entity\Rule:
       length: 255
       nullable: true
   manyToOne:
-    Soruce:
+    Source:
       targetEntity: Tox\ParserBundle\Entity\Source
       inversedBy: Rules
       joinColumns:

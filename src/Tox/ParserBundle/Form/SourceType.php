@@ -14,8 +14,8 @@ class SourceType extends AbstractType
             ->add('url')
             ->add('Theme')
             ->add('Schedule')
-            ->add('Account',new SourceAccountType())
-            ->add('rules', 'collection', array('type' => new RuleType()))
+//            ->add('Account',new SourceAccountType())
+            ->add('Rules', 'collection', array('type' => new RuleType()))
         ;
     }
 

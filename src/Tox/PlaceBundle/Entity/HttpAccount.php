@@ -15,10 +15,6 @@ class HttpAccount extends Account
      */
     private $login_field;
 
-    /**
-     * @var string $password_fied
-     */
-    private $password_fied;
 
     /**
      * @var string $url
@@ -46,27 +42,7 @@ class HttpAccount extends Account
         return $this->login_field;
     }
 
-    /**
-     * Set password_fied
-     *
-     * @param string $passwordFied
-     */
-    public function setPasswordFied($passwordFied)
-    {
-        $this->password_fied = $passwordFied;
-    }
-
-    /**
-     * Get password_fied
-     *
-     * @return string 
-     */
-    public function getPasswordFied()
-    {
-        return $this->password_fied;
-    }
-
-    /**
+      /**
      * Set url
      *
      * @param string $url
@@ -84,5 +60,30 @@ class HttpAccount extends Account
     public function getUrl()
     {
         return $this->url;
+    }
+    /**
+     * @var string $password_field
+     */
+    private $password_field;
+
+
+    /**
+     * Set password_field
+     *
+     * @param string $passwordField
+     */
+    public function setPasswordField($passwordField)
+    {
+        $this->password_field = $passwordField;
+    }
+
+    /**
+     * Get password_field
+     *
+     * @return string 
+     */
+    public function getPasswordField()
+    {
+        return $this->password_field;
     }
 }
