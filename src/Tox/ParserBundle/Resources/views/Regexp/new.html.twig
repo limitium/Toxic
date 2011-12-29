@@ -1,0 +1,13 @@
+{% extends '::base.html.twig' %}
+{% block content %}
+<h1>Regexp checker</h1>
+
+<form action="{{ path('regexp_check') }}" method="post" {{ form_enctype(form) }}>
+    {{ form_errors(form) }}
+
+
+    {{ form_rest(form) }}
+    <input type="submit" class="symfony-button-grey" value="Check">
+</form>
+
+        {% endblock %}

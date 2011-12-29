@@ -2,8 +2,7 @@
 SQLyog Ultimate - MySQL GUI v8.2 
 MySQL - 5.1.40-community : Database - toxqwe12223
 *********************************************************************
-*/
-
+*/
 
 /*!40101 SET NAMES utf8 */;
 
@@ -95,8 +94,8 @@ CREATE TABLE `DomenHistory` (
   PRIMARY KEY (`id`),
   KEY `IDX_97B47152D0EAD71` (`satellite_id`),
   KEY `IDX_97B4715EB3C358F` (`domen_id`),
-  CONSTRAINT `FK_97B4715EB3C358F` FOREIGN KEY (`domen_id`) REFERENCES `domen` (`id`),
-  CONSTRAINT `FK_97B47152D0EAD71` FOREIGN KEY (`satellite_id`) REFERENCES `satellite` (`id`)
+  CONSTRAINT `FK_97B47152D0EAD71` FOREIGN KEY (`satellite_id`) REFERENCES `satellite` (`id`),
+  CONSTRAINT `FK_97B4715EB3C358F` FOREIGN KEY (`domen_id`) REFERENCES `domen` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
 
 /*Data for the table `DomenHistory` */
@@ -110,8 +109,8 @@ CREATE TABLE `FtpAccount` (
   `host_account_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_5ED6AC9E33F805B3` (`host_account_id`),
-  CONSTRAINT `FK_5ED6AC9EBF396750` FOREIGN KEY (`id`) REFERENCES `account` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `FK_5ED6AC9E33F805B3` FOREIGN KEY (`host_account_id`) REFERENCES `hostaccount` (`id`)
+  CONSTRAINT `FK_5ED6AC9E33F805B3` FOREIGN KEY (`host_account_id`) REFERENCES `hostaccount` (`id`),
+  CONSTRAINT `FK_5ED6AC9EBF396750` FOREIGN KEY (`id`) REFERENCES `account` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
 
 /*Data for the table `FtpAccount` */
@@ -140,8 +139,8 @@ CREATE TABLE `HostAccount` (
   `host_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_E933C6871FB8D185` (`host_id`),
-  CONSTRAINT `FK_E933C687BF396750` FOREIGN KEY (`id`) REFERENCES `account` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `FK_E933C6871FB8D185` FOREIGN KEY (`host_id`) REFERENCES `host` (`id`)
+  CONSTRAINT `FK_E933C6871FB8D185` FOREIGN KEY (`host_id`) REFERENCES `host` (`id`),
+  CONSTRAINT `FK_E933C687BF396750` FOREIGN KEY (`id`) REFERENCES `account` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
 
 /*Data for the table `HostAccount` */
@@ -289,8 +288,8 @@ CREATE TABLE `RegisterAccount` (
   `register_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_70CDCECF4976CB7E` (`register_id`),
-  CONSTRAINT `FK_70CDCECFBF396750` FOREIGN KEY (`id`) REFERENCES `account` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `FK_70CDCECF4976CB7E` FOREIGN KEY (`register_id`) REFERENCES `register` (`id`)
+  CONSTRAINT `FK_70CDCECF4976CB7E` FOREIGN KEY (`register_id`) REFERENCES `register` (`id`),
+  CONSTRAINT `FK_70CDCECFBF396750` FOREIGN KEY (`id`) REFERENCES `account` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
 
 /*Data for the table `RegisterAccount` */
@@ -307,8 +306,8 @@ CREATE TABLE `Rule` (
   PRIMARY KEY (`id`),
   KEY `IDX_E6EA03F2953C1C61` (`source_id`),
   KEY `IDX_E6EA03F2EE49CE3` (`pattern_type_id`),
-  CONSTRAINT `FK_E6EA03F2EE49CE3` FOREIGN KEY (`pattern_type_id`) REFERENCES `patterntype` (`id`),
-  CONSTRAINT `FK_E6EA03F2953C1C61` FOREIGN KEY (`source_id`) REFERENCES `source` (`id`)
+  CONSTRAINT `FK_E6EA03F2953C1C61` FOREIGN KEY (`source_id`) REFERENCES `source` (`id`),
+  CONSTRAINT `FK_E6EA03F2EE49CE3` FOREIGN KEY (`pattern_type_id`) REFERENCES `patterntype` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
 
 /*Data for the table `Rule` */
@@ -326,8 +325,8 @@ CREATE TABLE `Satellite` (
   UNIQUE KEY `UNIQ_ED36A894EB3C358F` (`domen_id`),
   KEY `IDX_ED36A89459027487` (`theme_id`),
   KEY `IDX_ED36A89468043490` (`ftp_account_id`),
-  CONSTRAINT `FK_ED36A89468043490` FOREIGN KEY (`ftp_account_id`) REFERENCES `ftpaccount` (`id`),
   CONSTRAINT `FK_ED36A89459027487` FOREIGN KEY (`theme_id`) REFERENCES `theme` (`id`),
+  CONSTRAINT `FK_ED36A89468043490` FOREIGN KEY (`ftp_account_id`) REFERENCES `ftpaccount` (`id`),
   CONSTRAINT `FK_ED36A894EB3C358F` FOREIGN KEY (`domen_id`) REFERENCES `domen` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
 
@@ -374,8 +373,8 @@ CREATE TABLE `Source` (
   KEY `IDX_58267A4559027487` (`theme_id`),
   KEY `IDX_58267A45A40BC2D5` (`schedule_id`),
   KEY `IDX_58267A458C9334FB` (`source_type_id`),
-  CONSTRAINT `FK_58267A458C9334FB` FOREIGN KEY (`source_type_id`) REFERENCES `sourcetype` (`id`),
   CONSTRAINT `FK_58267A4559027487` FOREIGN KEY (`theme_id`) REFERENCES `theme` (`id`),
+  CONSTRAINT `FK_58267A458C9334FB` FOREIGN KEY (`source_type_id`) REFERENCES `sourcetype` (`id`),
   CONSTRAINT `FK_58267A45A40BC2D5` FOREIGN KEY (`schedule_id`) REFERENCES `schedule` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
 
@@ -390,8 +389,8 @@ CREATE TABLE `SourceAccount` (
   `source_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQ_4E39E6A8953C1C61` (`source_id`),
-  CONSTRAINT `FK_4E39E6A8BF396750` FOREIGN KEY (`id`) REFERENCES `account` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `FK_4E39E6A8953C1C61` FOREIGN KEY (`source_id`) REFERENCES `source` (`id`)
+  CONSTRAINT `FK_4E39E6A8953C1C61` FOREIGN KEY (`source_id`) REFERENCES `source` (`id`),
+  CONSTRAINT `FK_4E39E6A8BF396750` FOREIGN KEY (`id`) REFERENCES `account` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
 
 /*Data for the table `SourceAccount` */
@@ -418,9 +417,11 @@ CREATE TABLE `Theme` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=cp1251;
 
 /*Data for the table `Theme` */
+
+insert  into `Theme`(`id`,`name`) values (1,'Новости авто');
 
 /*Table structure for table `UsedProxy` */
 
@@ -435,8 +436,8 @@ CREATE TABLE `UsedProxy` (
   PRIMARY KEY (`id`),
   KEY `IDX_C269B94D953C1C61` (`source_id`),
   KEY `IDX_C269B94DDB26A4E` (`proxy_id`),
-  CONSTRAINT `FK_C269B94DDB26A4E` FOREIGN KEY (`proxy_id`) REFERENCES `proxy` (`id`),
-  CONSTRAINT `FK_C269B94D953C1C61` FOREIGN KEY (`source_id`) REFERENCES `source` (`id`)
+  CONSTRAINT `FK_C269B94D953C1C61` FOREIGN KEY (`source_id`) REFERENCES `source` (`id`),
+  CONSTRAINT `FK_C269B94DDB26A4E` FOREIGN KEY (`proxy_id`) REFERENCES `proxy` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
 
 /*Data for the table `UsedProxy` */
