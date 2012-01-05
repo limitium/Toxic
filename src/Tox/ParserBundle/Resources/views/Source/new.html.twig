@@ -2,33 +2,8 @@
 {% block content %}
 <h1>Source creation</h1>
 
-<form action="{{ path('source_create') }}" method="post" {{ form_enctype(form) }}>
-    {{ form_errors(form) }}
+{% include 'ToxParserBundle:Source:form.html.twig' with {'form': form } %}
 
-    {{ form_row(form.name) }}
-    {{ form_row(form.url) }}
-    {{ form_row(form.Theme) }}
-    {{ form_row(form.Schedule) }}
-
-    <div class="embedded">
-        {{ form_label(form.Rules) }}
-        {{ form_errors(form.Rules) }}
-        <div>
-            {% for rule in form.Rules %}
-            <div>
-                {{ form_errors(rule.pattern) }}
-                <label class="required" for="{{ rule.pattern.vars.form.vars.full_name }}">{{ rule.vars.value.Type | capitalize}}</label>
-                {{ form_widget(rule.pattern) }}
-                {{ form_widget(rule.Type) }}
-
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-
-    {{ form_rest(form) }}
-    <input type="submit" class="symfony-button-grey" value="Create">
-</form>
 <ul class="record_actions">
     <li>
         <a href="{{ path('source') }}">

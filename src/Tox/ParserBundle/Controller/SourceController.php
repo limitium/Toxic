@@ -63,29 +63,14 @@ class SourceController extends Controller
      */
     public function newAction()
     {
-        $patterns = $this->getDoctrine()
-            ->getEntityManager()
-            ->getRepository('ToxParserBundle:PatternType')
-            ->findAll();
-//            ->createQueryBuilder('p')
-////            ->select('p')
-////            ->leftJoin('p.Type','t')
-////            ->where('t.name = ?1')
-////            ->setParameter(1,'Content')
-//            ->getQuery()
-//            ->getResult();
-
         $source = new Source();
-        foreach($patterns as $pattern){
-            $rule = new Rule();
-            $rule->setType($pattern);
-            $source->addRule($rule);
-        }
+
+        $this->addRules($source);
 
         $form   = $this->createForm(new SourceType(), $source);
 
         return array(
-            'entity' => $source,
+            'source' => $source,
             'form'   => $form->createView()
         );
     }
@@ -99,22 +84,29 @@ class SourceController extends Controller
      */
     public function createAction()
     {
-        $entity  = new Source();
+        $source  = new Source();
         $request = $this->getRequest();
-        $form    = $this->createForm(new SourceType(), $entity);
+        $form = $this->createForm(new SourceType(), $source);
         $form->bindRequest($request);
-
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getEntityManager();
-            $em->persist($entity);
+            $em->persist($source);
+            foreach($source->getRules() as $k => $rule){
+                if(!$rule->getPattern()){
+                    $source->removeRule($rule);
+                }else{
+                    $rule->setSource($source);
+                    $em->persist($rule);
+                }
+            }
             $em->flush();
 
-            return $this->redirect($this->generateUrl('source_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('source_show', array('id' => $source->getId())));
             
         }
 
         return array(
-            'entity' => $entity,
+            'source' => $source,
             'form'   => $form->createView()
         );
     }
@@ -129,20 +121,42 @@ class SourceController extends Controller
     {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entity = $em->getRepository('ToxParserBundle:Source')->find($id);
+        $source = $em->getRepository('ToxParserBundle:Source')->find($id);
 
-        if (!$entity) {
+        if (!$source) {
             throw $this->createNotFoundException('Unable to find Source entity.');
         }
 
-        $editForm = $this->createForm(new SourceType(), $entity);
+        $this->addRules($source);
+
+        $editForm = $this->createForm(new SourceType(), $source);
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'source'      => $source,
+            'form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
+    }
+
+    private function addRules($source) {
+        $patterns = $this->getDoctrine()
+            ->getEntityManager()
+            ->getRepository('ToxParserBundle:PatternType')
+            ->findAll();
+
+        $usedTypes = array();
+        foreach ($source->getRules() as $rule) {
+            $usedTypes[] = $rule->getType();
+        }
+
+        foreach ($patterns as $pattern) {
+            if (!in_array($pattern, $usedTypes)) {
+                $rule = new Rule();
+                $rule->setType($pattern);
+                $source->addRule($rule);
+            }
+        }
     }
 
     /**
@@ -156,13 +170,13 @@ class SourceController extends Controller
     {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entity = $em->getRepository('ToxParserBundle:Source')->find($id);
+        $source = $em->getRepository('ToxParserBundle:Source')->find($id);
 
-        if (!$entity) {
+        if (!$source) {
             throw $this->createNotFoundException('Unable to find Source entity.');
         }
 
-        $editForm   = $this->createForm(new SourceType(), $entity);
+        $editForm   = $this->createForm(new SourceType(), $source);
         $deleteForm = $this->createDeleteForm($id);
 
         $request = $this->getRequest();
@@ -170,14 +184,14 @@ class SourceController extends Controller
         $editForm->bindRequest($request);
 
         if ($editForm->isValid()) {
-            $em->persist($entity);
+            $em->persist($source);
             $em->flush();
 
             return $this->redirect($this->generateUrl('source_edit', array('id' => $id)));
         }
 
         return array(
-            'entity'      => $entity,
+            'source'      => $source,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );

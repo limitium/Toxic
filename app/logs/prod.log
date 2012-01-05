@@ -1,2 +1,0 @@
-[2011-12-27 13:17:33] request.INFO: Matched route "patterntype_new" (parameters: "_controller": "Tox\ParserBundle\Controller\PatternTypeController::newAction", "_route": "patterntype_new") [] []
-[2011-12-27 13:17:34] request.CRITICAL: Symfony\Component\Form\Exception\InvalidPropertyException: Neither property "is_meta" nor method "getIsMeta()" nor method "isIsMeta()" exists in class "Tox\ParserBundle\Entity\PatternType" (uncaught exception) at Z:\home\localhost\www\toxic\vendor\symfony\src\Symfony\Component\Form\Util\PropertyPath.php line 316 [] []

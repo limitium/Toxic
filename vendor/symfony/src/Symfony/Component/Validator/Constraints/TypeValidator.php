@@ -38,6 +38,7 @@ class TypeValidator extends ConstraintValidator
         $type = $constraint->type == 'boolean' ? 'bool' : $constraint->type;
         $function = 'is_'.$type;
 
+
         if (function_exists($function) && call_user_func($function, $value)) {
             return true;
         } else if ($value instanceof $constraint->type) {

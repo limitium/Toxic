@@ -453,6 +453,7 @@ class Form implements \IteratorAggregate, FormInterface
      */
     public function bind($clientData)
     {
+
         if ($this->readOnly) {
             $this->bound = true;
 

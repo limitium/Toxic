@@ -11,8 +11,9 @@ class RuleType extends AbstractType
     {
         $builder
             ->add('pattern')
-//            ->add('Soruce')
-            ->add('Type','hidden')
+            ->add('Type')
+            ->add('Source')
+            ->add('id','hidden')
         ;
     }
 

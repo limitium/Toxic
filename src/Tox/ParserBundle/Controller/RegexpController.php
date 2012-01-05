@@ -27,10 +27,8 @@ class RegexpController extends Controller
     public function newAction()
     {
 
-        $form   = $this->createForm(new RegexpType(), array());
-
         return array(
-            'form'   => $form->createView()
+            'form'   => $this->createForm(new RegexpType(), array())->createView()
         );
     }
 
@@ -39,25 +37,26 @@ class RegexpController extends Controller
      *
      * @Route("/check", name="regexp_check")
      * @Method("post")
-     * @Template("ToxParserBundle:Regexp:new.html.twig")
+     * @Template("ToxParserBundle:Regexp:check.html.twig")
      */
     public function createAction()
     {
+
         $request = $this->getRequest();
         $form   = $this->createForm(new RegexpType(), array());
         $form->bindRequest($request);
 
+        $result =  array(
+            'form'   => $form->createView()
+        );
         if ($form->isValid()) {
             $data = $form->getData();
             $task = new Task($data['url'],$data['regexp']);
             $parser = new Parser();
             $parser->execute($task);
-
-            print_r($task->getResult());
+            $result['task'] = $task;
         }
 
-        return array(
-            'form'   => $form->createView()
-        );
+        return $result;
     }
 }

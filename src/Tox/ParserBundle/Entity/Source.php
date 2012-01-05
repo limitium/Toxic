@@ -10,6 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Source
 {
+    
     /**
      * @var integer $id
      */
@@ -17,13 +18,11 @@ class Source
 
     /**
      * @var string $name
-     * @Assert\NotBlank()
      */
     private $name;
 
     /**
      * @var string $url
-     * @Assert\NotBlank()
      */
     private $url;
 
@@ -38,13 +37,22 @@ class Source
     private $Results;
 
     /**
+     * @var Tox\ParserBundle\Entity\Rule
+     */
+    private $Rules;
+
+    /**
+     * @var Tox\ParserBundle\Entity\UsedProxy
+     */
+    private $UsedProxy;
+
+    /**
      * @var Tox\SatelliteBundle\Entity\Theme
      */
     private $Theme;
 
     /**
      * @var Tox\ParserBundle\Entity\Schedule
-     * @Assert\NotBlank()
      */
     private $Schedule;
 
@@ -53,15 +61,11 @@ class Source
      */
     private $Type;
 
-    /**
-     * @var Tox\ParserBundle\Entity\Proxy
-     */
-    private $UsedProxy;
-
     public function __construct()
     {
         $this->Results = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->UsedProxy = new \Doctrine\Common\Collections\ArrayCollection();
+    $this->Rules = new \Doctrine\Common\Collections\ArrayCollection();
+    $this->UsedProxy = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
     /**
@@ -155,6 +159,60 @@ class Source
     }
 
     /**
+     * Add Rules
+     *
+     * @param Tox\ParserBundle\Entity\Rule $rules
+     */
+    public function addRule(\Tox\ParserBundle\Entity\Rule $rules)
+    {
+        $this->Rules[] = $rules;
+    }
+
+    /**
+     * Set Rules
+     *
+     * @param Doctrine\Common\Collections\ArrayCollection  $rules
+     */
+    public function setRulesDoctrine(\Doctrine\Common\Collections\ArrayCollection $rules)
+    {
+        $this->Rules[] = $rules;
+    }
+
+    /**
+     * Get Rules
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getRules()
+    {
+        return $this->Rules;
+    }
+
+    public function removeRule(\Tox\ParserBundle\Entity\Rule $rule) {
+        $this->Rules->removeElement($rule);
+    }
+
+    /**
+     * Add UsedProxy
+     *
+     * @param Tox\ParserBundle\Entity\UsedProxy $usedProxy
+     */
+    public function addUsedProxy(\Tox\ParserBundle\Entity\UsedProxy $usedProxy)
+    {
+        $this->UsedProxy[] = $usedProxy;
+    }
+
+    /**
+     * Get UsedProxy
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getUsedProxy()
+    {
+        return $this->UsedProxy;
+    }
+
+    /**
      * Set Theme
      *
      * @param Tox\SatelliteBundle\Entity\Theme $theme
@@ -214,60 +272,7 @@ class Source
         return $this->Type;
     }
 
-    /**
-     * Add UsedProxy
-     *
-     * @param Tox\ParserBundle\Entity\Proxy $usedProxy
-     */
-    public function addProxy(\Tox\ParserBundle\Entity\Proxy $usedProxy)
-    {
-        $this->UsedProxy[] = $usedProxy;
-    }
-
-    /**
-     * Get UsedProxy
-     *
-     * @return Doctrine\Common\Collections\Collection 
-     */
-    public function getUsedProxy()
-    {
-        return $this->UsedProxy;
-    }
-    /**
-     * @var Tox\ParserBundle\Entity\Rule
-     * @Assert\Type(type="Tox\ParserBundle\Entity\Rule")
-     * @Assert\NotBlank()
-     */
-    private $Rules;
-
-
-    /**
-     * Add Rules
-     *
-     * @param Tox\ParserBundle\Entity\Rule $rules
-     */
-    public function addRule(\Tox\ParserBundle\Entity\Rule $rules)
-    {
-        $this->Rules[] = $rules;
-    }
-
-    /**
-     * Get Rules
-     *
-     * @return Doctrine\Common\Collections\Collection 
-     */
-    public function getRules()
-    {
-        return $this->Rules;
-    }
-
-    /**
-     * Add UsedProxy
-     *
-     * @param Tox\ParserBundle\Entity\UsedProxy $usedProxy
-     */
-    public function addUsedProxy(\Tox\ParserBundle\Entity\UsedProxy $usedProxy)
-    {
-        $this->UsedProxy[] = $usedProxy;
+    public function __toString() {
+        return $this->name;
     }
 }

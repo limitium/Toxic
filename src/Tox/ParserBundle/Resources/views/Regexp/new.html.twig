@@ -1,4 +1,10 @@
 {% extends '::base.html.twig' %}
+{% block stylesheets %}
+    {{parent()}}
+    <link rel="stylesheet" href="{{ asset('bundles/toxparser/css/pygments.css') }}" type="text/css" media="all"/>
+    <link rel="stylesheet" href="{{ asset('bundles/toxparser/css/form.css') }}" type="text/css" media="all"/>
+{% endblock%}
+
 {% block content %}
 <h1>Regexp checker</h1>
 

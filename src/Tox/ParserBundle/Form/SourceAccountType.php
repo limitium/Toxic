@@ -21,6 +21,13 @@ class SourceAccountType extends AbstractType
 
     public function getName()
     {
-        return 'tox_parserbundle_sourceaccounttype';
+        return 'source_account';
+    }
+
+    public function getDefaultOptions(array $options)
+    {
+        return array(
+            'data_class' => 'Tox\ParserBundle\Entity\SourceAccount',
+        );
     }
 }

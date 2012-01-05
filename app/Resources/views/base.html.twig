@@ -2,8 +2,9 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('bundles/acmedemo/css/demo.css') }}" type="text/css" media="all"/>
-    {% block stylesheets %}{% endblock %}
+    {% endblock %}
     <title>{% block title %}Toxic{% endblock %}</title>
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}"/>
 </head>
@@ -26,10 +27,8 @@
     {% block content_header %}
     <ul id="menu">
         {% block content_header_more %}
-        <li><a href="{{ path('_demo') }}">Demo Home</a></li>
-        <li><a href="{{ path('_demo') }}">Demo Home</a></li>
-        <li><a href="{{ path('_demo') }}">Demo Home</a></li>
-        <li><a href="{{ path('_demo') }}">Demo Home</a></li>
+        <li><a href="{{ path('source') }}">Sources</a></li>
+        <li><a href="{{ path('regexp_new') }}">Check regexp</a></li>
         {% endblock %}
     </ul>
 

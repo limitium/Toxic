@@ -23,6 +23,7 @@ Tox\ParserBundle\Entity\Source:
     Rules:
       targetEntity: Tox\ParserBundle\Entity\Rule
       mappedBy: Source
+      orphanRemoval: true
     UsedProxy:
       targetEntity: Tox\ParserBundle\Entity\UsedProxy
       mappedBy: Source

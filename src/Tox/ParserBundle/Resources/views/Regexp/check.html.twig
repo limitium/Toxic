@@ -1,0 +1,20 @@
+{% extends 'ToxParserBundle:Regexp:new.html.twig' %}
+{% block content %}
+{{ parent() }}
+
+{% if task is defined %}
+<div class="highlight">
+    <pre>
+        <a href="{{ task.getUrl() }}">{{ task.getUrl() }}</a>
+        {% if task.result[1] is defined %}
+        <ul>
+            {% for a in task.result[1] %}
+            <li>{{ loop.index }} {{ a|raw }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </pre>
+</div>
+{% endif %}
+
+{% endblock %}

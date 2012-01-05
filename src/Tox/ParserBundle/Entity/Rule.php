@@ -76,7 +76,7 @@ class Rule
     }
 
     public function __toString(){
-        return $this->pattern;
+        return $this->pattern?$this->pattern:"";
     }
     /**
      * @var Tox\ParserBundle\Entity\Source
