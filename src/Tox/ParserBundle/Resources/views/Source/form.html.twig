@@ -1,4 +1,10 @@
-<form action="{{ path('source_create') }}" method="post" {{ form_enctype(form) }}>
+<form action="{% spaceless %}
+{% if source.id %}
+{{ path('source_update', { 'id': source.id }) }}
+{% else %}
+{{ path('source_create') }}
+{% endif %}
+{% endspaceless %}" method="post" {{ form_enctype(form) }}>
     {{ form_errors(form) }}
 
     {{ form_row(form.name) }}
@@ -11,34 +17,26 @@
         {{ form_label(form.Rules) }}
         {{ form_errors(form.Rules) }}
         <div>
-            {#{% for rule in form.Rules %}#}
-            {#<div>#}
-                {#{{ form_errors(rule.pattern) }}#}
-                {#<label class="required" for="{{ rule.pattern.vars.form.vars.full_name }}">{{ rule.vars.value.Type | capitalize}}</label>#}
-                {#{{ form_widget(rule.pattern) }}#}
-                {#{{ form_widget(rule.Type) }}#}
-
-            {#</div>#}
-            {#{% endfor %}#}
-            {% for address in form.Rules %}
-            <div id="{{ 'address%sDivId'|format(loop.index) }}" class="userAddressItem">
-                <h5> Address #{{ loop.index }}</h5>
-
-                {{ form_errors(address) }}
-                {{ form_widget(address) }}
-            </div>
-            {% endfor %}
-            {% for address in form.Rules %}
-            <div id="{{ 'address%sDivId'|format(loop.index) }}" class="userAddressItem">
-                <h5> Address #{{ loop.index }}</h5>
-
-                {{ form_errors(address) }}
-                {{ form_widget(address) }}
+            {% for rule in form.Rules %}
+            <div>
+                {{ form_errors(rule.pattern) }}
+                <label class="required"
+                       for="{{ rule.pattern.vars.form.vars.full_name }}">{{ rule.vars.value.Type | capitalize}}</label>
+                {{ form_widget(rule.pattern) }}
+                {{ form_widget(rule.Type) }}
+                {{ form_widget(rule.Source) }}
+                {{ form_widget(rule.id) }}
             </div>
             {% endfor %}
         </div>
     </div>
 
     {{ form_rest(form) }}
-    <input type="submit" class="symfony-button-grey" value="Create">
+    <input type="submit" class="symfony-button-grey" value="{% spaceless %}
+{% if source.id %}
+Update
+{% else %}
+Create
+{% endif %}
+{% endspaceless %}">
 </form>

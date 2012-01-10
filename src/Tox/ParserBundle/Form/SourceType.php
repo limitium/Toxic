@@ -12,11 +12,15 @@ class SourceType extends AbstractType {
             ->add('url')
             ->add('Theme')
             ->add('Schedule')
-            ->add('Type')
+            ->add('Type', 'entity_id', array(
+            'class' => 'Tox\ParserBundle\Entity\SourceType',
+            'hidden' => true,
+            'property' => 'id',
+            ))
 //            ->add('Account',new SourceAccountType())
             ->add('Rules', 'collection', array('type' => new RuleType(),
             'allow_add' => true,
-            'allow_delete' => true,));
+            'allow_delete' => true));
     }
 
     public function getName() {

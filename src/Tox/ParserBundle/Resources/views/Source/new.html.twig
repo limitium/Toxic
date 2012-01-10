@@ -1,14 +1,13 @@
-{% extends '::base.html.twig' %}
-{% block content %}
+{% extends 'ToxParserBundle:Source:source.html.twig' %}
+
+{% block source %}
 <h1>Source creation</h1>
-
-{% include 'ToxParserBundle:Source:form.html.twig' with {'form': form } %}
-
 <ul class="record_actions">
     <li>
-        <a href="{{ path('source') }}">
-            Back to the list
-        </a>
+        <a href="{{ path('source') }}">←</a>
     </li>
 </ul>
+{% include 'ToxParserBundle:Source:form.html.twig' with {'form': form } %}
+
+
         {% endblock %}

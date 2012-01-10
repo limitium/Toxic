@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new Tox\PlaceBundle\ToxPlaceBundle(),
             new Tox\SatelliteBundle\ToxSatelliteBundle(),
             new Limitium\ORMBundle\ORMBundle(),
+            new Gregwar\FormBundle\GregwarFormBundle(),
 
             new Acme\DemoBundle\AcmeDemoBundle(),
         );

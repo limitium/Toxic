@@ -1,42 +1,28 @@
-{% extends '::base.html.twig' %}
-{% block content %}
-<h1>Source list</h1>
+{% extends 'ToxParserBundle:Source:source.html.twig' %}
 
+{% block source %}
+<h1>Source list</h1>
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('source_new') }}">
+            Create a new source
+        </a>
+    </li>
+</ul>
 <table class="records_list">
     <thead>
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Url</th>
-            <th>Actions</th>
-        </tr>
+    <tr>
+        <th>Name</th>
+    </tr>
     </thead>
     <tbody>
     {% for entity in entities %}
-        <tr>
-            <td><a href="{{ path('source_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-            <td>{{ entity.name }}</td>
-            <td>{{ entity.url }}</td>
-            <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('source_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('source_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
-            </td>
-        </tr>
+    <tr>
+        <td><a href="{{ path('source_show', { 'id': entity.id }) }}">{{ entity.name }} ({{ entity.url }})</a></td>
+    </tr>
     {% endfor %}
     </tbody>
 </table>
 
-<ul>
-    <li>
-        <a href="{{ path('source_new') }}">
-            Create a new entry
-        </a>
-    </li>
-</ul>
+
         {% endblock %}

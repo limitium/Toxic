@@ -15,16 +15,14 @@ use Tox\ParserBundle\Form\SourceType;
  *
  * @Route("/source")
  */
-class SourceController extends Controller
-{
+class SourceController extends Controller {
     /**
      * Lists all Source entities.
      *
      * @Route("/", name="source")
      * @Template()
      */
-    public function indexAction()
-    {
+    public function indexAction() {
         $em = $this->getDoctrine()->getEntityManager();
 
         $entities = $em->getRepository('ToxParserBundle:Source')->findAll();
@@ -38,8 +36,7 @@ class SourceController extends Controller
      * @Route("/{id}/show", name="source_show")
      * @Template()
      */
-    public function showAction($id)
-    {
+    public function showAction($id) {
         $em = $this->getDoctrine()->getEntityManager();
 
         $entity = $em->getRepository('ToxParserBundle:Source')->find($id);
@@ -51,8 +48,8 @@ class SourceController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),        );
+            'entity' => $entity,
+            'delete_form' => $deleteForm->createView(),);
     }
 
     /**
@@ -61,17 +58,21 @@ class SourceController extends Controller
      * @Route("/new", name="source_new")
      * @Template()
      */
-    public function newAction()
-    {
+    public function newAction() {
         $source = new Source();
 
         $this->addRules($source);
 
-        $form   = $this->createForm(new SourceType(), $source);
+        $st = $this->getDoctrine()
+            ->getEntityManager()
+            ->getRepository('ToxParserBundle:SourceType')
+            ->find(1);
+        $source->setType($st);
+        $form = $this->createForm(new SourceType(), $source);
 
         return array(
             'source' => $source,
-            'form'   => $form->createView()
+            'form' => $form->createView()
         );
     }
 
@@ -82,19 +83,18 @@ class SourceController extends Controller
      * @Method("post")
      * @Template("ToxParserBundle:Source:new.html.twig")
      */
-    public function createAction()
-    {
-        $source  = new Source();
+    public function createAction() {
+        $source = new Source();
         $request = $this->getRequest();
         $form = $this->createForm(new SourceType(), $source);
         $form->bindRequest($request);
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getEntityManager();
             $em->persist($source);
-            foreach($source->getRules() as $k => $rule){
-                if(!$rule->getPattern()){
+            foreach ($source->getRules() as $k => $rule) {
+                if (!$rule->getPattern()) {
                     $source->removeRule($rule);
-                }else{
+                } else {
                     $rule->setSource($source);
                     $em->persist($rule);
                 }
@@ -102,12 +102,12 @@ class SourceController extends Controller
             $em->flush();
 
             return $this->redirect($this->generateUrl('source_show', array('id' => $source->getId())));
-            
+
         }
 
         return array(
             'source' => $source,
-            'form'   => $form->createView()
+            'form' => $form->createView()
         );
     }
 
@@ -117,8 +117,7 @@ class SourceController extends Controller
      * @Route("/{id}/edit", name="source_edit")
      * @Template()
      */
-    public function editAction($id)
-    {
+    public function editAction($id) {
         $em = $this->getDoctrine()->getEntityManager();
 
         $source = $em->getRepository('ToxParserBundle:Source')->find($id);
@@ -133,8 +132,8 @@ class SourceController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'source'      => $source,
-            'form'   => $editForm->createView(),
+            'source' => $source,
+            'form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -166,8 +165,7 @@ class SourceController extends Controller
      * @Method("post")
      * @Template("ToxParserBundle:Source:edit.html.twig")
      */
-    public function updateAction($id)
-    {
+    public function updateAction($id) {
         $em = $this->getDoctrine()->getEntityManager();
 
         $source = $em->getRepository('ToxParserBundle:Source')->find($id);
@@ -176,7 +174,7 @@ class SourceController extends Controller
             throw $this->createNotFoundException('Unable to find Source entity.');
         }
 
-        $editForm   = $this->createForm(new SourceType(), $source);
+        $editForm = $this->createForm(new SourceType(), $source);
         $deleteForm = $this->createDeleteForm($id);
 
         $request = $this->getRequest();
@@ -184,15 +182,24 @@ class SourceController extends Controller
         $editForm->bindRequest($request);
 
         if ($editForm->isValid()) {
+            $em = $this->getDoctrine()->getEntityManager();
             $em->persist($source);
+            foreach ($source->getRules() as $k => $rule) {
+                if (!$rule->getPattern()) {
+                    $source->removeRule($rule);
+                } else {
+                    $rule->setSource($source);
+                    $em->persist($rule);
+                }
+            }
             $em->flush();
 
-            return $this->redirect($this->generateUrl('source_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('source_show', array('id' => $id)));
         }
 
         return array(
-            'source'      => $source,
-            'edit_form'   => $editForm->createView(),
+            'source' => $source,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -203,8 +210,7 @@ class SourceController extends Controller
      * @Route("/{id}/delete", name="source_delete")
      * @Method("post")
      */
-    public function deleteAction($id)
-    {
+    public function deleteAction($id) {
         $form = $this->createDeleteForm($id);
         $request = $this->getRequest();
 
@@ -225,11 +231,9 @@ class SourceController extends Controller
         return $this->redirect($this->generateUrl('source'));
     }
 
-    private function createDeleteForm($id)
-    {
+    private function createDeleteForm($id) {
         return $this->createFormBuilder(array('id' => $id))
             ->add('id', 'hidden')
-            ->getForm()
-        ;
+            ->getForm();
     }
 }
