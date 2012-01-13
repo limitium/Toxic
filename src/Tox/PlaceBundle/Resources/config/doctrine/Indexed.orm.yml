@@ -19,7 +19,6 @@ Tox\PlaceBundle\Entity\Indexed:
       joinColumns:
         domen_id:
           referencedColumnName: id
-          onDelete: CASCADE
     SearchEngine:
       targetEntity: Tox\PlaceBundle\Entity\SearchEngine
       inversedBy: Indexes

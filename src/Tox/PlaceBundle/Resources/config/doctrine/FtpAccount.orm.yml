@@ -1,9 +1,6 @@
 Tox\PlaceBundle\Entity\FtpAccount:
   type: entity
-  fields:
-    host_account_id:
-      type: integer
-      nullable: false
+  fields: {  }
   oneToMany:
     Satellites:
       targetEntity: Tox\SatelliteBundle\Entity\Satellite

@@ -19,6 +19,5 @@ Tox\PlaceBundle\Entity\HttpAccount:
     length: 255
     type: string
   discriminatorMap:
-    SourceAccount: Tox\ParserBundle\Entity\SourceAccount
-    RegisterAccount: Tox\PlaceBundle\Entity\RegisterAccount
     HostAccount: Tox\PlaceBundle\Entity\HostAccount
+    SourceAccount: Tox\ParserBundle\Entity\SourceAccount

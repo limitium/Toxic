@@ -10,10 +10,13 @@ Tox\ParserBundle\Entity\MetaData:
       type: string
       length: 1000
       nullable: false
-    content_id:
-      type: integer
-      nullable: false
   manyToOne:
+    Content:
+      targetEntity: Tox\ParserBundle\Entity\Content
+      inversedBy: Meta
+      joinColumns:
+        content_id:
+          referencedColumnName: id
     PatternType:
       targetEntity: Tox\ParserBundle\Entity\PatternType
       inversedBy: MetaData

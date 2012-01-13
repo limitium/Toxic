@@ -16,7 +16,7 @@ class Task {
         return $this->url;
     }
 
-    public function getRegexp() {
+    public function getRegexps() {
         return $this->regexp;
     }
 

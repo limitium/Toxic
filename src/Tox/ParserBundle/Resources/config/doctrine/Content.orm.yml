@@ -5,3 +5,7 @@ Tox\ParserBundle\Entity\Content:
       type: text
       length: 10000
       nullable: false
+  oneToMany:
+    Meta:
+      targetEntity: Tox\ParserBundle\Entity\MetaData
+      mappedBy: Content

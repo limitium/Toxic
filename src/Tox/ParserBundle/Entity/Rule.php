@@ -35,6 +35,11 @@ class Rule
         return $this->id;
     }
 
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
     /**
      * Set pattern
      *

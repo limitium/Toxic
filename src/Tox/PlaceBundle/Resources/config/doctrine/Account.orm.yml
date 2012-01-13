@@ -7,10 +7,6 @@ Tox\PlaceBundle\Entity\Account:
       type: integer
       generator:
         strategy: AUTO
-    username:
-      type: string
-      length: 255
-      nullable: false
     password:
       type: string
       length: 255

@@ -18,12 +18,6 @@ Tox\PlaceBundle\Entity\Domen:
     paid_unitl:
       type: date
       nullable: true
-    register_account_id:
-      type: integer
-      nullable: true
-    bot_id:
-      type: integer
-      nullable: true
   oneToOne:
     Satellite:
       targetEntity: Tox\SatelliteBundle\Entity\Satellite

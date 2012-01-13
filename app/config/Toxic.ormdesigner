@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
-<orm-designer version="1.4.7.491">
+<orm-designer version="1.4.6.488">
 
   <project code-name="Toxic" framework="Without Framework" name="toxic" orm="Doctrine2" visSizeX="76" visSizeX2="1277" visSizeY="148" visSizeY2="1016">
     <module-position name="Sattelite" visPositionX="0" visPositionY="-66"/>
@@ -130,6 +130,9 @@
       <column name="source_id" type="integer"/>
       <column name="proxy_id" type="integer"/>
     </table>
+    <foreign-key caption="Source RawResult" from="RawResult" inverse-alias="Source" name="FK_RawResult_Source_id" owning-alias="Results" to="Source">
+      <foreign-key-column from="source_id" to="id"/>
+    </foreign-key>
     <foreign-key caption="Theme Source" from="Source" inverse-alias="Theme" name="FK_Source_Theme_id" owning-alias="Sources" to="Theme">
       <foreign-key-column from="theme_id" to="id"/>
     </foreign-key>
@@ -142,12 +145,9 @@
     <foreign-key caption="SourceType PatternType" from="PatternType" inverse-alias="Type" name="FK_PatternType_SourceType_id" owning-alias="Patterns" to="SourceType">
       <foreign-key-column from="source_type_id" to="id"/>
     </foreign-key>
-    <foreign-key caption="RawText MetaData" from="MetaData" name="FK_MetaData_RawText_id" to="Content" visCaption1X="-1" visCaption1Y="2" visCenterX="0" visCenterY="0"/>
+    <foreign-key caption="RawText MetaData" from="MetaData" inverse-alias="Content" name="FK_MetaData_RawText_id" owning-alias="Meta" to="Content" visCaption1X="-1" visCaption1Y="2" visCenterX="0" visCenterY="0"/>
     <foreign-key caption="PatternType MetaData" from="MetaData" inverse-alias="PatternType" name="FK_MetaData_PatternType_id" owning-alias="MetaData" to="PatternType" visCaption1X="0" visCaption1Y="-1" visCenterX="0" visCenterY="0">
       <foreign-key-column from="pattern_type_id" to="id"/>
-    </foreign-key>
-    <foreign-key caption="Source RawResult" from="RawResult" inverse-alias="Source" name="FK_RawResult_Source_id" owning-alias="Results" to="Source">
-      <foreign-key-column from="source_id" to="id"/>
     </foreign-key>
     <foreign-key caption="Source SourceAccount" from="SourceAccount" inverse-alias="Source" name="FK_SourceAccount_Source_id" owning-alias="Account" to="Source">
       <foreign-key-column from="source_id" to="id"/>
@@ -197,10 +197,10 @@
     </table>
     <table name="Account" visPositionX="377" visPositionY="413" visSizeX="0" visSizeX2="137" visSizeY="0" visSizeY2="73">
       <column auto-increment="true" name="id" primary="true" type="integer"/>
-      <column name="username" required="true" size="255" type="string"/>
+      <column name="username" required="true" size="255" type="text"/>
       <column name="password" required="true" size="255" type="string"/>
-      <column name="descriminator" size="255" type="string"/>
-      <inheritance-parent discriminator-column="descriminator" type="JOINED"/>
+      <column name="descriminator" size="255" type="text"/>
+      <inheritance-parent discriminator-column="username" type="JOINED"/>
     </table>
     <table name="RegisterAccount" visPositionX="159" visPositionY="297" visSizeX="0" visSizeX2="108" visSizeY="0" visSizeY2="31">
       <column name="register_id" required="true" type="integer"/>
@@ -227,7 +227,7 @@
       <column name="url" size="255" type="string"/>
       <column name="descriminator" size="255" type="string"/>
       <inheritance-parent discriminator-column="descriminator" type="JOINED"/>
-      <inheritance-child derived-from="Account" discriminator-value="HttpAccount" visCenterX="1" visCenterY="0"/>
+      <inheritance-child derived-from="Account" discriminator-value="HttpAccount"/>
     </table>
     <foreign-key caption="RegisterAccount Domen" from="Domen" inverse-alias="RegisterAccount" name="FK_Domen_RegisterAccount_id" owning-alias="Domens" to="RegisterAccount"/>
     <foreign-key caption="Bot Domen" from="Domen" inverse-alias="Bot" name="FK_Domen_Bot_id" owning-alias="Domens" to="Bot"/>

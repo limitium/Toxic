@@ -22,9 +22,9 @@ class MetaData
     private $data;
 
     /**
-     * @var integer $content_id
+     * @var Tox\ParserBundle\Entity\Content
      */
-    private $content_id;
+    private $Content;
 
     /**
      * @var Tox\ParserBundle\Entity\PatternType
@@ -62,24 +62,26 @@ class MetaData
         return $this->data;
     }
 
+
+
     /**
-     * Set content_id
+     * Set content
      *
-     * @param integer $contentId
+     * @param  Tox\ParserBundle\Entity\Content $contentId
      */
-    public function setContentId($contentId)
+    public function setContent($content)
     {
-        $this->content_id = $contentId;
+        $this->Content = $content;
     }
 
     /**
-     * Get content_id
+     * Get content
      *
-     * @return integer 
+     * @return  Tox\ParserBundle\Entity\Content
      */
-    public function getContentId()
+    public function getContent()
     {
-        return $this->content_id;
+        return $this->Content;
     }
 
     /**

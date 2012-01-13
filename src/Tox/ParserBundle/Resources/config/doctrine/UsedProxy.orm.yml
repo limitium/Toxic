@@ -12,9 +12,6 @@ Tox\ParserBundle\Entity\UsedProxy:
     success:
       type: boolean
       nullable: false
-    proxy_id:
-      type: integer
-      nullable: true
   manyToOne:
     Source:
       targetEntity: Tox\ParserBundle\Entity\Source

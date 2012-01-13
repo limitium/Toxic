@@ -24,8 +24,8 @@ Tox\ParserBundle\Entity\RawResult:
   discriminatorColumn:
     name: descriminator
     length: 255
-    type: text
+    type: string
   discriminatorMap:
-    Bot: Tox\ParserBundle\Entity\Bot
     Content: Tox\ParserBundle\Entity\Content
     Proxy: Tox\ParserBundle\Entity\Proxy
+    Bot: Tox\ParserBundle\Entity\Bot

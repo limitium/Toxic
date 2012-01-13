@@ -6,9 +6,6 @@ Tox\SatelliteBundle\Entity\Satellite:
       type: integer
       generator:
         strategy: AUTO
-    ftp_account_id:
-      type: integer
-      nullable: true
   oneToOne:
     Domen:
       targetEntity: Tox\PlaceBundle\Entity\Domen
@@ -16,7 +13,6 @@ Tox\SatelliteBundle\Entity\Satellite:
       joinColumns:
         domen_id:
           referencedColumnName: id
-          onDelete: CASCADE
   oneToMany:
     Posts:
       targetEntity: Tox\SatelliteBundle\Entity\Post

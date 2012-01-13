@@ -36,4 +36,33 @@ class Content extends RawResult
     {
         return $this->data;
     }
+    /**
+     * @var Tox\ParserBundle\Entity\MetaData
+     */
+    private $Meta;
+
+    public function __construct()
+    {
+        $this->Meta = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add Meta
+     *
+     * @param Tox\ParserBundle\Entity\MetaData $meta
+     */
+    public function addMetaData(\Tox\ParserBundle\Entity\MetaData $meta)
+    {
+        $this->Meta[] = $meta;
+    }
+
+    /**
+     * Get Meta
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getMeta()
+    {
+        return $this->Meta;
+    }
 }
