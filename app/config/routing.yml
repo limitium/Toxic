@@ -25,6 +25,14 @@ ToxParserBundle:
     resource: "@ToxParserBundle/Controller/"
     type:     annotation
     prefix:   /
+ToxSatelliteBundle:
+    resource: "@ToxSatelliteBundle/Controller/"
+    type:     annotation
+    prefix:
+ToxPlaceBundle:
+    resource: "@ToxPlaceBundle/Controller/"
+    type:     annotation
+    prefix:   /
 
 # Internal routing configuration to handle ESI
 #_internal:

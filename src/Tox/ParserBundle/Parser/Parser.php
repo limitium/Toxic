@@ -34,7 +34,6 @@ class Parser {
             $result = $this->getMatches($regs, $content);
         }
 
-
         $task->setResult($result);
         return $task;
     }

@@ -6,9 +6,9 @@
 <div class="highlight">
     <pre>
         <a href="{{ task.getUrl() }}">{{ task.getUrl() }}</a>
-        {% if task.result[1] is defined %}
+        {% if task.result is defined %}
         <ul>
-            {% for a in task.result[1] %}
+            {% for a in task.result %}
             <li>{{ loop.index }} {{ a|raw }}</li>
             {% endfor %}
         </ul>

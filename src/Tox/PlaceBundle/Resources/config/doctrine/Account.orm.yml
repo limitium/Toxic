@@ -18,3 +18,4 @@ Tox\PlaceBundle\Entity\Account:
   discriminatorMap:
     FtpAccount: Tox\PlaceBundle\Entity\FtpAccount
     HttpAccount: Tox\PlaceBundle\Entity\HttpAccount
+    RegisterAccount: Tox\PlaceBundle\Entity\RegisterAccount

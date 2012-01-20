@@ -1,0 +1,49 @@
+{% extends 'ToxPlaceBundle:Domen:domen.html.twig' %}
+
+{% block domen %}
+<h1>Domen</h1>
+
+<table class="record_properties">
+    <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ entity.id }}</td>
+        </tr>
+        <tr>
+            <th>Name</th>
+            <td>{{ entity.name }}</td>
+        </tr>
+        <tr>
+            <th>Bought_at</th>
+            <td>{{ entity.boughtat|date('Y-m-d H:i:s') }}</td>
+        </tr>
+        <tr>
+            <th>Whois</th>
+            <td>{{ entity.whois }}</td>
+        </tr>
+        <tr>
+            <th>Paid_unitl</th>
+            <td>{{ entity.paidunitl|date('Y-m-d H:i:s') }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('domen') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('domen_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>
+        <form action="{{ path('domen_delete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+</ul>
+        {% endblock %}
