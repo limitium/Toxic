@@ -179,4 +179,189 @@ class Satellite
     {
         return $this->Theme;
     }
+    /**
+     * @var string $title
+     */
+    private $title;
+
+    /**
+     * @var text $keys
+     */
+    private $keys;
+
+    /**
+     * @var text $description
+     */
+    private $description;
+
+    /**
+     * @var text $about
+     */
+    private $about;
+
+    /**
+     * @var string $key
+     */
+    private $key;
+
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string 
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Set keys
+     *
+     * @param text $keys
+     */
+    public function setKeys($keys)
+    {
+        $this->keys = $keys;
+    }
+
+    /**
+     * Get keys
+     *
+     * @return text 
+     */
+    public function getKeys()
+    {
+        return $this->keys;
+    }
+
+    /**
+     * Set description
+     *
+     * @param text $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * Get description
+     *
+     * @return text 
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set about
+     *
+     * @param text $about
+     */
+    public function setAbout($about)
+    {
+        $this->about = $about;
+    }
+
+    /**
+     * Get about
+     *
+     * @return text 
+     */
+    public function getAbout()
+    {
+        return $this->about;
+    }
+
+    /**
+     * Set key
+     *
+     * @param string $key
+     */
+    public function setKey($key)
+    {
+        $this->key = $key;
+    }
+
+    /**
+     * Get key
+     *
+     * @return string 
+     */
+    public function getKey()
+    {
+        return $this->key;
+    }
+    /**
+     * @var string $keyz
+     */
+    private $keyz;
+
+    /**
+     * @var string $mark
+     */
+    private $mark;
+
+
+    /**
+     * Set keyz
+     *
+     * @param string $keyz
+     */
+    public function setKeyz($keyz)
+    {
+        $this->keyz = $keyz;
+    }
+
+    /**
+     * Get keyz
+     *
+     * @return string 
+     */
+    public function getKeyz()
+    {
+        return $this->keyz;
+    }
+
+    /**
+     * Set mark
+     *
+     * @param string $mark
+     */
+    public function setMark($mark)
+    {
+        $this->mark = $mark;
+    }
+
+    /**
+     * Get mark
+     *
+     * @return string 
+     */
+    public function getMark()
+    {
+        return $this->mark;
+    }
+
+    public function getConfig() {
+        return array(
+            'about' => $this->getAbout(),
+            'keys' => $this->getKeyz(),
+            'description' => $this->getDescription(),
+            'title' => $this->getTitle(),
+            'key' => $this->getMark()
+        );
+    }
 }

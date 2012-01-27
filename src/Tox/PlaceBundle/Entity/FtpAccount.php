@@ -89,4 +89,58 @@ class FtpAccount extends Account
     {
         return $this->HostAccount;
     }
+    /**
+     * @var string $url
+     */
+    private $url;
+
+
+    /**
+     * Set url
+     *
+     * @param string $url
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+    }
+
+    /**
+     * Get url
+     *
+     * @return string 
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    public function __toString() {
+        return $this->getHostAccount()." - ".$this->getUsername();
+    }
+    /**
+     * @var string $shell_version
+     */
+    private $shell_version;
+
+
+    /**
+     * Set shell_version
+     *
+     * @param string $shellVersion
+     */
+    public function setShellVersion($shellVersion)
+    {
+        $this->shell_version = $shellVersion;
+    }
+
+    /**
+     * Get shell_version
+     *
+     * @return string 
+     */
+    public function getShellVersion()
+    {
+        return $this->shell_version;
+    }
 }

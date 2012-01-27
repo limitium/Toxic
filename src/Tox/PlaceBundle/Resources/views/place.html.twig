@@ -1,0 +1,12 @@
+{% extends '::base.html.twig' %}
+
+{% block content %}
+<div class="menus">
+    <ul>
+        <li><a href="{{ path('domen') }}">Domens</a></li>
+        <li><a href="{{ path('register') }}">Registers</a></li>
+        <li><a href="{{ path('host') }}">Hosts</a></li>
+        <li><a href="{{ path('ftpaccount') }}">Ftps</a></li>
+    </ul>
+</div>
+        {% endblock %}

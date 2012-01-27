@@ -6,12 +6,13 @@ Tox\ParserBundle\Entity\Source:
       type: integer
       generator:
         strategy: AUTO
-    name:
-      type: string
-      nullable: true
     url:
       type: string
+      unique: true
       nullable: false
+    parsed_at:
+      type: datetime
+      nullable: true
   oneToOne:
     Account:
       targetEntity: Tox\ParserBundle\Entity\SourceAccount

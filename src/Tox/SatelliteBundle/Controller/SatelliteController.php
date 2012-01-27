@@ -32,7 +32,7 @@ class SatelliteController extends Controller
     }
 
     /**
-     * Finds and displays a Satellite entity.
+     * Finds and displays a Satellite satellite.
      *
      * @Route("/{id}/show", name="satellite_show")
      * @Template()
@@ -41,38 +41,38 @@ class SatelliteController extends Controller
     {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entity = $em->getRepository('ToxSatelliteBundle:Satellite')->find($id);
+        $satellite = $em->getRepository('ToxSatelliteBundle:Satellite')->find($id);
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Satellite entity.');
+        if (!$satellite) {
+            throw $this->createNotFoundException('Unable to find Satellite satellite.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
+            'satellite'      => $satellite,
             'delete_form' => $deleteForm->createView(),        );
     }
 
     /**
-     * Displays a form to create a new Satellite entity.
+     * Displays a form to create a new Satellite satellite.
      *
      * @Route("/new", name="satellite_new")
      * @Template()
      */
     public function newAction()
     {
-        $entity = new Satellite();
-        $form   = $this->createForm(new SatelliteType(), $entity);
+        $satellite = new Satellite();
+        $form   = $this->createForm(new SatelliteType(), $satellite);
 
         return array(
-            'entity' => $entity,
+            'satellite' => $satellite,
             'form'   => $form->createView()
         );
     }
 
     /**
-     * Creates a new Satellite entity.
+     * Creates a new Satellite satellite.
      *
      * @Route("/create", name="satellite_create")
      * @Method("post")
@@ -80,28 +80,29 @@ class SatelliteController extends Controller
      */
     public function createAction()
     {
-        $entity  = new Satellite();
+        $satellite  = new Satellite();
         $request = $this->getRequest();
-        $form    = $this->createForm(new SatelliteType(), $entity);
+        $form    = $this->createForm(new SatelliteType(), $satellite);
         $form->bindRequest($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getEntityManager();
-            $em->persist($entity);
+            $satellite->setMark(md5('pizda'.time()));
+            $em->persist($satellite);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('satellite_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('satellite_show', array('id' => $satellite->getId())));
             
         }
 
         return array(
-            'entity' => $entity,
+            'satellite' => $satellite,
             'form'   => $form->createView()
         );
     }
 
     /**
-     * Displays a form to edit an existing Satellite entity.
+     * Displays a form to edit an existing Satellite satellite.
      *
      * @Route("/{id}/edit", name="satellite_edit")
      * @Template()
@@ -110,24 +111,24 @@ class SatelliteController extends Controller
     {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entity = $em->getRepository('ToxSatelliteBundle:Satellite')->find($id);
+        $satellite = $em->getRepository('ToxSatelliteBundle:Satellite')->find($id);
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Satellite entity.');
+        if (!$satellite) {
+            throw $this->createNotFoundException('Unable to find Satellite satellite.');
         }
 
-        $editForm = $this->createForm(new SatelliteType(), $entity);
+        $editForm = $this->createForm(new SatelliteType(), $satellite);
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'satellite'      => $satellite,
+            'form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
 
     /**
-     * Edits an existing Satellite entity.
+     * Edits an existing Satellite satellite.
      *
      * @Route("/{id}/update", name="satellite_update")
      * @Method("post")
@@ -137,13 +138,13 @@ class SatelliteController extends Controller
     {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entity = $em->getRepository('ToxSatelliteBundle:Satellite')->find($id);
+        $satellite = $em->getRepository('ToxSatelliteBundle:Satellite')->find($id);
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Satellite entity.');
+        if (!$satellite) {
+            throw $this->createNotFoundException('Unable to find Satellite satellite.');
         }
 
-        $editForm   = $this->createForm(new SatelliteType(), $entity);
+        $editForm   = $this->createForm(new SatelliteType(), $satellite);
         $deleteForm = $this->createDeleteForm($id);
 
         $request = $this->getRequest();
@@ -151,21 +152,22 @@ class SatelliteController extends Controller
         $editForm->bindRequest($request);
 
         if ($editForm->isValid()) {
-            $em->persist($entity);
+            $satellite->setMark(md5('pizda'.time()));
+            $em->persist($satellite);
             $em->flush();
 
             return $this->redirect($this->generateUrl('satellite_edit', array('id' => $id)));
         }
 
         return array(
-            'entity'      => $entity,
+            'satellite'      => $satellite,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
 
     /**
-     * Deletes a Satellite entity.
+     * Deletes a Satellite satellite.
      *
      * @Route("/{id}/delete", name="satellite_delete")
      * @Method("post")
@@ -179,13 +181,13 @@ class SatelliteController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getEntityManager();
-            $entity = $em->getRepository('ToxSatelliteBundle:Satellite')->find($id);
+            $satellite = $em->getRepository('ToxSatelliteBundle:Satellite')->find($id);
 
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Satellite entity.');
+            if (!$satellite) {
+                throw $this->createNotFoundException('Unable to find Satellite satellite.');
             }
 
-            $em->remove($entity);
+            $em->remove($satellite);
             $em->flush();
         }
 

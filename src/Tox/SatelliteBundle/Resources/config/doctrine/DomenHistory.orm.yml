@@ -9,6 +9,11 @@ Tox\SatelliteBundle\Entity\DomenHistory:
     changet_at:
       type: date
       nullable: false
+  indexes:
+    unique_pair:
+      columns:
+        - satellite_id
+        - domen_id
   manyToOne:
     Satellite:
       targetEntity: Tox\SatelliteBundle\Entity\Satellite

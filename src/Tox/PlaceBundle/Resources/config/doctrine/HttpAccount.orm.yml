@@ -17,7 +17,8 @@ Tox\PlaceBundle\Entity\HttpAccount:
   discriminatorColumn:
     name: descriminator
     length: 255
-    type: string
+    type: text
   discriminatorMap:
-    HostAccount: Tox\PlaceBundle\Entity\HostAccount
     SourceAccount: Tox\ParserBundle\Entity\SourceAccount
+    RegisterAccount: Tox\PlaceBundle\Entity\RegisterAccount
+    HostAccount: Tox\PlaceBundle\Entity\HostAccount

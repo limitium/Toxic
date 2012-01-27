@@ -7,6 +7,10 @@ Tox\PlaceBundle\Entity\Account:
       type: integer
       generator:
         strategy: AUTO
+    username:
+      type: string
+      length: 255
+      nullable: false
     password:
       type: string
       length: 255
@@ -14,8 +18,7 @@ Tox\PlaceBundle\Entity\Account:
   discriminatorColumn:
     name: descriminator
     length: 255
-    type: string
+    type: text
   discriminatorMap:
     FtpAccount: Tox\PlaceBundle\Entity\FtpAccount
     HttpAccount: Tox\PlaceBundle\Entity\HttpAccount
-    RegisterAccount: Tox\PlaceBundle\Entity\RegisterAccount

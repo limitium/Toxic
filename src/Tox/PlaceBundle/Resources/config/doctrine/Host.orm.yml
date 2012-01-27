@@ -6,15 +6,9 @@ Tox\PlaceBundle\Entity\Host:
       type: integer
       generator:
         strategy: AUTO
-    name:
+    url:
       type: string
-      nullable: true
-    username:
-      type: string
-      nullable: true
-    password:
-      type: string
-      nullable: true
+      nullable: false
     ns_servers:
       type: text
       nullable: true

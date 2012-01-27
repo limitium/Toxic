@@ -6,22 +6,14 @@
 <table class="records_list">
     <thead>
         <tr>
-            <th>Id</th>
             <th>Name</th>
-            <th>Username</th>
-            <th>Password</th>
-            <th>Ns_servers</th>
             <th>Actions</th>
         </tr>
     </thead>
     <tbody>
     {% for entity in entities %}
         <tr>
-            <td><a href="{{ path('host_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-            <td>{{ entity.name }}</td>
-            <td>{{ entity.username }}</td>
-            <td>{{ entity.password }}</td>
-            <td>{{ entity.nsservers }}</td>
+            <td>{{ entity.url }}</td>
             <td>
                 <ul>
                     <li>

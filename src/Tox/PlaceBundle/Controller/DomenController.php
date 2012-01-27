@@ -62,11 +62,11 @@ class DomenController extends Controller
      */
     public function newAction()
     {
-        $entity = new Domen();
-        $form   = $this->createForm(new DomenType(), $entity);
+        $domen = new Domen();
+        $form   = $this->createForm(new DomenType(), $domen);
 
         return array(
-            'entity' => $entity,
+            'domen' => $domen,
             'form'   => $form->createView()
         );
     }

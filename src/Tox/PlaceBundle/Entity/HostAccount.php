@@ -64,4 +64,8 @@ class HostAccount extends HttpAccount
     {
         return $this->Host;
     }
+
+    public function __toString() {
+        return $this->getHost()->getUrl()." - ".$this->getUsername();
+    }
 }

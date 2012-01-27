@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Post
 {
+  
     /**
      * @var integer $id
      */
@@ -20,9 +21,9 @@ class Post
     private $title;
 
     /**
-     * @var text $content
+     * @var text $body
      */
-    private $content;
+    private $body;
 
     /**
      * @var string $file_name
@@ -35,11 +36,30 @@ class Post
     private $is_page;
 
     /**
+     * @var boolean $is_posted
+     */
+    private $is_posted;
+
+    /**
+     * @var Tox\SatelliteBundle\Entity\Image
+     */
+    private $Post;
+
+    /**
      * @var Tox\SatelliteBundle\Entity\Satellite
      */
     private $Satellite;
 
+    /**
+     * @var Tox\ParserBundle\Entity\Content
+     */
+    private $Content;
 
+    public function __construct()
+    {
+        $this->Post = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
     /**
      * Get id
      *
@@ -71,23 +91,23 @@ class Post
     }
 
     /**
-     * Set content
+     * Set body
      *
-     * @param text $content
+     * @param text $body
      */
-    public function setContent($content)
+    public function setBody($body)
     {
-        $this->content = $content;
+        $this->body = $body;
     }
 
     /**
-     * Get content
+     * Get body
      *
      * @return text 
      */
-    public function getContent()
+    public function getBody()
     {
-        return $this->content;
+        return $this->body;
     }
 
     /**
@@ -131,6 +151,46 @@ class Post
     }
 
     /**
+     * Set is_posted
+     *
+     * @param boolean $isPosted
+     */
+    public function setIsPosted($isPosted)
+    {
+        $this->is_posted = $isPosted;
+    }
+
+    /**
+     * Get is_posted
+     *
+     * @return boolean 
+     */
+    public function getIsPosted()
+    {
+        return $this->is_posted;
+    }
+
+    /**
+     * Add Post
+     *
+     * @param Tox\SatelliteBundle\Entity\Image $post
+     */
+    public function addImage(\Tox\SatelliteBundle\Entity\Image $post)
+    {
+        $this->Post[] = $post;
+    }
+
+    /**
+     * Get Post
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getPost()
+    {
+        return $this->Post;
+    }
+
+    /**
      * Set Satellite
      *
      * @param Tox\SatelliteBundle\Entity\Satellite $satellite
@@ -148,5 +208,25 @@ class Post
     public function getSatellite()
     {
         return $this->Satellite;
+    }
+
+    /**
+     * Set Content
+     *
+     * @param Tox\ParserBundle\Entity\Content $content
+     */
+    public function setContent(\Tox\ParserBundle\Entity\Content $content)
+    {
+        $this->Content = $content;
+    }
+
+    /**
+     * Get Content
+     *
+     * @return Tox\ParserBundle\Entity\Content 
+     */
+    public function getContent()
+    {
+        return $this->Content;
     }
 }

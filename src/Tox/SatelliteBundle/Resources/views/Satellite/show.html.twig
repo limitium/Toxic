@@ -2,32 +2,40 @@
 
 {% block satellite %}
 <h1>Satellite</h1>
-
-<table class="record_properties">
-    <tbody>
-        <tr>
-            <th>Id</th>
-            <td>{{ entity.id }}</td>
-        </tr>
-    </tbody>
-</table>
-
 <ul class="record_actions">
     <li>
-        <a href="{{ path('satellite') }}">
-            Back to the list
-        </a>
+        <a href="{{ path('satellite') }}">←</a>
     </li>
     <li>
-        <a href="{{ path('satellite_edit', { 'id': entity.id }) }}">
+        <a href="{{ path('satellite_edit', { 'id': satellite.id }) }}">
             Edit
         </a>
     </li>
-    <li>
-        <form action="{{ path('satellite_delete', { 'id': entity.id }) }}" method="post">
-            {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
-        </form>
-    </li>
 </ul>
+<h4><a class="ext_url" href="http://{{ satellite.getDomen().getName() }}">{{ satellite.getDomen().getName()}}</a></h4>
+<div>
+    Host:
+    <a href="{{ path('ftpaccount_show', { 'id': satellite.getFtpAccount().getId() }) }}">{{ satellite.getFtpAccount().getUsername() }}</a>
+    <a href="{{ path('host_show', { 'id': satellite.getFtpAccount().getHostAccount().getHost().getId() }) }}">{{ satellite.getFtpAccount().getHostAccount().getHost().getUrl() }}</a>
+</div>
+<div>
+    Register:
+    <a href="{{ path('domen_show', { 'id': satellite.getDomen().getId() }) }}">{{ satellite.getDomen().getName() }}</a>
+    <a href="{{ path('register_show', { 'id': satellite.getDomen().getRegisterAccount().getRegister().getId() }) }}">{{ satellite.getDomen().getRegisterAccount().getRegister().getUrl() }}</a>
+</div>
+<div>
+    title: {{ satellite.getTitle() }}
+</div>
+<div>
+    description: {{ satellite.getDescription() }}
+</div>
+<div>
+    keys: {{ satellite.getKeyz() }}
+</div>
+<div>
+    about: {{ satellite.getAbout() }}
+</div>
+<div>
+    key: {{ satellite.getMark() }}
+</div>
         {% endblock %}

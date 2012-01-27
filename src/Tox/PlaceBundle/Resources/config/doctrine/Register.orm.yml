@@ -6,12 +6,10 @@ Tox\PlaceBundle\Entity\Register:
       type: integer
       generator:
         strategy: AUTO
-    name:
-      type: string
-      nullable: true
     url:
       type: string
-      nullable: true
+      unique: true
+      nullable: false
   oneToMany:
     Accounts:
       targetEntity: Tox\PlaceBundle\Entity\RegisterAccount

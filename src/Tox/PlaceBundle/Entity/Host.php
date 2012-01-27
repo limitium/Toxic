@@ -144,6 +144,10 @@ class Host
         $this->Accounts[] = $accounts;
     }
 
+    public function removeHostAccount(\Tox\PlaceBundle\Entity\HostAccount $account)
+    {
+        $this->Accounts->removeElement($account);
+    }
     /**
      * Get Accounts
      *
@@ -152,5 +156,30 @@ class Host
     public function getAccounts()
     {
         return $this->Accounts;
+    }
+    /**
+     * @var string $url
+     */
+    private $url;
+
+
+    /**
+     * Set url
+     *
+     * @param string $url
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+    }
+
+    /**
+     * Get url
+     *
+     * @return string 
+     */
+    public function getUrl()
+    {
+        return $this->url;
     }
 }

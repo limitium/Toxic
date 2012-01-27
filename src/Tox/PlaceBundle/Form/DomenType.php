@@ -12,11 +12,8 @@ class DomenType extends AbstractType
         $builder
             ->add('name')
             ->add('bought_at')
-            ->add('whois')
             ->add('paid_unitl')
-            ->add('Satellite')
             ->add('RegisterAccount')
-            ->add('Bot')
         ;
     }
 

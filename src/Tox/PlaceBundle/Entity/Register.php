@@ -15,11 +15,6 @@ class Register
     private $id;
 
     /**
-     * @var string $name
-     */
-    private $name;
-
-    /**
      * @var string $url
      */
     private $url;
@@ -42,26 +37,6 @@ class Register
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set name
-     *
-     * @param string $name
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string 
-     */
-    public function getName()
-    {
-        return $this->name;
     }
 
     /**
@@ -94,6 +69,10 @@ class Register
         $this->Accounts[] = $accounts;
     }
 
+    public function removeRegisterAccount(\Tox\PlaceBundle\Entity\RegisterAccount $account)
+    {
+        $this->Accounts->removeElement($account);
+    }
     /**
      * Get Accounts
      *
@@ -103,4 +82,5 @@ class Register
     {
         return $this->Accounts;
     }
+
 }

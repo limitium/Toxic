@@ -1,0 +1,33 @@
+<form action="{% spaceless %}
+{% if host.id %}
+{{ path('host_update', { 'id': host.id }) }}
+{% else %}
+{{ path('host_create') }}
+{% endif %}
+{% endspaceless %}" method="post" {{ form_enctype(form) }}>
+    {{ form_errors(form) }}
+    {{ form_row(form.url) }}
+    {{ form_row(form.ns_servers) }}
+
+    <div class="embedded">
+        {{ form_label(form.Accounts) }}
+        {{ form_errors(form.Accounts) }}
+        <div>
+            {% for account in form.Accounts %}
+            <div>
+                {{ form_row(account.username) }}
+                {{ form_row(account.password) }}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    {{ form_rest(form) }}
+    <input type="submit" class="symfony-button-grey" value="{% spaceless %}
+{% if host.id %}
+Update
+{% else %}
+Create
+{% endif %}
+{% endspaceless %}">
+</form>

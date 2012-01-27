@@ -9,13 +9,14 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Account
 {
+
     /**
      * @var integer $id
      */
     private $id;
 
     /**
-     * @var string $username
+     * @var text $username
      */
     private $username;
 
@@ -38,7 +39,7 @@ class Account
     /**
      * Set username
      *
-     * @param string $username
+     * @param text $username
      */
     public function setUsername($username)
     {
@@ -48,7 +49,7 @@ class Account
     /**
      * Get username
      *
-     * @return string 
+     * @return text 
      */
     public function getUsername()
     {
@@ -73,5 +74,9 @@ class Account
     public function getPassword()
     {
         return $this->password;
+    }
+
+    public function __toString() {
+        return $this->getUsername();
     }
 }

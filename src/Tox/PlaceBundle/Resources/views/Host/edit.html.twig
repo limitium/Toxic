@@ -1,26 +1,20 @@
 {% extends 'ToxPlaceBundle:Host:host.html.twig' %}
 
 {% block host %}
-<h1>Host edit</h1>
-
-<form action="{{ path('host_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
-    {{ form_widget(edit_form) }}
-    <p>
-        <button type="submit">Edit</button>
-    </p>
-</form>
-
+<h1>Register edit</h1>
 <ul class="record_actions">
     <li>
-        <a href="{{ path('host') }}">
-            Back to the list
-        </a>
+        <a href="{{ path('host') }}">←</a>
     </li>
     <li>
-        <form action="{{ path('host_delete', { 'id': entity.id }) }}" method="post">
+        <form action="{{ path('host_delete', { 'id': host.id }) }}" method="post">
             {{ form_widget(delete_form) }}
             <button type="submit">Delete</button>
         </form>
     </li>
 </ul>
+
+{% include 'ToxPlaceBundle:Host:form.html.twig' with {'form': form,'host':host } %}
+
+
         {% endblock %}

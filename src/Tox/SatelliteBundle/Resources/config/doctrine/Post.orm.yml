@@ -9,7 +9,7 @@ Tox\SatelliteBundle\Entity\Post:
     title:
       type: string
       nullable: false
-    content:
+    body:
       type: text
       length: 10000
       nullable: false
@@ -20,10 +20,28 @@ Tox\SatelliteBundle\Entity\Post:
     is_page:
       type: boolean
       nullable: true
+    is_posted:
+      type: boolean
+      nullable: true
+  uniqueConstraints:
+    Unique_name:
+      columns:
+        - is_posted
+        - file_name
+  oneToMany:
+    Post:
+      targetEntity: Tox\SatelliteBundle\Entity\Image
+      mappedBy: Images
   manyToOne:
     Satellite:
       targetEntity: Tox\SatelliteBundle\Entity\Satellite
       inversedBy: Posts
       joinColumns:
         satellite_id:
+          referencedColumnName: id
+    Content:
+      targetEntity: Tox\ParserBundle\Entity\Content
+      inversedBy: Posts
+      joinColumns:
+        content_id:
           referencedColumnName: id

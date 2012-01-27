@@ -6,10 +6,7 @@
 <table class="records_list">
     <thead>
         <tr>
-            <th>Id</th>
             <th>Name</th>
-            <th>Bought_at</th>
-            <th>Whois</th>
             <th>Paid_unitl</th>
             <th>Actions</th>
         </tr>
@@ -17,11 +14,14 @@
     <tbody>
     {% for entity in entities %}
         <tr>
-            <td><a href="{{ path('domen_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-            <td>{{ entity.name }}</td>
-            <td>{% if entity.boughtat %}{{ entity.boughtat|date('Y-m-d H:i:s') }}{% endif%}</td>
-            <td>{{ entity.whois }}</td>
-            <td>{% if entity.paidunitl %}{{ entity.paidunitl|date('Y-m-d H:i:s') }}{% endif%}</td>
+            <td>{% spaceless %}
+                {% if entity.Satellite %}
+                *
+                {% else %}
+                -
+                {% endif %}
+                {% endspaceless %}{{ entity.name }}</td>
+            <td>{% if entity.paidunitl %}{{ entity.paidunitl|date('Y:m:d') }}{% endif%}</td>
             <td>
                 <ul>
                     <li>

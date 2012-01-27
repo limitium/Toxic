@@ -10,10 +10,11 @@ class HostType extends AbstractType
     public function buildForm(FormBuilder $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('username')
-            ->add('password')
+            ->add('url')
             ->add('ns_servers')
+            ->add('Accounts', 'collection', array('type' => new HostAccountType(),
+            'allow_add' => true,
+            'allow_delete' => true));
         ;
     }
 

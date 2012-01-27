@@ -1,11 +1,10 @@
 Tox\ParserBundle\Entity\Content:
   type: entity
-  fields:
-    data:
-      type: text
-      length: 10000
-      nullable: false
+  fields: null
   oneToMany:
+    Posts:
+      targetEntity: Tox\SatelliteBundle\Entity\Post
+      mappedBy: Content
     Meta:
       targetEntity: Tox\ParserBundle\Entity\MetaData
       mappedBy: Content

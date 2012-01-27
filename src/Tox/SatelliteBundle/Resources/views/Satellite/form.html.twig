@@ -1,0 +1,26 @@
+<form action="{% spaceless %}
+{% if satellite.id %}
+{{ path('satellite_update', { 'id': satellite.id }) }}
+{% else %}
+{{ path('satellite_create') }}
+{% endif %}
+{% endspaceless %}" method="post" {{ form_enctype(form) }}>
+    {{ form_errors(form) }}
+    {{ form_row(form.Domen) }}
+    {{ form_row(form.Theme) }}
+    {{ form_row(form.FtpAccount) }}
+    {{ form_row(form.title) }}
+    {{ form_row(form.keyz) }}
+    {{ form_row(form.description) }}
+    {{ form_row(form.about) }}
+
+
+    {{ form_rest(form) }}
+    <input type="submit" class="symfony-button-grey" value="{% spaceless %}
+{% if satellite.id %}
+Update
+{% else %}
+Create
+{% endif %}
+{% endspaceless %}">
+</form>

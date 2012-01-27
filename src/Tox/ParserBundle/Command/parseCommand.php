@@ -37,20 +37,18 @@ class ParseCommand extends ContainerAwareCommand {
         $rsm->addEntityResult('ToxParserBundle:Schedule', 'sc');
         $rsm->addEntityResult('ToxParserBundle:RawResult', 'r');
         $rsm->addFieldResult('s', 'id', 'id');
-        $rsm->addFieldResult('s', 'name', 'name');
+        $rsm->addFieldResult('s', 'parsed_at', 'parsed_at');
         $rsm->addFieldResult('s', 'url', 'url');
 
-        //@todo: add check time to source
-        $query = $em->createNativeQuery("SELECT s.id,s.name,s.url FROM Source s
+        $query = $em->createNativeQuery("SELECT s.id,s.url,s.parsed_at FROM Source s
             INNER JOIN Schedule sc ON sc.id = s.schedule_id
-            INNER JOIN RawResult r ON r.source_id = s.id AND TIME_TO_SEC(TIMEDIFF('" . $start->format("Y-m-d H:i:s") . "',r.created_at)) > sc.timeout
+            WHERE IF(parsed_at IS NULL,TRUE,TIME_TO_SEC(TIMEDIFF('" . $start->format("Y-m-d H:i:s") . "',s.parsed_at)) > sc.timeout)
             GROUP BY s.id", $rsm);
-
 
         $parser = new Parser();
         foreach ($query->getResult() as $source) {
 
-            $output->writeln(sprintf('  > parsing %s', $source->getName()));
+            $output->writeln(sprintf('  > parsing %s', $source->getUrl()));
 
             $postTask = $parser->execute(new Task($source->getUrl(), $source->getRule('post')->getPattern()));
 
@@ -74,11 +72,8 @@ class ParseCommand extends ContainerAwareCommand {
 
                 $content = new Content();
                 $content->setSource($source);
-                //@todo: add unqiue index
                 $content->setUrl($postUrl);
                 $content->setCreatedAt(new \DateTime("now"));
-                //@todo: move to meta!
-                $content->setData("");
 
                 $em->persist($content);
                 foreach ($data as $type => $meta) {
@@ -94,6 +89,8 @@ class ParseCommand extends ContainerAwareCommand {
                     }
                 }
             }
+
+            $source->setParsedAt(new \DateTime("now"));
         }
         $em->flush();
 

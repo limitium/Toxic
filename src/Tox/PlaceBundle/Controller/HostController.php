@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Tox\PlaceBundle\Entity\Host;
+use Tox\PlaceBundle\Entity\HostAccount;
 use Tox\PlaceBundle\Form\HostType;
 
 /**
@@ -32,7 +33,7 @@ class HostController extends Controller
     }
 
     /**
-     * Finds and displays a Host entity.
+     * Finds and displays a Host host.
      *
      * @Route("/{id}/show", name="host_show")
      * @Template()
@@ -41,38 +42,41 @@ class HostController extends Controller
     {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entity = $em->getRepository('ToxPlaceBundle:Host')->find($id);
+        $host = $em->getRepository('ToxPlaceBundle:Host')->find($id);
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Host entity.');
+        if (!$host) {
+            throw $this->createNotFoundException('Unable to find Host host.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
+            'host'      => $host,
             'delete_form' => $deleteForm->createView(),        );
     }
 
     /**
-     * Displays a form to create a new Host entity.
+     * Displays a form to create a new Host host.
      *
      * @Route("/new", name="host_new")
      * @Template()
      */
     public function newAction()
     {
-        $entity = new Host();
-        $form   = $this->createForm(new HostType(), $entity);
+        $host = new Host();
+        $account = new HostAccount();
+        $account->setHost($host);
+        $host->addHostAccount($account);
+        $form   = $this->createForm(new HostType(), $host);
 
         return array(
-            'entity' => $entity,
+            'host' => $host,
             'form'   => $form->createView()
         );
     }
 
     /**
-     * Creates a new Host entity.
+     * Creates a new Host host.
      *
      * @Route("/create", name="host_create")
      * @Method("post")
@@ -80,28 +84,35 @@ class HostController extends Controller
      */
     public function createAction()
     {
-        $entity  = new Host();
+        $host = new Host();
         $request = $this->getRequest();
-        $form    = $this->createForm(new HostType(), $entity);
+        $form = $this->createForm(new HostType(), $host);
         $form->bindRequest($request);
-
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getEntityManager();
-            $em->persist($entity);
+            $em->persist($host);
+            foreach ($host->getAccounts() as $k => $account) {
+                if (!$account->getUsername()) {
+                    $host->removeHostAccount($account);
+                } else {
+                    $account->setHost($host);
+                    $em->persist($account);
+                }
+            }
             $em->flush();
 
-            return $this->redirect($this->generateUrl('host_show', array('id' => $entity->getId())));
-            
+            return $this->redirect($this->generateUrl('host_show', array('id' => $host->getId())));
+
         }
 
         return array(
-            'entity' => $entity,
-            'form'   => $form->createView()
+            'host' => $host,
+            'form' => $form->createView()
         );
     }
 
     /**
-     * Displays a form to edit an existing Host entity.
+     * Displays a form to edit an existing Host host.
      *
      * @Route("/{id}/edit", name="host_edit")
      * @Template()
@@ -110,24 +121,24 @@ class HostController extends Controller
     {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entity = $em->getRepository('ToxPlaceBundle:Host')->find($id);
+        $host = $em->getRepository('ToxPlaceBundle:Host')->find($id);
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Host entity.');
+        if (!$host) {
+            throw $this->createNotFoundException('Unable to find Host host.');
         }
 
-        $editForm = $this->createForm(new HostType(), $entity);
+        $editForm = $this->createForm(new HostType(), $host);
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'host'      => $host,
+            'form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
 
     /**
-     * Edits an existing Host entity.
+     * Edits an existing Host host.
      *
      * @Route("/{id}/update", name="host_update")
      * @Method("post")
@@ -137,13 +148,13 @@ class HostController extends Controller
     {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entity = $em->getRepository('ToxPlaceBundle:Host')->find($id);
+        $host = $em->getRepository('ToxPlaceBundle:Host')->find($id);
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Host entity.');
+        if (!$host) {
+            throw $this->createNotFoundException('Unable to find Host host.');
         }
 
-        $editForm   = $this->createForm(new HostType(), $entity);
+        $editForm   = $this->createForm(new HostType(), $host);
         $deleteForm = $this->createDeleteForm($id);
 
         $request = $this->getRequest();
@@ -151,21 +162,21 @@ class HostController extends Controller
         $editForm->bindRequest($request);
 
         if ($editForm->isValid()) {
-            $em->persist($entity);
+            $em->persist($host);
             $em->flush();
 
             return $this->redirect($this->generateUrl('host_edit', array('id' => $id)));
         }
 
         return array(
-            'entity'      => $entity,
+            'host'      => $host,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
 
     /**
-     * Deletes a Host entity.
+     * Deletes a Host host.
      *
      * @Route("/{id}/delete", name="host_delete")
      * @Method("post")
@@ -179,13 +190,13 @@ class HostController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getEntityManager();
-            $entity = $em->getRepository('ToxPlaceBundle:Host')->find($id);
+            $host = $em->getRepository('ToxPlaceBundle:Host')->find($id);
 
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Host entity.');
+            if (!$host) {
+                throw $this->createNotFoundException('Unable to find Host host.');
             }
 
-            $em->remove($entity);
+            $em->remove($host);
             $em->flush();
         }
 

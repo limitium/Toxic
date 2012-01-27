@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Tox\PlaceBundle\Entity\Register;
+use Tox\PlaceBundle\Entity\RegisterAccount;
 use Tox\PlaceBundle\Form\RegisterType;
 
 /**
@@ -14,16 +15,14 @@ use Tox\PlaceBundle\Form\RegisterType;
  *
  * @Route("/register")
  */
-class RegisterController extends Controller
-{
+class RegisterController extends Controller {
     /**
      * Lists all Register entities.
      *
      * @Route("/", name="register")
      * @Template()
      */
-    public function indexAction()
-    {
+    public function indexAction() {
         $em = $this->getDoctrine()->getEntityManager();
 
         $entities = $em->getRepository('ToxPlaceBundle:Register')->findAll();
@@ -37,8 +36,7 @@ class RegisterController extends Controller
      * @Route("/{id}/show", name="register_show")
      * @Template()
      */
-    public function showAction($id)
-    {
+    public function showAction($id) {
         $em = $this->getDoctrine()->getEntityManager();
 
         $entity = $em->getRepository('ToxPlaceBundle:Register')->find($id);
@@ -50,8 +48,8 @@ class RegisterController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),        );
+            'entity' => $entity,
+            'delete_form' => $deleteForm->createView(),);
     }
 
     /**
@@ -60,14 +58,17 @@ class RegisterController extends Controller
      * @Route("/new", name="register_new")
      * @Template()
      */
-    public function newAction()
-    {
-        $entity = new Register();
-        $form   = $this->createForm(new RegisterType(), $entity);
+    public function newAction() {
+        $register = new Register();
+        $account = new RegisterAccount();
+        $account->setRegister($register);
+        $register->addRegisterAccount($account);
+
+        $form = $this->createForm(new RegisterType(), $register);
 
         return array(
-            'entity' => $entity,
-            'form'   => $form->createView()
+            'register' => $register,
+            'form' => $form->createView()
         );
     }
 
@@ -78,25 +79,31 @@ class RegisterController extends Controller
      * @Method("post")
      * @Template("ToxPlaceBundle:Register:new.html.twig")
      */
-    public function createAction()
-    {
-        $entity  = new Register();
+    public function createAction() {
+        $register = new Register();
         $request = $this->getRequest();
-        $form    = $this->createForm(new RegisterType(), $entity);
+        $form = $this->createForm(new RegisterType(), $register);
         $form->bindRequest($request);
-
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getEntityManager();
-            $em->persist($entity);
+            $em->persist($register);
+            foreach ($register->getAccounts() as $k => $account) {
+                if (!$account->getUsername()) {
+                    $register->removeRegisterAccount($account);
+                } else {
+                    $account->setRegister($register);
+                    $em->persist($account);
+                }
+            }
             $em->flush();
 
-            return $this->redirect($this->generateUrl('register_show', array('id' => $entity->getId())));
-            
+            return $this->redirect($this->generateUrl('register_show', array('id' => $register->getId())));
+
         }
 
         return array(
-            'entity' => $entity,
-            'form'   => $form->createView()
+            'register' => $register,
+            'form' => $form->createView()
         );
     }
 
@@ -106,22 +113,21 @@ class RegisterController extends Controller
      * @Route("/{id}/edit", name="register_edit")
      * @Template()
      */
-    public function editAction($id)
-    {
+    public function editAction($id) {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entity = $em->getRepository('ToxPlaceBundle:Register')->find($id);
+        $register = $em->getRepository('ToxPlaceBundle:Register')->find($id);
 
-        if (!$entity) {
+        if (!$register) {
             throw $this->createNotFoundException('Unable to find Register entity.');
         }
 
-        $editForm = $this->createForm(new RegisterType(), $entity);
+        $editForm = $this->createForm(new RegisterType(), $register);
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'register' => $register,
+            'form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -133,17 +139,16 @@ class RegisterController extends Controller
      * @Method("post")
      * @Template("ToxPlaceBundle:Register:edit.html.twig")
      */
-    public function updateAction($id)
-    {
+    public function updateAction($id) {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entity = $em->getRepository('ToxPlaceBundle:Register')->find($id);
+        $register = $em->getRepository('ToxPlaceBundle:Register')->find($id);
 
-        if (!$entity) {
+        if (!$register) {
             throw $this->createNotFoundException('Unable to find Register entity.');
         }
 
-        $editForm   = $this->createForm(new RegisterType(), $entity);
+        $editForm = $this->createForm(new RegisterType(), $register);
         $deleteForm = $this->createDeleteForm($id);
 
         $request = $this->getRequest();
@@ -151,15 +156,20 @@ class RegisterController extends Controller
         $editForm->bindRequest($request);
 
         if ($editForm->isValid()) {
-            $em->persist($entity);
+            $em = $this->getDoctrine()->getEntityManager();
+            $em->persist($register);
+            foreach ($register->getAccounts() as $k => $account) {
+                $account->setRegister($register);
+                $em->persist($account);
+            }
             $em->flush();
 
-            return $this->redirect($this->generateUrl('register_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('register_show', array('id' => $id)));
         }
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'register' => $register,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -170,8 +180,7 @@ class RegisterController extends Controller
      * @Route("/{id}/delete", name="register_delete")
      * @Method("post")
      */
-    public function deleteAction($id)
-    {
+    public function deleteAction($id) {
         $form = $this->createDeleteForm($id);
         $request = $this->getRequest();
 
@@ -192,11 +201,9 @@ class RegisterController extends Controller
         return $this->redirect($this->generateUrl('register'));
     }
 
-    private function createDeleteForm($id)
-    {
+    private function createDeleteForm($id) {
         return $this->createFormBuilder(array('id' => $id))
             ->add('id', 'hidden')
-            ->getForm()
-        ;
+            ->getForm();
     }
 }

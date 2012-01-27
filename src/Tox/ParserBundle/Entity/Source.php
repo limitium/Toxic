@@ -266,4 +266,29 @@ class Source {
     public function __toString() {
         return $this->name;
     }
+    /**
+     * @var datetime $parsed_at
+     */
+    private $parsed_at;
+
+
+    /**
+     * Set parsed_at
+     *
+     * @param datetime $parsedAt
+     */
+    public function setParsedAt($parsedAt)
+    {
+        $this->parsed_at = $parsedAt;
+    }
+
+    /**
+     * Get parsed_at
+     *
+     * @return datetime 
+     */
+    public function getParsedAt()
+    {
+        return $this->parsed_at;
+    }
 }

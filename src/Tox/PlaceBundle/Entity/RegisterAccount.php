@@ -64,4 +64,8 @@ class RegisterAccount extends HttpAccount
     {
         return $this->Register;
     }
+
+    public function __toString() {
+        return $this->getRegister()->getUrl()." ".$this->getUsername();
+    }
 }

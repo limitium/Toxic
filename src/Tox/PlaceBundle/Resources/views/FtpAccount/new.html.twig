@@ -1,0 +1,20 @@
+{% extends 'ToxPlaceBundle:FtpAccount:ftpaccount.html.twig' %}
+
+{% block ftpaccount %}
+<h1>FtpAccount creation</h1>
+
+<form action="{{ path('ftpaccount_create') }}" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form) }}
+    <p>
+        <button type="submit">Create</button>
+    </p>
+</form>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('ftpaccount') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+        {% endblock %}

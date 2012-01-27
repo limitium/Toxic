@@ -6,6 +6,23 @@ Tox\SatelliteBundle\Entity\Satellite:
       type: integer
       generator:
         strategy: AUTO
+    title:
+      type: string
+      nullable: true
+    keyz:
+      type: string
+      nullable: true
+    description:
+      type: string
+      length: 500
+      nullable: true
+    about:
+      type: string
+      length: 1000
+      nullable: true
+    mark:
+      type: string
+      nullable: true
   oneToOne:
     Domen:
       targetEntity: Tox\PlaceBundle\Entity\Domen
@@ -13,6 +30,7 @@ Tox\SatelliteBundle\Entity\Satellite:
       joinColumns:
         domen_id:
           referencedColumnName: id
+          onDelete: CASCADE
   oneToMany:
     Posts:
       targetEntity: Tox\SatelliteBundle\Entity\Post

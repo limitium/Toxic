@@ -12,6 +12,7 @@ Tox\ParserBundle\Entity\RawResult:
       nullable: false
     url:
       type: string
+      unique: true
       length: 255
       nullable: false
   manyToOne:
@@ -24,8 +25,8 @@ Tox\ParserBundle\Entity\RawResult:
   discriminatorColumn:
     name: descriminator
     length: 255
-    type: string
+    type: text
   discriminatorMap:
+    Bot: Tox\ParserBundle\Entity\Bot
     Content: Tox\ParserBundle\Entity\Content
     Proxy: Tox\ParserBundle\Entity\Proxy
-    Bot: Tox\ParserBundle\Entity\Bot

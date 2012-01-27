@@ -13,7 +13,7 @@
     <tbody>
     {% for entity in entities %}
         <tr>
-            <td><a href="{{ path('satellite_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+            <td><a href="{{ path('satellite_show', { 'id': entity.id }) }}">{{ entity.getDomen() }}</a></td>
             <td>
                 <ul>
                     <li>

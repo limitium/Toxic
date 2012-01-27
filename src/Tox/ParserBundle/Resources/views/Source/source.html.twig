@@ -1,10 +1,11 @@
-{% extends '::base.html.twig' %}
+{% extends 'ToxParserBundle::parser.html.twig' %}
 {% block stylesheets %}
 {{parent()}}
 <link rel="stylesheet" href="{{ asset('bundles/toxparser/css/source.css') }}" type="text/css" media="all"/>
 {% endblock%}
 
 {% block content %}
+{{parent()}}
 <div class="source">
     {% block source %}
     {% endblock %}

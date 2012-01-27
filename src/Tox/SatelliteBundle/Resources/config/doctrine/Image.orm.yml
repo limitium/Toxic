@@ -1,0 +1,18 @@
+Tox\SatelliteBundle\Entity\Image:
+  type: entity
+  fields:
+    id:
+      id: true
+      type: integer
+      generator:
+        strategy: AUTO
+    name:
+      type: string
+      nullable: false
+  manyToOne:
+    Images:
+      targetEntity: Tox\SatelliteBundle\Entity\Post
+      inversedBy: Post
+      joinColumns:
+        post_id:
+          referencedColumnName: id

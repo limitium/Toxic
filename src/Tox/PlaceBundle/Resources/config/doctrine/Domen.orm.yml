@@ -8,6 +8,7 @@ Tox\PlaceBundle\Entity\Domen:
         strategy: AUTO
     name:
       type: string
+      unique: true
       nullable: false
     bought_at:
       type: date

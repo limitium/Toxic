@@ -1,0 +1,18 @@
+<form action="{% spaceless %}
+{% if domen.id %}
+{{ path('domen_update', { 'id': domen.id }) }}
+{% else %}
+{{ path('domen_create') }}
+{% endif %}
+{% endspaceless %}" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form) }}
+
+    {{ form_rest(form) }}
+    <input type="submit" class="symfony-button-grey" value="{% spaceless %}
+{% if domen.id %}
+Update
+{% else %}
+Create
+{% endif %}
+{% endspaceless %}">
+</form>

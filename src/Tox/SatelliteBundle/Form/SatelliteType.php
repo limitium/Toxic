@@ -13,6 +13,10 @@ class SatelliteType extends AbstractType
             ->add('Domen')
             ->add('Theme')
             ->add('FtpAccount')
+            ->add('title')
+            ->add('keyz')
+            ->add('description')
+            ->add('about')
         ;
     }
 

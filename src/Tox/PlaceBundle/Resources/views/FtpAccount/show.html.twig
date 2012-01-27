@@ -1,0 +1,31 @@
+{% extends 'ToxPlaceBundle:FtpAccount:ftpaccount.html.twig' %}
+
+{% block ftpaccount %}
+<h1>Ftp account</h1>
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('ftpaccount') }}">←</a>
+    </li>
+    <li>
+        <a href="{{ path('ftpaccount_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+</ul>
+<h4>{{ entity.getUsername() }}</h4>
+<div>
+    username:{{ entity.username }}
+</div>
+<div>
+    password:{{ entity.password}}
+</div>
+<div>
+    url:{{ entity.url}}
+</div>
+<div>
+    Host:<a href="{{ path('host_show', { 'id': entity.getHostAccount().getHost().getId() }) }}">{{ entity.getHostAccount().getHost().getUrl() }}</a>
+</div>
+<div>
+    vaersion: <a href="https://github.com/limitium/satellite">{{ entity.getShellVersion() }}</a>
+</div>
+        {% endblock %}

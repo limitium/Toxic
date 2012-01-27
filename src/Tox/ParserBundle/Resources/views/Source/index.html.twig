@@ -18,7 +18,7 @@
     <tbody>
     {% for entity in entities %}
     <tr>
-        <td><a href="{{ path('source_show', { 'id': entity.id }) }}">{{ entity.name }} ({{ entity.url }})</a></td>
+        <td><a href="{{ path('source_show', { 'id': entity.id }) }}">{{ entity.url }}</a></td>
     </tr>
     {% endfor %}
     </tbody>

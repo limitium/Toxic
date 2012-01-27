@@ -65,4 +65,44 @@ class Content extends RawResult
     {
         return $this->Meta;
     }
+    /**
+     * @var Tox\SatelliteBundle\Entity\Post
+     */
+    private $Post;
+
+
+    /**
+     * Add Post
+     *
+     * @param Tox\SatelliteBundle\Entity\Post $post
+     */
+    public function addPost(\Tox\SatelliteBundle\Entity\Post $post)
+    {
+        $this->Post[] = $post;
+    }
+
+    /**
+     * Get Post
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getPost()
+    {
+        return $this->Post;
+    }
+    /**
+     * @var Tox\SatelliteBundle\Entity\Post
+     */
+    private $Posts;
+
+
+    /**
+     * Get Posts
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getPosts()
+    {
+        return $this->Posts;
+    }
 }

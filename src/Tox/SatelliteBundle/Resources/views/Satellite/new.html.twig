@@ -1,20 +1,13 @@
 {% extends 'ToxSatelliteBundle:Satellite:satellite.html.twig' %}
 
 {% block satellite %}
-<h1>Satellite creation</h1>
-
-<form action="{{ path('satellite_create') }}" method="post" {{ form_enctype(form) }}>
-    {{ form_widget(form) }}
-    <p>
-        <button type="submit">Create</button>
-    </p>
-</form>
-
+<h1>satellite creation</h1>
 <ul class="record_actions">
     <li>
-        <a href="{{ path('satellite') }}">
-            Back to the list
-        </a>
+        <a href="{{ path('satellite') }}">←</a>
     </li>
 </ul>
+{% include 'ToxSatelliteBundle:Satellite:form.html.twig' with {'form': form } %}
+
+
         {% endblock %}

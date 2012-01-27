@@ -305,4 +305,8 @@ class Domen
     {
         return $this->Bot;
     }
+
+    public function __toString() {
+        return $this->getName();
+    }
 }

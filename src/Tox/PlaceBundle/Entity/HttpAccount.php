@@ -5,16 +5,22 @@ namespace Tox\PlaceBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Tox\PlaceBundle\Entity\HttpAccount
+ * Tox\PlaceBundle\Entity\Host
  */
 class HttpAccount extends Account
 {
+
+
 
     /**
      * @var string $login_field
      */
     private $login_field;
 
+    /**
+     * @var string $password_field
+     */
+    private $password_field;
 
     /**
      * @var string $url
@@ -42,31 +48,6 @@ class HttpAccount extends Account
         return $this->login_field;
     }
 
-      /**
-     * Set url
-     *
-     * @param string $url
-     */
-    public function setUrl($url)
-    {
-        $this->url = $url;
-    }
-
-    /**
-     * Get url
-     *
-     * @return string 
-     */
-    public function getUrl()
-    {
-        return $this->url;
-    }
-    /**
-     * @var string $password_field
-     */
-    private $password_field;
-
-
     /**
      * Set password_field
      *
@@ -85,5 +66,25 @@ class HttpAccount extends Account
     public function getPasswordField()
     {
         return $this->password_field;
+    }
+
+    /**
+     * Set url
+     *
+     * @param string $url
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+    }
+
+    /**
+     * Get url
+     *
+     * @return string 
+     */
+    public function getUrl()
+    {
+        return $this->url;
     }
 }

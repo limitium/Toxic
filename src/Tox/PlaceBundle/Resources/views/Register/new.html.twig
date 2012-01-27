@@ -2,19 +2,12 @@
 
 {% block register %}
 <h1>Register creation</h1>
-
-<form action="{{ path('register_create') }}" method="post" {{ form_enctype(form) }}>
-    {{ form_widget(form) }}
-    <p>
-        <button type="submit">Create</button>
-    </p>
-</form>
-
 <ul class="record_actions">
     <li>
-        <a href="{{ path('register') }}">
-            Back to the list
-        </a>
+        <a href="{{ path('register') }}">←</a>
     </li>
 </ul>
+{% include 'ToxPlaceBundle:Register:form.html.twig' with {'form': form } %}
+
+
         {% endblock %}

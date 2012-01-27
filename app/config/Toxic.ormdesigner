@@ -1,36 +1,56 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
-<orm-designer version="1.4.6.488">
+<orm-designer version="1.4.7.491">
 
-  <project code-name="Toxic" framework="Without Framework" name="toxic" orm="Doctrine2" visSizeX="76" visSizeX2="1277" visSizeY="148" visSizeY2="1016">
+  <project code-name="Toxic" framework="Without Framework" name="toxic" orm="Doctrine2" visSizeX="76" visSizeX2="1346" visSizeY="148" visSizeY2="1018">
     <module-position name="Sattelite" visPositionX="0" visPositionY="-66"/>
-    <module-position name="Parser" visPositionX="539" visPositionY="361"/>
+    <module-position name="Parser" visPositionX="608" visPositionY="363"/>
     <module-position name="Place" visPositionX="-26" visPositionY="371"/>
   </project>
 
-  <module import-format="Doctrine2Yml" import-path="..\..\src\Tox\SatelliteBundle\Resources\config\doctrine\" name="Sattelite" visBkColor="15987704" visSizeX="25" visSizeX2="700" visSizeY="29" visSizeY2="427">
-    <table name="Satellite" visPositionX="205" visPositionY="279" visSizeX="0" visSizeX2="127" visSizeY="0" visSizeY2="73">
+  <module import-format="Doctrine2Yml" import-path="..\..\src\Tox\SatelliteBundle\Resources\config\doctrine\" name="Sattelite" visBkColor="15987704" visSizeX="25" visSizeX2="710" visSizeY="39" visSizeY2="415">
+    <table name="Satellite" visPositionX="254" visPositionY="228" visSizeX="0" visSizeX2="127" visSizeY="0" visSizeY2="143">
       <column auto-increment="true" name="id" primary="true" type="integer"/>
       <column name="domen_id" required="true" type="integer" unique="true"/>
       <column name="theme_id" required="true" type="integer"/>
       <column name="ftp_account_id" type="integer"/>
+      <column name="title" type="string"/>
+      <column name="keyz" type="string"/>
+      <column name="description" size="500" type="string"/>
+      <column name="about" size="1000" type="string"/>
+      <column name="mark" type="string"/>
     </table>
-    <table name="Post" visPositionX="23" visPositionY="29" visSizeX="0" visSizeX2="109" visSizeY="0" visSizeY2="101">
+    <table name="Post" visPositionX="515" visPositionY="63" visSizeX="0" visSizeX2="109" visSizeY="0" visSizeY2="129">
       <column auto-increment="true" name="id" primary="true" type="integer"/>
       <column name="title" required="true" type="string"/>
-      <column name="content" required="true" size="10000" type="text"/>
+      <column name="body" required="true" size="10000" type="text"/>
       <column name="file_name" required="true" type="string" unique="true"/>
       <column name="satellite_id" required="true" type="integer"/>
       <column name="is_page" type="boolean"/>
+      <column name="is_posted" type="boolean"/>
+      <column name="content_id"/>
+      <index name="Unique_name" unique="true">
+        <index-column name="is_posted"/>
+        <index-column name="file_name"/>
+      </index>
     </table>
     <table name="DomenHistory" visPositionX="-7" visPositionY="232" visSizeX="0" visSizeX2="109" visSizeY="0" visSizeY2="73">
       <column auto-increment="true" name="id" primary="true" type="integer"/>
       <column name="changet_at" required="true" type="date"/>
       <column name="satellite_id" required="true" type="integer"/>
       <column name="domen_id" required="true" type="integer"/>
+      <index name="unique_pair" unique="false">
+        <index-column name="satellite_id"/>
+        <index-column name="domen_id"/>
+      </index>
     </table>
     <table name="Theme" visPositionX="607" visPositionY="-19" visSizeX="0" visSizeX2="83" visSizeY="0" visSizeY2="45">
       <column auto-increment="true" name="id" primary="true" type="integer"/>
       <column name="name" required="true" type="string"/>
+    </table>
+    <table name="Image" visPositionX="209" visPositionY="44" visSizeX="0" visSizeX2="95" visSizeY="0" visSizeY2="59">
+      <column auto-increment="true" name="id" primary="true" type="integer"/>
+      <column name="name" required="true" type="string"/>
+      <column name="post_id" required="true" type="integer"/>
     </table>
     <foreign-key caption="Domen Satellite" from="Satellite" inverse-alias="Domen" name="FK_Satellite_Domen_id" owning-alias="Satellite" to="Domen">
       <foreign-key-column from="domen_id" to="id"/>
@@ -45,11 +65,15 @@
     <foreign-key caption="Satellite Post" from="Post" inverse-alias="Satellite" name="FK_Post_Satellite_id" owning-alias="Posts" to="Satellite" visCaption1X="-1" visCaption1Y="1" visCenterX="0" visCenterY="0">
       <foreign-key-column from="satellite_id" to="id"/>
     </foreign-key>
+    <foreign-key caption="Content Post" from="Post" inverse-alias="Content" name="FK_Post_Content_id" owning-alias="Posts" to="Content"/>
     <foreign-key caption="Satellite DomenHistory" from="DomenHistory" inverse-alias="Satellite" name="FK_DomenHistory_Satellite_id" owning-alias="History" to="Satellite">
       <foreign-key-column from="satellite_id" to="id"/>
     </foreign-key>
     <foreign-key caption="Domen DomenHistory" from="DomenHistory" inverse-alias="Domen" name="FK_DomenHistory_Domen_id" owning-alias="History" to="Domen" visCaption1X="0" visCaption1Y="0" visCenterX="0" visCenterY="4">
       <foreign-key-column from="domen_id" to="id"/>
+    </foreign-key>
+    <foreign-key caption="Post Image" from="Image" inverse-alias="Images" name="FK_Image_Post_id" owning-alias="Post" to="Post">
+      <foreign-key-column from="post_id" to="id"/>
     </foreign-key>
   </module>
 
@@ -63,16 +87,15 @@
       <inheritance-child derived-from="RawResult" discriminator-value="Bot"/>
     </table>
     <table name="Content" visPositionX="373" visPositionY="352" visSizeX="0" visSizeX2="115" visSizeY="0" visSizeY2="45">
-      <column name="data" required="true" size="10000" type="text"/>
       <inheritance-child derived-from="RawResult" discriminator-value="Content"/>
     </table>
     <table name="Source" visPositionX="193" visPositionY="109" visSizeX="0" visSizeX2="129" visSizeY="0" visSizeY2="101">
       <column auto-increment="true" name="id" primary="true" type="integer"/>
-      <column name="name" type="string"/>
-      <column name="url" required="true" type="string"/>
+      <column name="url" required="true" type="string" unique="true"/>
       <column name="theme_id" type="integer"/>
       <column name="schedule_id" required="true" type="integer"/>
       <column name="source_type_id" required="true" type="integer"/>
+      <column name="parsed_at" type="datetime"/>
     </table>
     <table name="PatternType" visPositionX="551" visPositionY="192" visSizeX="0" visSizeX2="129" visSizeY="0" visSizeY2="59">
       <column auto-increment="true" name="id" primary="true" type="integer"/>
@@ -108,7 +131,7 @@
     <table name="RawResult" visPositionX="53" visPositionY="306" visSizeX="0" visSizeX2="130" visSizeY="0" visSizeY2="87">
       <column auto-increment="true" name="id" primary="true" type="integer"/>
       <column name="created_at" required="true" type="datetime"/>
-      <column name="url" required="true" size="255" type="string"/>
+      <column name="url" required="true" size="255" type="string" unique="true"/>
       <column name="source_id" required="true" type="integer"/>
       <column name="descriminator" size="255" type="text"/>
       <inheritance-parent discriminator-column="descriminator" type="JOINED"/>
@@ -133,7 +156,7 @@
     <foreign-key caption="Source RawResult" from="RawResult" inverse-alias="Source" name="FK_RawResult_Source_id" owning-alias="Results" to="Source">
       <foreign-key-column from="source_id" to="id"/>
     </foreign-key>
-    <foreign-key caption="Theme Source" from="Source" inverse-alias="Theme" name="FK_Source_Theme_id" owning-alias="Sources" to="Theme">
+    <foreign-key caption="Theme Source" from="Source" inverse-alias="Theme" name="FK_Source_Theme_id" owning-alias="Sources" to="Theme" visCaption1X="0" visCaption1Y="0" visCenterX="0" visCenterY="179">
       <foreign-key-column from="theme_id" to="id"/>
     </foreign-key>
     <foreign-key caption="Schedule Source" from="Source" inverse-alias="Schedule" name="FK_Source_Schedule_id" owning-alias="Source" to="Schedule" visCaption1X="0" visCaption1Y="0" visCenterX="0" visCenterY="0">
@@ -169,10 +192,10 @@
     <foreign-key caption="Proxy UsedProxy" from="UsedProxy" inverse-alias="Proxy" name="FK_UsedProxy_Proxy_id" owning-alias="Used" to="Proxy"/>
   </module>
 
-  <module import-format="Doctrine2Yml" import-path="..\..\src\Tox\PlaceBundle\Resources\config\doctrine\" name="Place" visBkColor="16317694" visSizeX="0" visSizeX2="518" visSizeY="0" visSizeY2="512">
+  <module import-format="Doctrine2Yml" import-path="..\..\src\Tox\PlaceBundle\Resources\config\doctrine\" name="Place" visBkColor="16317694" visSizeX="0" visSizeX2="570" visSizeY="0" visSizeY2="512">
     <table name="Domen" visPositionX="37" visPositionY="29" visSizeX="0" visSizeX2="146" visSizeY="0" visSizeY2="101">
       <column auto-increment="true" name="id" primary="true" type="integer"/>
-      <column name="name" required="true" type="string"/>
+      <column name="name" required="true" type="string" unique="true"/>
       <column name="bought_at" type="date"/>
       <column name="whois" type="string"/>
       <column name="paid_unitl" type="date"/>
@@ -181,34 +204,33 @@
     </table>
     <table name="Host" visPositionX="215" visPositionY="107" visSizeX="0" visSizeX2="101" visSizeY="0" visSizeY2="87">
       <column auto-increment="true" name="id" primary="true" type="integer"/>
-      <column name="name" type="string"/>
-      <column name="username" type="string"/>
-      <column name="password" type="string"/>
+      <column name="url" required="true" type="string"/>
       <column name="ns_servers" type="text"/>
     </table>
-    <table name="FtpAccount" visPositionX="374" visPositionY="103" visSizeX="0" visSizeX2="133" visSizeY="0" visSizeY2="45">
+    <table name="FtpAccount" visPositionX="394" visPositionY="101" visSizeX="0" visSizeX2="133" visSizeY="0" visSizeY2="31">
       <column name="host_account_id" required="true" type="integer"/>
+      <column name="url" required="true" type="string"/>
+      <column name="shell_version" type="string"/>
       <inheritance-child derived-from="Account" discriminator-value="FtpAccount" visCenterX="3" visCenterY="0"/>
     </table>
-    <table name="Register" visPositionX="109" visPositionY="430" visSizeX="0" visSizeX2="83" visSizeY="0" visSizeY2="59">
+    <table name="Register" visPositionX="108" visPositionY="431" visSizeX="0" visSizeX2="72" visSizeY="0" visSizeY2="45">
       <column auto-increment="true" name="id" primary="true" type="integer"/>
-      <column name="name" type="string"/>
-      <column name="url" type="string"/>
+      <column name="url" required="true" type="string" unique="true"/>
     </table>
-    <table name="Account" visPositionX="377" visPositionY="413" visSizeX="0" visSizeX2="137" visSizeY="0" visSizeY2="73">
+    <table name="Account" visPositionX="420" visPositionY="419" visSizeX="0" visSizeX2="130" visSizeY="0" visSizeY2="73">
       <column auto-increment="true" name="id" primary="true" type="integer"/>
-      <column name="username" required="true" size="255" type="text"/>
+      <column name="username" required="true" size="255" type="string"/>
       <column name="password" required="true" size="255" type="string"/>
       <column name="descriminator" size="255" type="text"/>
-      <inheritance-parent discriminator-column="username" type="JOINED"/>
+      <inheritance-parent discriminator-column="descriminator" type="JOINED"/>
     </table>
     <table name="RegisterAccount" visPositionX="159" visPositionY="297" visSizeX="0" visSizeX2="108" visSizeY="0" visSizeY2="31">
       <column name="register_id" required="true" type="integer"/>
       <inheritance-child derived-from="HttpAccount" discriminator-value="RegisterAccount"/>
     </table>
-    <table name="HostAccount" visPositionX="301" visPositionY="297" visSizeX="0" visSizeX2="95" visSizeY="0" visSizeY2="31">
+    <table name="HostAccount" visPositionX="326" visPositionY="300" visSizeX="0" visSizeX2="95" visSizeY="0" visSizeY2="31">
       <column name="host_id" required="true" type="integer"/>
-      <inheritance-child derived-from="HttpAccount" discriminator-value="HostAccount"/>
+      <inheritance-child derived-from="HttpAccount" discriminator-value="HostAccount" visCenterX="0" visCenterY="-2"/>
     </table>
     <table name="Indexed" visPositionX="17" visPositionY="180" visSizeX="0" visSizeX2="137" visSizeY="0" visSizeY2="87">
       <column auto-increment="true" name="id" primary="true" type="integer"/>
@@ -221,11 +243,11 @@
       <column auto-increment="true" name="id" primary="true" type="integer"/>
       <column name="name" required="true" type="string"/>
     </table>
-    <table name="HttpAccount" visPositionX="203" visPositionY="416" visSizeX="0" visSizeX2="141" visSizeY="0" visSizeY2="73">
+    <table name="HttpAccount" visPositionX="205" visPositionY="411" visSizeX="0" visSizeX2="143" visSizeY="0" visSizeY2="87">
       <column name="login_field" size="255" type="string"/>
       <column name="password_field" size="255" type="string"/>
       <column name="url" size="255" type="string"/>
-      <column name="descriminator" size="255" type="string"/>
+      <column name="descriminator" size="255" type="text"/>
       <inheritance-parent discriminator-column="descriminator" type="JOINED"/>
       <inheritance-child derived-from="Account" discriminator-value="HttpAccount"/>
     </table>
