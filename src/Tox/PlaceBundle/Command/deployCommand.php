@@ -20,23 +20,46 @@ class DeployCommand extends ContainerAwareCommand {
     protected function configure() {
         $this
             ->setName('place:deploy')
-            ->setDescription('deploy satellite task');
+            ->setDescription('deploy satellite task')
+            ->addArgument('shell', InputArgument::OPTIONAL, 'with shell?');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output) {
         $start = new \DateTime("now");
+        //        $withShell = $input->getArgument('shell');
 
         $em = $this->getContainer()->get('doctrine')->getEntityManager();
 
         $ftp = $em->getRepository('ToxPlaceBundle:FtpAccount')->find(4);
         $dep = new Deployer($ftp);
         $dep->connect();
-//        $version = $dep->updateShell();
-//        $ftp->setShellVersion($version);
+        //        $version = $dep->updateShell();
+        //        $ftp->setShellVersion($version);
 
         foreach ($em->getRepository('ToxSatelliteBundle:Satellite')->findAll() as $satellite) {
-//            $dep->deploy($satellite);
-            $dep->update($satellite);
+
+            //            $dep->deploy($satellite);
+                        $dep->update($satellite);
+
+//            foreach ($satellite->getPosts() as $post) {
+//                $b = '';
+//                $c = $post->getContent();
+//                if ($c) {
+//                    foreach ($post->getContent()->getMeta() as $m) {
+//                        if ($m->getPatternType()->getName() == 'content') {
+//                            $b = $m->getData();
+//                        }
+//                    }
+//                    $b = str_replace('||', '', strip_tags($b));
+//                } else {
+//                    $b = $post->getBody();
+//                }
+//                foreach ($post->getImages() as $i) {
+//                    $b = "<img src='/img/" . $i->getName() . "' />" . $b;
+//                }
+//                $post->setBody($b);
+//                $post->setIsPosted(false);
+//            }
         }
 
         $dep->close();

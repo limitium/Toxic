@@ -1,0 +1,23 @@
+<form action="{% spaceless %}
+{% if post.id %}
+{{ path('post_update', { 'id': post.id }) }}
+{% else %}
+{{ path('post_create') }}
+{% endif %}
+{% endspaceless %}" method="post" {{ form_enctype(form) }}>
+    {{ form_errors(form) }}
+    {{ form_row(form.title) }}
+    {{ form_row(form.body) }}
+    {{ form_row(form.file_name) }}
+    {{ form_row(form.Satellite) }}
+
+
+    {{ form_rest(form) }}
+    <input type="submit" class="symfony-button-grey" value="{% spaceless %}
+{% if post.id %}
+Update
+{% else %}
+Create
+{% endif %}
+{% endspaceless %}">
+</form>

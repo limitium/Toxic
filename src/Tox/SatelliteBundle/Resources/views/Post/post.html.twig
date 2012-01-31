@@ -1,0 +1,12 @@
+{% extends 'ToxSatelliteBundle::satellite.html.twig' %}
+{% block stylesheets %}
+{{parent()}}
+<link rel="stylesheet" href="{{ asset('bundles/toxparser/css/satellite.css') }}" type="text/css" media="all"/>
+{% endblock%}
+
+{% block content %}
+<div class="post">
+    {% block post%}
+    {% endblock %}
+</div>
+        {% endblock %}

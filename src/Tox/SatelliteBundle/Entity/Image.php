@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Image
 {
+    
     /**
      * @var integer $id
      */
@@ -22,7 +23,7 @@ class Image
     /**
      * @var Tox\SatelliteBundle\Entity\Post
      */
-    private $Images;
+    private $Post;
 
 
     /**
@@ -56,22 +57,26 @@ class Image
     }
 
     /**
-     * Set Images
+     * Set Post
      *
-     * @param Tox\SatelliteBundle\Entity\Post $images
+     * @param Tox\SatelliteBundle\Entity\Post $post
      */
-    public function setImages(\Tox\SatelliteBundle\Entity\Post $images)
+    public function setPost(\Tox\SatelliteBundle\Entity\Post $post)
     {
-        $this->Images = $images;
+        $this->Post = $post;
     }
 
     /**
-     * Get Images
+     * Get Post
      *
      * @return Tox\SatelliteBundle\Entity\Post 
      */
-    public function getImages()
+    public function getPost()
     {
-        return $this->Images;
+        return $this->Post;
+    }
+
+    public function __toString() {
+        return $this->getName();
     }
 }

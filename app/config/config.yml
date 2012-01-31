@@ -60,3 +60,9 @@ jms_security_extra:
     secure_all_services: false
 
 gregwar_form: ~
+
+services:
+ twig.extension.text:
+     class: Twig_Extensions_Extension_Text
+     tags:
+         - { name: twig.extension }

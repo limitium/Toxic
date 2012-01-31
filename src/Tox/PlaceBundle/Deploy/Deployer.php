@@ -18,6 +18,13 @@ class Deployer {
 
     public function __construct(FtpAccount $ftp) {
         list($this->ip, $this->baseDir) = explode('@', $ftp->getUrl());
+        if ($this->baseDir[0] != '/') {
+            $this->baseDir = '/' . $this->baseDir;
+        }
+        if($this->baseDir[strlen($this->baseDir)-1]!='/'){
+            $this->baseDir .= '/';
+        }
+
         $this->user = $ftp->getUsername();
         $this->password = $ftp->getPassword();
     }
@@ -110,12 +117,13 @@ class Deployer {
         $satellite->getDomen()->getName();
         $satDir = str_replace('.', '', $satellite->getDomen()->getName());
 
-        @ftp_mkdir($this->ftr, $this->baseDir . "/data");
-        @ftp_mkdir($this->ftr, $this->baseDir . "/data/$satDir");
-        @ftp_mkdir($this->ftr, $this->baseDir . "/data/$satDir/pages");
-        @ftp_mkdir($this->ftr, $this->baseDir . "/data/$satDir/posts");
+        @ftp_mkdir($this->ftr, $this->baseDir . "data");
+        @ftp_mkdir($this->ftr, $this->baseDir . "data/$satDir");
+        @ftp_mkdir($this->ftr, $this->baseDir . "data/$satDir/pages");
+        @ftp_mkdir($this->ftr, $this->baseDir . "data/$satDir/posts");
+        @ftp_mkdir($this->ftr, $this->baseDir . "data/$satDir/img");
 
-        $this->putFile($this->baseDir . "/data/$satDir/config.php", "<?php return " . var_export($satellite->getConfig(), true) . ";");
+        $this->putFile($this->baseDir . "data/$satDir/config.php", "<?php return " . var_export($satellite->getConfig(), true) . ";");
         //@todo: add theme upload;
     }
 
@@ -133,9 +141,15 @@ class Deployer {
             if ($post->getIsPosted()) {
                 continue;
             }
-            $uploadDir = $this->baseDir . "/data/$satDir/";
-            $uploadDir += $post->getIsPage() ? "pages/" : "posts/";
-            $this->putFile($uploadDir . $post->getFileName(), "<?php return array('title'=>'" . $post->getTitle() . "','body'=>'" . $post->getBody() . "');");
+            $uploadDir = $this->baseDir . "data/$satDir/";
+            $uploadDir .= $post->getIsPage() ? "pages/" : "posts/";
+            foreach($post->getImages() as $image){
+                //@todo: get normal path to file
+                $imgFile = 'c:\\WebServers\\home\\localhost\\www\\toxic\\web\\images\\'.$post->getSatellite()->getDomen()->getName().'\\'.$image->getName();
+                ftp_put($this->ftr,$this->baseDir . "data/$satDir/img/".$image->getName() , $imgFile , FTP_BINARY);
+            }
+            $this->putFile($uploadDir . $post->getFileName(), "<?php return array('title'=>'" . $post->getTitle() . "','body'=>'" .addslashes(nl2br($post->getBody())) . "');");
+            $post->setIsPosted(true);
         }
 
     }

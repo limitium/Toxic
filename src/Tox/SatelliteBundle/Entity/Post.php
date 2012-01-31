@@ -9,7 +9,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Post
 {
-  
+
+
+
     /**
      * @var integer $id
      */
@@ -43,7 +45,7 @@ class Post
     /**
      * @var Tox\SatelliteBundle\Entity\Image
      */
-    private $Post;
+    private $Images;
 
     /**
      * @var Tox\SatelliteBundle\Entity\Satellite
@@ -57,7 +59,7 @@ class Post
 
     public function __construct()
     {
-        $this->Post = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->Images = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
     /**
@@ -171,23 +173,23 @@ class Post
     }
 
     /**
-     * Add Post
+     * Add Images
      *
-     * @param Tox\SatelliteBundle\Entity\Image $post
+     * @param Tox\SatelliteBundle\Entity\Image $images
      */
-    public function addImage(\Tox\SatelliteBundle\Entity\Image $post)
+    public function addImage(\Tox\SatelliteBundle\Entity\Image $images)
     {
-        $this->Post[] = $post;
+        $this->Images[] = $images;
     }
 
     /**
-     * Get Post
+     * Get Images
      *
      * @return Doctrine\Common\Collections\Collection 
      */
-    public function getPost()
+    public function getImages()
     {
-        return $this->Post;
+        return $this->Images;
     }
 
     /**

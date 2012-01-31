@@ -7,8 +7,8 @@ Tox\ParserBundle\Entity\MetaData:
       generator:
         strategy: AUTO
     data:
-      type: string
-      length: 1000
+      type: text
+      length: 20000
       nullable: false
   manyToOne:
     Content:

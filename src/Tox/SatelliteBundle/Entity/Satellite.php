@@ -364,4 +364,8 @@ class Satellite
             'key' => $this->getMark()
         );
     }
+
+    public function __toString() {
+        return $this->getDomen()->getName();
+    }
 }

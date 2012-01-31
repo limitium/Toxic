@@ -22,7 +22,7 @@
     <table name="Post" visPositionX="515" visPositionY="63" visSizeX="0" visSizeX2="109" visSizeY="0" visSizeY2="129">
       <column auto-increment="true" name="id" primary="true" type="integer"/>
       <column name="title" required="true" type="string"/>
-      <column name="body" required="true" size="10000" type="text"/>
+      <column name="body" required="true" size="20000" type="text"/>
       <column name="file_name" required="true" type="string" unique="true"/>
       <column name="satellite_id" required="true" type="integer"/>
       <column name="is_page" type="boolean"/>
@@ -72,7 +72,7 @@
     <foreign-key caption="Domen DomenHistory" from="DomenHistory" inverse-alias="Domen" name="FK_DomenHistory_Domen_id" owning-alias="History" to="Domen" visCaption1X="0" visCaption1Y="0" visCenterX="0" visCenterY="4">
       <foreign-key-column from="domen_id" to="id"/>
     </foreign-key>
-    <foreign-key caption="Post Image" from="Image" inverse-alias="Images" name="FK_Image_Post_id" owning-alias="Post" to="Post">
+    <foreign-key caption="Post Image" from="Image" inverse-alias="Post" name="FK_Image_Post_id" owning-alias="Images" to="Post">
       <foreign-key-column from="post_id" to="id"/>
     </foreign-key>
   </module>
@@ -104,7 +104,7 @@
     </table>
     <table name="MetaData" visPositionX="513" visPositionY="441" visSizeX="0" visSizeX2="130" visSizeY="0" visSizeY2="73">
       <column auto-increment="true" name="id" primary="true" type="integer"/>
-      <column name="data" required="true" size="1000" type="string"/>
+      <column name="data" required="true" size="20000" type="text"/>
       <column name="content_id" required="true" type="integer"/>
       <column name="pattern_type_id" required="true" type="integer"/>
     </table>

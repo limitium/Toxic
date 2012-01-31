@@ -1,0 +1,29 @@
+{% extends 'ToxSatelliteBundle:Post:post.html.twig' %}
+
+{% block post %}
+<h1>Post list</h1>
+
+<ul>
+    <li>
+        <a href="{{ path('post_new') }}">
+            Create a new entry
+        </a>
+    </li>
+</ul>
+{% for entity in entities %}
+<div>
+    <h3></h3><a href="{{ path('post_show', { 'id': entity.id }) }}">{{ entity.title }}</a></h3>
+    <div>{{ entity.body | truncate(200) }}</div>
+    <ul>
+        <li>
+            <a href="{{ path('post_show', { 'id': entity.id }) }}">show</a>
+        </li>
+        <li>
+            <a href="{{ path('post_edit', { 'id': entity.id }) }}">edit</a>
+        </li>
+    </ul>
+</div>
+{% endfor %}
+
+
+        {% endblock %}

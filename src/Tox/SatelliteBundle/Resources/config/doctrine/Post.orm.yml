@@ -11,7 +11,7 @@ Tox\SatelliteBundle\Entity\Post:
       nullable: false
     body:
       type: text
-      length: 10000
+      length: 20000
       nullable: false
     file_name:
       type: string
@@ -29,9 +29,9 @@ Tox\SatelliteBundle\Entity\Post:
         - is_posted
         - file_name
   oneToMany:
-    Post:
+    Images:
       targetEntity: Tox\SatelliteBundle\Entity\Image
-      mappedBy: Images
+      mappedBy: Post
   manyToOne:
     Satellite:
       targetEntity: Tox\SatelliteBundle\Entity\Satellite
